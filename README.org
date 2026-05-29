@@ -9,24 +9,24 @@ Since I'll try to develop it myself version 1 will be completely digital, adding
 - TFT/LCD-Display for saving/loading patches
 - full MIDI-IO
 
-* Plan for Version 0.1 [/]
-[] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
-[] 2 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
-[] controllable ladder-Lopass-filter
-[] controllable LFO for automating filter
-[] controllable ADSR-Envelope
+* Plan for Version 0.1 [0/5]
+- [ ] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
+- [ ] 2 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
+- [ ] controllable ladder-Lopass-filter
+- [ ] controllable LFO for automating filter
+- [ ] controllable ADSR-Envelope
   
 * Ideas for later
 - Onboard-Sequencer
 - Oscilloscope for showing the generated wave-form
 
-* Parts list
-[X] Teensy 4.1
-[X] Teensy Audio Shield
-[] 2x Buchsenleisten 1x24
-[X] 10x Rotary Encoder (ALPS?)
-- 2x Optokoppler 6N138
-- 2x DIN-Buchse 5-polig
-- 1x CR2032 Halter
-- 1x Audiobuchse 6.5mm
-[X] 1x ILI9341 Color TFT
+* Parts list [4/9]
+- [X] Teensy 4.1
+- [X] Teensy Audio Shield
+- [ ] 2x Buchsenleisten 1x24
+- [X] 10x Rotary Encoder (ALPS?)
+- [ ] 2x Optokoppler 6N138
+- [ ] 2x DIN-Buchse 5-polig
+- [ ] 1x CR2032 Halter
+- [ ] 1x Audiobuchse 6.5mm
+- [X] 1x ILI9341 Color TFT
