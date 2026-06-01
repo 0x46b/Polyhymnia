@@ -67,9 +67,42 @@
     "version": 5
   },
   "net_inspector_panel": {
-    "col_hidden": [],
-    "col_order": [],
-    "col_widths": [],
+    "col_hidden": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "col_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "col_widths": [
+      354,
+      339,
+      210,
+      157,
+      210,
+      228,
+      210,
+      166,
+      210,
+      210
+    ],
     "custom_group_rules": [],
     "expanded_rows": [],
     "filter_by_net_name": true,
@@ -81,24 +114,11 @@
     "show_unconnected_nets": false,
     "show_zero_pad_nets": false,
     "sort_ascending": true,
-    "sorting_column": -1
+    "sorting_column": 0
   },
   "open_jobsets": [],
   "project": {
-    "files": [
-      {
-        "name": "Polyhymnia.kicad_sch",
-        "open": true,
-        "window": {
-          "display": 0,
-          "maximized": true,
-          "pos_x": 43,
-          "pos_y": 37,
-          "size_x": 1278,
-          "size_y": 674
-        }
-      }
-    ]
+    "files": []
   },
   "schematic": {
     "hierarchy_collapsed": [],
