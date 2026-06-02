@@ -2,6 +2,46 @@
 Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy 4.1 as oscillators and envelope-generator but using analogue filters.
 
 Since I'll try to develop it myself version 1 will be completely digital, adding the analogue stuff incrementally as the project evolves.
+* Used MIDI-CC
+| VCO Type | CC value |
+|----------+----------|
+|        0 | Sawtooth |
+|        1 | Triangle |
+|        2 | Square   |
+|        3 | Sine     |
+
+| Filter Type | CC value |
+|-------------+----------|
+| Low-Pass    |        0 |
+| High-Pass   |        1 |
+|             |          |
+
+| CC# | Function     |
+|-----+--------------|
+|  70 | VCO1 Type    |
+|  76 | VCO1 Detune  |
+|  77 | VCO2 Type    |
+|  78 | VCO2 Detune  |
+|  85 | VCO3 Type    |
+|  86 | VCO3 Detune  |
+|-----+--------------|
+|  73 | Attack       |
+|  80 | Decay        |
+|  75 | Sustain      |
+|  72 | Release      |
+|-----+--------------|
+|  74 | Cutoff       |
+|  71 | Resonance    |
+|  89 | Filtertype   |
+|-----+--------------|
+| 105 | LFO Rate     |
+| 106 | LFO Amount   |
+|-----+--------------|
+| 102 | VCO1 Volume  |
+| 103 | VCO2 Volume  |
+| 104 | VCO3 Volume  |
+| 105 | Noise Volume |
+| 106 | Total Volume |
 
 * Vision
 - digitally created oscillators using the Teensy 4.1
