@@ -4,18 +4,18 @@ Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy
 Since I'll try to develop it myself version 1 will be completely digital, adding the analogue stuff incrementally as the project evolves.
 
 * Used MIDI-CC
-| VCO Type | CC value |
+| CC value | Waveform |
 |----------+----------|
 |        0 | Sawtooth |
 |        1 | Triangle |
 |        2 | Square   |
 |        3 | Sine     |
 
-| Filter Type | CC value |
-|-------------+----------|
-| Low-Pass    |        0 |
-| High-Pass   |        1 |
-|             |          |
+| CC value | Filter Type |
+|----------+-------------|
+|        0 | Low Pass    |
+|        1 | High Pass   |
+|        2 | Band Pass   |
 
 | CC# | Function     |
 |-----+--------------|
