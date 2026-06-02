@@ -37,11 +37,11 @@ Since I'll try to develop it myself version 1 will be completely digital, adding
 | 105 | LFO Rate     |
 | 106 | LFO Amount   |
 |-----+--------------|
-| 102 | VCO1 Volume  |
-| 103 | VCO2 Volume  |
-| 104 | VCO3 Volume  |
-| 105 | Noise Volume |
-| 106 | Total Volume |
+| 20  | VCO1 Volume  |
+| 21  | VCO2 Volume  |
+| 22  | VCO3 Volume  |
+| 23  | Noise Volume |
+| 24  | Total Volume |
 
 * Vision
 - digitally created oscillators using the Teensy 4.1
