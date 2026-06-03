@@ -5,28 +5,28 @@
 #include <SerialFlash.h>
 
 // GUItool: begin automatically generated code
-AudioSynthWaveform       VCO3;           //xy=389.20001220703125,478.00001525878906
-AudioSynthWaveform       VCO1;           //xy=391.20001220703125,405.00001525878906
-AudioSynthWaveform       VCO2;           //xy=391.20001220703125,443.00001525878906
-AudioSynthNoiseWhite     Noise;          //xy=391.20001220703125,517.0000152587891
-AudioSynthWaveform       LFO;            //xy=394.20001220703125,614.0000152587891
-AudioMixer4              VCOMixer;       //xy=569.2000122070312,420.00001525878906
-AudioFilterLadder        VCF;            //xy=728.2000122070312,494.00001525878906
-AudioEffectEnvelope      ADSR;           //xy=888.2000122070312,495.00001525878906
-AudioOutputI2S           i2s1;           //xy=1105.3999938964844,437.99998474121094
-AudioOutputUSB           usb2; //xy=1109.2000122070312,548.0000152587891
-AudioConnection          patchCord1(VCO3, 0, VCOMixer, 2);
-AudioConnection          patchCord2(VCO1, 0, VCOMixer, 0);
-AudioConnection          patchCord3(VCO2, 0, VCOMixer, 1);
-AudioConnection          patchCord4(Noise, 0, VCOMixer, 3);
-AudioConnection          patchCord5(LFO, 0, VCF, 1);
-AudioConnection          patchCord6(VCOMixer, 0, VCF, 0);
-AudioConnection          patchCord7(VCF, ADSR);
-AudioConnection          patchCord8(ADSR, 0, i2s1, 0);
-AudioConnection          patchCord9(ADSR, 0, i2s1, 1);
-AudioConnection          patchCord10(ADSR, 0, usb2, 0);
-AudioConnection          patchCord11(ADSR, 0, usb2, 1);
-AudioControlSGTL5000     sgtl5000_1; //xy=965.2000122070312,582.0000152587891
+AudioSynthWaveform VCO3;     //xy=389.20001220703125,478.00001525878906
+AudioSynthWaveform VCO1;     //xy=391.20001220703125,405.00001525878906
+AudioSynthWaveform VCO2;     //xy=391.20001220703125,443.00001525878906
+AudioSynthNoiseWhite Noise;  //xy=391.20001220703125,517.0000152587891
+AudioSynthWaveform LFO;      //xy=394.20001220703125,614.0000152587891
+AudioMixer4 VCOMixer;        //xy=569.2000122070312,420.00001525878906
+AudioFilterLadder VCF;       //xy=728.2000122070312,494.00001525878906
+AudioEffectEnvelope ADSR;    //xy=888.2000122070312,495.00001525878906
+AudioOutputI2S i2s1;         //xy=1105.3999938964844,437.99998474121094
+AudioOutputUSB usb2;         //xy=1109.2000122070312,548.0000152587891
+AudioConnection patchCord1(VCO3, 0, VCOMixer, 2);
+AudioConnection patchCord2(VCO1, 0, VCOMixer, 0);
+AudioConnection patchCord3(VCO2, 0, VCOMixer, 1);
+AudioConnection patchCord4(Noise, 0, VCOMixer, 3);
+AudioConnection patchCord5(LFO, 0, VCF, 1);
+AudioConnection patchCord6(VCOMixer, 0, VCF, 0);
+AudioConnection patchCord7(VCF, ADSR);
+AudioConnection patchCord8(ADSR, 0, i2s1, 0);
+AudioConnection patchCord9(ADSR, 0, i2s1, 1);
+AudioConnection patchCord10(ADSR, 0, usb2, 0);
+AudioConnection patchCord11(ADSR, 0, usb2, 1);
+AudioControlSGTL5000 sgtl5000_1;  //xy=965.2000122070312,582.0000152587891
 // GUItool: end automatically generated code
 
 const float DIV127 = (1.0 / 127.0);
@@ -61,26 +61,14 @@ public:
     return offset + maxValue * (value * DIV127);
   }
 
-  
-  static void PrintMidiNoteInfoToSerial(const String &msg, byte channel, byte note, byte velocity){
-    Serial.print(msg);
-    Serial.print(" Channel: ");
-    Serial.print(channel);
-    Serial.print(" Note: ");
-    Serial.print(note);
-    Serial.print(" Velocity: ");
-    Serial.println(velocity);
+
+  static void PrintMidiNoteInfoToSerial(const String& msg, byte channel, byte note, byte velocity) {
+    Serial.printf("%s Channel: %i Note: %i Velocity: %i\n", msg, channel, note, velocity);
   }
 
-  
-  static void PrintMidiCCInfoToSerial(byte channel, byte control, byte value){
-    Serial.print("Received MIDI CC:");
-    Serial.print(" Channel: ");
-    Serial.print(channel);
-    Serial.print(" Control: ");
-    Serial.print(control);
-    Serial.print(" Value: ");
-    Serial.println(value);
+
+  static void PrintMidiCCInfoToSerial(byte channel, byte control, byte value) {
+    Serial.printf("%s Channel: %i CC: %i Value: %i\n", channel, control, value);
   }
 };
 
@@ -91,11 +79,31 @@ private:
   float _maxVolume = 1.0;
   AudioSynthWaveform* _teensyVCO;
   MIDI _midi;
+
   // Waveform lookup
   // Note: Noise is not generated through the VCO1, so we had to handle it separately
   const short _waveformLookup[4] = { WAVEFORM_SAWTOOTH, WAVEFORM_TRIANGLE, WAVEFORM_SQUARE, WAVEFORM_SINE };
   byte _detuneChangeMidiCC;
   byte _typeChangeMidiCC;
+
+  void PrintWaveformChangeToSerial(int waveform) {
+    switch(waveform) {
+        case 0:
+          Serial.println("WaveformChange: Sawtooth\n");
+          break;
+        case 1:
+          Serial.println("WaveformChange: Triangle\n");
+          break;
+        case 2:
+          Serial.println("WaveformChange: Square\n");
+          break;
+        case 4:
+          Serial.println("WaveformChange: Sine\n");
+          break;
+        default:
+          Serial.println("WaveformChange: UNKNOWN\n");
+      }
+  }
 
 public:
   VCO(AudioSynthWaveform* vco, int typeChangeMidiCC, int detuneChangeMidiCC, float maxVolume)
@@ -111,6 +119,7 @@ public:
   }
 
   void SwitchVCO1Waveform(int waveform) {
+    PrintWaveformChangeToSerial(waveform);
     _teensyVCO->begin(waveform);
   }
 
@@ -134,15 +143,18 @@ public:
 
   void HandlePitchChange(byte midiValue) {
     float frequency = _midi.MidiToFrequency(midiValue);
+    Serial.printf("PitchChange: %f\n", frequency);
     _teensyVCO->frequency(frequency + _current_detune);
   }
 
-  void HandleVelocityChange(byte velocity){
-      _teensyVCO->amplitude(velocity * DIV127);
+  void HandleVelocityChange(byte velocity) {
+    Serial.printf("VelocityChange: %i\n", velocity);
+    _teensyVCO->amplitude(velocity * DIV127);
   }
 
   void HandleDetuneChange(byte detune) {
     // TODO
+    Serial.printf("(NotImplementedYet)DetuneChange: %i\n", detune);
   }
 };
 
@@ -184,21 +196,19 @@ private:
     int totalVolumes = this->_vco1Volume + this->_vco2Volume + this->_vco3Volume + this->_noiseVolume;
 
     float vco1gain = CalculatePercentage(this->_vco1Volume, totalVolumes);
-    Serial.print("Setting VCO1 gain to");
-    Serial.println(vco1gain);
+    Serial.printf("Setting VCO1 gain to %f\n", vco1gain);
     this->_teensyMixer->gain(0, vco1gain);
 
     float vco2gain = CalculatePercentage(this->_vco2Volume, totalVolumes);
-    Serial.print("Setting VCO2 gain to");
-    Serial.println(vco2gain);
+    Serial.printf("Setting VCO2 gain to %f\n", vco2gain);
     this->_teensyMixer->gain(1, vco2gain);
 
     float vco3gain = CalculatePercentage(this->_vco3Volume, totalVolumes);
-    Serial.print("Setting VCO3 gain to");
-    Serial.println(vco3gain);
+    Serial.printf("Setting VCO3 gain to %f\n", vco3gain);
     this->_teensyMixer->gain(2, vco3gain);
 
     float noisegain = CalculatePercentage(this->_noiseVolume, totalVolumes);
+    Serial.printf("Setting Noise gain to %f\n", noisegain);
     this->_teensyMixer->gain(3, noisegain);
   }
 
@@ -223,23 +233,19 @@ public:
     switch (vcoNumber) {
       case 0:
         this->_vco1Volume = volume;
-        Serial.print("Changing volume of VCO1 to ");
-        Serial.println(volume);
+        Serial.printf("Changing volume of VCO1 to %f\n", volume);
         break;
       case 1:
         this->_vco2Volume = volume;
-        Serial.print("Changing volume of VCO2 to ");
-        Serial.println(volume);
+        Serial.printf("Changing volume of VCO2 to %f\n", volume);
         break;
       case 2:
         this->_vco3Volume = volume;
-        Serial.print("Changing volume of VCO3 to ");
-        Serial.println(volume);
+        Serial.printf("Changing volume of VCO3 to %f\n", volume);
         break;
       case 3:
         this->_noiseVolume = volume;
-        Serial.print("Changing volume of Noise to ");
-        Serial.println(volume);
+        Serial.printf("Changing volume of Noise to %f\n", volume);
         break;
     }
     this->UpdateVolumes();
@@ -328,12 +334,12 @@ public:
     }
   }
 
-  void NoteOn(){
+  void NoteOn() {
     Serial.println("Envelope: NoteOn");
     this->_teensyEnvelope->noteOn();
   }
 
-  void NoteOff(){
+  void NoteOff() {
     Serial.println("Envelope: NoteOff");
     this->_teensyEnvelope->noteOff();
   }
@@ -378,7 +384,7 @@ void setup() {
   LFO.pulseWidth(0.15);
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);   // set the LED on
+  digitalWrite(ledPin, HIGH);  // set the LED on
 }
 
 void loop() {
@@ -399,7 +405,7 @@ void handleNoteOn(byte channel, byte note, byte velocity) {
   PolyVCO2->HandleVelocityChange(velocity);
   PolyVCO3->HandlePitchChange(note);
   PolyVCO3->HandleVelocityChange(velocity);
-  Noise.amplitude(velocity/127);
+  Noise.amplitude(velocity / 127);
 
   Envelope->NoteOn();
 }
@@ -438,7 +444,7 @@ void handleCC(byte channel, byte control, byte value) {
     // Overall volume
     case 24:
       Serial.print("Changing volume to ");
-      Serial.println(value/127);
+      Serial.println(value / 127);
       sgtl5000_1.volume(value / 127);
       break;
   }
