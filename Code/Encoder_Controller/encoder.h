@@ -2,6 +2,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
+#include "spi.h"
+#include "spi_commands.h"
 
 #define XTAL 8e6
 
@@ -31,6 +33,23 @@ int8_t encode_read( uint8_t step ) {        // Encoder auslesen
   enc_delta = 0;
   sei();
   return val >> (step / 2);
+}
+
+void send_data_for_encoder(uint8_t data)
+{
+	spi_send(encoderData);
+}
+
+void on_spi_interupt(){
+	unsigned char msg = spi_read();
+	uint8_t command = DecodeCommand(msg);
+	uint8_t data = DecodeData(msg);
+	
+	switch(command){
+		case READ:
+			send_data_for_encoder(data);
+			break;		
+	}
 }
 
 #define ENCODER_H
