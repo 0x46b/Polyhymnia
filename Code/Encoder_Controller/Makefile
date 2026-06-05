@@ -38,9 +38,9 @@
 MCU = atmega32
 FORMAT = ihex
 TARGET = main
-SRC = $(TARGET).cpp
-ASRC = src/encoder.cpp
-OPT = s
+SRC = $(TARGET).cpp src/encoder.cpp src/spi.cpp
+ASRC = 
+OPT = 
 
 # Name of this Makefile (used for "make depend").
 MAKEFILE = Makefile
