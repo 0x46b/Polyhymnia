@@ -1,6 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# AVR-GCC Makefile template, derived from the WinAVR template (public domain)
+# AVR-GCXX Makefile template, derived from the WinAVR template (public domain)
 #
 # --------------------------------- WARNING ---------------------------------
 # Running "make fuses" can and will brick your AVR if you are not careful
@@ -29,7 +29,7 @@
 # make filename.s = Just compile filename.c into the assembler code only.
 #
 # make filename.i = Create a preprocessed source file for use in submitting
-#                   bug reports to the GCC project.
+#                   bug reports to the GCXX project.
 #
 # To rebuild project do "make clean" then "make all".
 # ---------------------------------------------------------------------------
@@ -37,38 +37,38 @@
 
 MCU = atmega32
 FORMAT = ihex
-TARGET = encoder_spi
-SRC = $(TARGET).c
-ASRC =
+TARGET = main
+SRC = $(TARGET).cpp
+ASRC = src/encoder.cpp
 OPT = s
 
 # Name of this Makefile (used for "make depend").
 MAKEFILE = Makefile
 
 # Debugging format.
-# Native formats for AVR-GCC's -g are stabs [default], or dwarf-2.
+# Native formats for AVR-GCXX's -g are stabs [default], or dwarf-2.
 # AVR (extended) COFF requires stabs, plus an avr-objcopy run.
 DEBUG = dwarf-2
 
 # Compiler flag to set the C Standard level.
 # c89   - "ANSI" C
-# gnu89 - c89 plus GCC extensions
+# gnu89 - c89 plus GCXX extensions
 # c99   - ISO C99 standard (not yet fully implemented)
-# gnu99 - c99 plus GCC extensions
-CSTANDARD = -std=gnu99
+# gnu99 - c99 plus GCXX extensions
+CXXSTANDARD = -std=gnu++20
 
 # Place -D or -U options here
-CDEFS =
+CXXDEFS =
 
 # Place -I options here
-CINCS =
+CXXINCS = -Iinclude
 
 
 CDEBUG = -g$(DEBUG)
-CWARN = -Wall -Wstrict-prototypes
+CWARN = -Wall
 CTUNING = -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-#CEXTRA = -Wa,-adhlns=$(<:.c=.lst)
-CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CSTANDARD) $(CEXTRA)
+CXXEXTRA = -fno-exceptions -fno-rtti
+CXXFLAGS = $(CDEBUG) $(CXXDEFS) $(CXXINCS) -O$(OPT) $(CWARN) $(CXXSTANDARD) $(CXXEXTRA)
 
 
 #ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs
@@ -138,7 +138,7 @@ AVRDUDE_BASIC = -p $(MCU) -c $(AVRDUDE_PROGRAMMER)
 AVRDUDE_FLAGS = $(AVRDUDE_BASIC) $(AVRDUDE_NO_VERIFY) $(AVRDUDE_VERBOSE) $(AVRDUDE_ERASE_COUNTER)
 
 
-CC = avr-gcc
+CXX = avr-g++
 OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
@@ -148,14 +148,14 @@ REMOVE = rm -f
 MV = mv -f
 
 # Define all object files.
-OBJ = $(SRC:.c=.o) $(ASRC:.S=.o)
+OBJ = $(SRC:.cpp=.o) $(ASRC:.S=.o)
 
 # Define all listing files.
-LST = $(ASRC:.S=.lst) $(SRC:.c=.lst)
+LST = $(ASRC:.S=.lst) $(SRC:.cpp=.lst)
 
 # Combine all necessary flags and optional flags.
 # Add target processor to flags.
-ALL_CFLAGS = -mmcu=$(MCU) -I. $(CFLAGS)
+ALL_CXXFLAGS = -mmcu=$(MCU) -I. $(CXXFLAGS)
 ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
@@ -218,22 +218,22 @@ extcoff: $(TARGET).elf
 
 # Link: create ELF output file from object files.
 $(TARGET).elf: $(OBJ)
-	$(CC) $(ALL_CFLAGS) $(OBJ) --output $@ $(LDFLAGS)
+	$(CXX) $(ALL_CXXFLAGS) $(OBJ) --output $@ $(LDFLAGS)
 
 
-# Compile: create object files from C source files.
-.c.o:
-	$(CC) -c $(ALL_CFLAGS) $< -o $@
+# Compile: create object files from C++ source files.
+.cpp.o:
+	$(CXX) -c $(ALL_CXXFLAGS) $< -o $@
 
 
-# Compile: create assembler files from C source files.
-.c.s:
-	$(CC) -S $(ALL_CFLAGS) $< -o $@
+# Compile: create assembler files from C++ source files.
+.cpp.s:
+	$(CXX) -S $(ALL_CXXFLAGS) $< -o $@
 
 
 # Assemble: create object files from assembler source files.
 .S.o:
-	$(CC) -c $(ALL_ASFLAGS) $< -o $@
+	$(CXX) -c $(ALL_ASFLAGS) $< -o $@
 
 
 
@@ -241,7 +241,7 @@ $(TARGET).elf: $(OBJ)
 clean:
 	$(REMOVE) $(TARGET).hex $(TARGET).eep $(TARGET).cof $(TARGET).elf \
 	$(TARGET).map $(TARGET).sym $(TARGET).lss \
-	$(OBJ) $(LST) $(SRC:.c=.s) $(SRC:.c=.d)
+	$(OBJ) $(LST) $(SRC:.cpp=.s) $(SRC:.cpp=.d)
 
 depend:
 	if grep '^# DO NOT DELETE' $(MAKEFILE) >/dev/null; \
@@ -252,6 +252,6 @@ depend:
 	fi
 	echo '# DO NOT DELETE THIS LINE -- make depend depends on it.' \
 		>> $(MAKEFILE); \
-	$(CC) -M -mmcu=$(MCU) $(CDEFS) $(CINCS) $(SRC) $(ASRC) >> $(MAKEFILE)
+	$(CXX) -M -mmcu=$(MCU) $(CXXDEFS) $(CXXINCS) $(SRC) $(ASRC) >> $(MAKEFILE)
 
 .PHONY:	all build elf hex eep lss sym program coff extcoff clean depend
