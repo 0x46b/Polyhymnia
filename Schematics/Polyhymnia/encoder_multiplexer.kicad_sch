@@ -1281,6 +1281,12 @@
 		)
 		(uuid "cb1cd036-1bac-41ad-bcce-59c868740670")
 	)
+	(junction
+		(at 120.65 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8e8e9de1-558d-4661-9fee-c902ba97b5ed")
+	)
 	(wire
 		(pts
 			(xy 154.94 119.38) (xy 154.94 110.49)
@@ -1413,6 +1419,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 60.96) (xy 185.42 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a5ecc70-f1f6-46f0-836c-2015544501d5")
+	)
+	(wire
+		(pts
 			(xy 154.94 86.36) (xy 154.94 97.79)
 		)
 		(stroke
@@ -1423,6 +1439,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 54.61) (xy 135.89 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ff82d04-6a28-4c24-bf8b-121c7b2ac8e0")
+	)
+	(wire
+		(pts
 			(xy 154.94 119.38) (xy 187.96 119.38)
 		)
 		(stroke
@@ -1430,6 +1456,26 @@
 			(type default)
 		)
 		(uuid "45923729-e0a6-41df-bce9-3cc271b26d3a")
+	)
+	(wire
+		(pts
+			(xy 185.42 52.07) (xy 135.89 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49299880-e947-4612-afb7-069a92a3fe1f")
+	)
+	(wire
+		(pts
+			(xy 120.65 38.1) (xy 120.65 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "500ae071-5b70-480e-b416-76e6738a1f77")
 	)
 	(wire
 		(pts
@@ -1453,6 +1499,26 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 55.88) (xy 186.69 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6059ccd6-dc52-4623-a353-47697a7bca36")
+	)
+	(wire
+		(pts
+			(xy 123.19 41.91) (xy 123.19 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6143db1e-aac8-4454-829e-34f325be5e25")
+	)
+	(wire
+		(pts
 			(xy 154.94 97.79) (xy 135.89 97.79)
 		)
 		(stroke
@@ -1463,7 +1529,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 36.83) (xy 120.65 41.91)
+			(xy 120.65 36.83) (xy 120.65 38.1)
 		)
 		(stroke
 			(width 0)
@@ -1480,6 +1546,16 @@
 			(type default)
 		)
 		(uuid "65f8522b-c966-4781-a92b-c8f704f8e6c9")
+	)
+	(wire
+		(pts
+			(xy 182.88 57.15) (xy 135.89 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "699b02dc-8878-4646-b148-46731a5076f0")
 	)
 	(wire
 		(pts
@@ -1503,6 +1579,26 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 38.1) (xy 123.19 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74c6297d-cf97-4c05-9763-a5f95219bac1")
+	)
+	(wire
+		(pts
+			(xy 187.96 58.42) (xy 187.96 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75c6c075-e701-4880-8910-50e78e4f2078")
+	)
+	(wire
+		(pts
 			(xy 148.59 149.86) (xy 187.96 149.86)
 		)
 		(stroke
@@ -1510,6 +1606,16 @@
 			(type default)
 		)
 		(uuid "7600428e-e621-44f5-a745-91f246db0b41")
+	)
+	(wire
+		(pts
+			(xy 185.42 60.96) (xy 185.42 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7651c8cb-b5b6-45ac-9923-928fdcbe1da8")
 	)
 	(wire
 		(pts
@@ -1533,6 +1639,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 73.66) (xy 182.88 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80f6ba7a-f7ec-4733-b6d7-6488a523ed13")
+	)
+	(wire
+		(pts
 			(xy 152.4 132.08) (xy 152.4 118.11)
 		)
 		(stroke
@@ -1550,6 +1666,16 @@
 			(type default)
 		)
 		(uuid "9de58197-cf07-488f-971e-485a59ce7c4d")
+	)
+	(wire
+		(pts
+			(xy 182.88 73.66) (xy 182.88 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0e2b8f4-9601-484c-9da3-12f6c3fe0794")
 	)
 	(wire
 		(pts
@@ -1580,6 +1706,16 @@
 			(type default)
 		)
 		(uuid "b7808f35-852e-4ae0-984c-3b3db4ddbf1b")
+	)
+	(wire
+		(pts
+			(xy 184.15 68.58) (xy 184.15 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8319efc-7e82-413e-b446-335ab44765bb")
 	)
 	(wire
 		(pts
@@ -1633,6 +1769,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 55.88) (xy 186.69 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cee0df2a-c37f-42b8-866a-3950be3b5b96")
+	)
+	(wire
+		(pts
 			(xy 152.4 118.11) (xy 135.89 118.11)
 		)
 		(stroke
@@ -1653,6 +1799,16 @@
 	)
 	(wire
 		(pts
+			(xy 186.69 49.53) (xy 135.89 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7b2c9da-0eb1-4e90-bfaf-b74c42d1b19c")
+	)
+	(wire
+		(pts
 			(xy 151.13 120.65) (xy 135.89 120.65)
 		)
 		(stroke
@@ -1660,6 +1816,16 @@
 			(type default)
 		)
 		(uuid "df863723-415a-4681-8bbc-0f62c79cde54")
+	)
+	(wire
+		(pts
+			(xy 187.96 68.58) (xy 184.15 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3d71e63-babd-4b3c-a93a-b7562c5212ec")
 	)
 	(wire
 		(pts
@@ -1819,84 +1985,6 @@
 			(project "Polyhymnia"
 				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0"
 					(reference "#PWR01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 187.96 46.99 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "082c16f8-70aa-4707-b481-1533ea6a0777")
-		(property "Reference" "#PWR03"
-			(at 187.96 53.34 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 187.96 52.07 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 187.96 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 187.96 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 187.96 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5de95d8a-426e-4862-8dd5-d06f94948c9a")
-		)
-		(instances
-			(project "Polyhymnia"
-				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0"
-					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -2145,91 +2233,6 @@
 			(project "Polyhymnia"
 				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0"
 					(reference "SW7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:RotaryEncoder")
-		(at 195.58 46.99 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "488c1702-45e2-4176-97b6-b0f770948f56")
-		(property "Reference" "SW5"
-			(at 195.58 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Filter Resonance"
-			(at 201.93 46.9899 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 191.77 42.926 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 195.58 40.386 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs"
-			(at 195.58 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "B"
-			(uuid "da4dd333-3570-4aaa-aced-3302b86148b3")
-		)
-		(pin "C"
-			(uuid "bf972d53-8715-4224-8f2d-312235c0ddd9")
-		)
-		(pin "A"
-			(uuid "8c9b0d53-e9b5-42f9-bf89-5334f3a2f9d5")
-		)
-		(instances
-			(project "Polyhymnia"
-				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0"
-					(reference "SW5")
 					(unit 1)
 				)
 			)
@@ -3405,7 +3408,7 @@
 	)
 	(symbol
 		(lib_id "Device:RotaryEncoder")
-		(at 195.58 59.69 0)
+		(at 195.58 58.42 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3416,7 +3419,7 @@
 		(fields_autoplaced yes)
 		(uuid "ee99a426-51e7-40a5-b1b3-4918953d31e9")
 		(property "Reference" "SW1"
-			(at 195.58 69.85 0)
+			(at 195.58 68.58 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3427,7 +3430,7 @@
 			)
 		)
 		(property "Value" "Filter Cutoff"
-			(at 201.93 59.6899 0)
+			(at 201.93 58.4199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3438,7 +3441,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 191.77 55.626 0)
+			(at 191.77 54.356 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3449,7 +3452,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 53.086 0)
+			(at 195.58 51.816 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3460,7 +3463,7 @@
 			)
 		)
 		(property "Description" "Rotary encoder, dual channel, incremental quadrate outputs"
-			(at 195.58 59.69 0)
+			(at 195.58 58.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
