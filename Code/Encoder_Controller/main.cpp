@@ -14,18 +14,16 @@ Encoder encoders[8];
 SPIConnection spi;
 
 ISR(TIMER0_COMP_vect) {
-  encoders[0].Tick();
-  encoders[1].Tick();
-  // for(Encoder currentEncoder : encoders){
-  //  currentEncoder.Tick();
-  // }
+  for (Encoder currentEncoder : encoders) {
+    currentEncoder.Tick();
+  }
 }
 
 ISR(SPI_STC_vect) { spi.Read(); }
 
 void InitializeEncoderTimer(void) { // nur Timer 0 initialisieren
-  TCCR0 = (1 << WGM01) | (1 << CS01) | (1 << CS00); // CTC, XTAL / 64
-  OCR0 = (uint8_t)20;                               // 1ms
+  TCCR0 = (1 << WGM01) | (1 << CS01) | (1 << CS00); // CTC, prescaler 64
+  OCR0 = (uint8_t)(XTAL / 64.0 * 1e-3 - 0.5);       // 1ms // 1ms
   TIMSK |= 1 << OCIE0;
 }
 
@@ -40,9 +38,30 @@ void StartNiceLittleLEDShow() {
 }
 
 void setup() {
-  encoders[0].Initialize(1, &PINA, &PORTA, (1 << PA1), (1 << PA3));
-  encoders[1].Initialize(2, &PINA, &PORTA, (1 << PA4), (1 << PA5));
-  DDRA &= (0 << PA1) | (0 << PA3) | (0 << PA4) | (0 << PA5);
+  // Filter Cutoff
+  encoders[0].Initialize(1, &PINA, &PORTA, (1 << PA0), (1 << PA1));
+  // Filter Resonance
+  encoders[1].Initialize(2, &PINA, &PORTA, (1 << PA2), (1 << PA3));
+
+  // OSC1 Type
+  encoders[2].Initialize(2, &PINC, &PORTC, (1 << PC0), (1 << PC1));
+  // OSC1 Detune
+  encoders[3].Initialize(2, &PINC, &PORTC, (1 << PC2), (1 << PC3));
+
+  // OSC2 Type
+  encoders[4].Initialize(2, &PINC, &PORTC, (1 << PC4), (1 << PC5));
+  // OSC2 Detune
+  encoders[5].Initialize(2, &PINC, &PORTC, (1 << PC6), (1 << PC7));
+
+  // OSC3 Type
+  // encoders[6].Initialize(2, &PIND, &PORTD, (1 << PD0), (1 << PD1));
+  // OSC3 Detune
+  // encoders[7].Initialize(2, &PIND, &PORTD, (1 << PD2), (1 << PD3));
+
+  // Set data directory registers
+  DDRA &= ~(1 << PA0) | ~(1 << PA1) | ~(1 << PA2) | ~(1 << PA3);
+  DDRC &= 0;
+  // DDRD &= ~(1 << PD0) | ~(1 << PD1) | ~(1 << PD2) | ~(1 << PD3);
 
   LEDS1_DDR = 0xFF;
   StartNiceLittleLEDShow();
@@ -62,6 +81,6 @@ int main(void) {
     val1 += encoders[0].Read(1);
     val2 += encoders[1].Read(1);
     sei();
-    LEDS1 = ~val2;
+    LEDS1 = ~val1;
   }
 }
