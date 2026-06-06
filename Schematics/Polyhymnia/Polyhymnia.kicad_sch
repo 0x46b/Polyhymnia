@@ -1700,6 +1700,42 @@
 		)
 		(uuid "fba5fb6f-50dc-41a4-a9f1-3b56479549bc")
 	)
+	(junction
+		(at 232.41 82.55)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1ac7bf36-a230-462a-b211-b0c5ea624b33")
+	)
+	(wire
+		(pts
+			(xy 236.22 180.34) (xy 236.22 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c258c14-d347-4403-aa64-fda96e9fa1e4")
+	)
+	(wire
+		(pts
+			(xy 232.41 91.44) (xy 267.97 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b8b5635-df4a-4d06-9b24-a7dfc606157b")
+	)
+	(wire
+		(pts
+			(xy 267.97 95.25) (xy 267.97 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2de0b4d8-f753-41b7-a5ac-cb364c730fe3")
+	)
 	(wire
 		(pts
 			(xy 140.97 116.84) (xy 176.53 116.84)
@@ -1722,6 +1758,16 @@
 	)
 	(wire
 		(pts
+			(xy 274.32 95.25) (xy 274.32 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b399e39-bee9-4ed4-9ab0-11f02fc1d8a4")
+	)
+	(wire
+		(pts
 			(xy 157.48 101.6) (xy 176.53 101.6)
 		)
 		(stroke
@@ -1729,6 +1775,26 @@
 			(type default)
 		)
 		(uuid "4258aa49-e141-4888-829f-2e154c9bde3d")
+	)
+	(wire
+		(pts
+			(xy 154.94 180.34) (xy 236.22 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "55ade62e-2e0c-4fe1-8b06-eddea5461fc6")
+	)
+	(wire
+		(pts
+			(xy 171.45 88.9) (xy 176.53 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57f56c01-51e7-4569-b1bd-e59d207cb49e")
 	)
 	(wire
 		(pts
@@ -1742,23 +1808,13 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 109.22) (xy 154.94 88.9)
+			(xy 154.94 109.22) (xy 154.94 180.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "695ca40d-a442-4167-ae68-c4f621a57c67")
-	)
-	(wire
-		(pts
-			(xy 154.94 88.9) (xy 176.53 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "754d21c9-3ef3-4760-9ad7-6068a6efdbcb")
+		(uuid "775727c5-e683-4c2f-a9de-3686404822f3")
 	)
 	(wire
 		(pts
@@ -1769,6 +1825,26 @@
 			(type default)
 		)
 		(uuid "8c64f901-f2b8-4ac6-861c-362c5db258aa")
+	)
+	(wire
+		(pts
+			(xy 270.51 95.25) (xy 270.51 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "917b2d2d-e17b-40d2-88ee-61abbc29225b")
+	)
+	(wire
+		(pts
+			(xy 171.45 73.66) (xy 278.13 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab1ba254-2ecc-4e73-8c7f-b27ec39ad466")
 	)
 	(wire
 		(pts
@@ -1812,6 +1888,16 @@
 	)
 	(wire
 		(pts
+			(xy 278.13 95.25) (xy 278.13 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd752d6d-e974-4c32-af80-da522ea5047a")
+	)
+	(wire
+		(pts
 			(xy 157.48 99.06) (xy 176.53 99.06)
 		)
 		(stroke
@@ -1832,6 +1918,26 @@
 	)
 	(wire
 		(pts
+			(xy 236.22 137.16) (xy 232.41 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c430fa9f-3dcf-4148-88d3-ea6cafd8c017")
+	)
+	(wire
+		(pts
+			(xy 274.32 82.55) (xy 232.41 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb5cd1ae-b7a0-4abb-81d6-7ab72ce3448b")
+	)
+	(wire
+		(pts
 			(xy 160.02 137.16) (xy 176.53 137.16)
 		)
 		(stroke
@@ -1849,6 +1955,26 @@
 			(type default)
 		)
 		(uuid "e3f2569f-ebe0-433b-a048-d3b27b3fc157")
+	)
+	(wire
+		(pts
+			(xy 171.45 73.66) (xy 171.45 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4019273-3c57-4a30-95c8-dba4db182a06")
+	)
+	(wire
+		(pts
+			(xy 270.51 88.9) (xy 232.41 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee0d7225-c2d4-4509-a1ff-ce516b968f08")
 	)
 	(wire
 		(pts
@@ -2589,6 +2715,92 @@
 			(project "Polyhymnia"
 				(path "/e4936a91-9e28-4906-9468-02ad94b9239b"
 					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 265.43 95.25)
+		(size 19.05 15.24)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "847d8919-6173-4e98-8a6f-493fe0dd1dfa")
+		(property "Sheetname" "MIDI_In"
+			(at 264.7184 110.49 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MIDI_In.kicad_sch"
+			(at 285.0646 110.49 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "MIDI_IN" input
+			(at 278.13 95.25 90)
+			(uuid "68f0c887-96ca-4886-b686-7acd74fd781b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3.3V" input
+			(at 267.97 95.25 90)
+			(uuid "ef012543-9dcb-44c8-9cb3-6ebb3b727236")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "5V" input
+			(at 274.32 95.25 90)
+			(uuid "6df69235-9f20-4c70-b0a3-a8c944793707")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GND" input
+			(at 270.51 95.25 90)
+			(uuid "91a7f45c-81dd-47e6-a699-8ae1965c1bca")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Polyhymnia"
+				(path "/e4936a91-9e28-4906-9468-02ad94b9239b"
+					(page "4")
 				)
 			)
 		)

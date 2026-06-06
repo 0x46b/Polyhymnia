@@ -648,7 +648,7 @@
         "uuid": "e4936a91-9e28-4906-9468-02ad94b9239b"
       }
     ],
-    "used_designators": "#PWR10-12",
+    "used_designators": "U7,R33,J1,#PWR3,#PWR12-13,D33",
     "variants": []
   },
   "sheets": [
@@ -663,6 +663,10 @@
     [
       "122cb2c0-2d7c-41e3-9ae2-a9529bc1d4a5",
       "LED Matrix"
+    ],
+    [
+      "847d8919-6173-4e98-8a6f-493fe0dd1dfa",
+      "MIDI_In"
     ]
   ],
   "text_variables": {},
