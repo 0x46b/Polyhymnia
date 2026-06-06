@@ -36,7 +36,7 @@ void print_encoder_to_serial(struct EncoderConfiguration encoder){
 }
 
 ISR(TIMER0_COMP_vect) {
-	for (int i=0; i < 2; i++) {
+	for (int i=0; i < 8; i++) {
 		encoder_tick(&encoders[i]);
 	}
 }
@@ -53,30 +53,24 @@ void setup() {
 	serial_initialize();
 	serial_send_string("Initializing Ports...", true);
 	// Filter Cutoff
-	encoders[0] = encoder_initialize(1, &PINA, &PORTA, PA0, PA1);
+	encoders[0] = encoder_initialize(1, &PINA, &DDRA, &PORTA, PA0, PA1);
 	// Filter Resonance
-	encoders[1] = encoder_initialize(2, &PINA, &PORTA, PA2, PA3);
-	//
-	//// OSC1 Type
-	//encoders[2] = encoder_initialize(2, &PINC, &PORTC, (1 << PC0), (1 << PC1));
-	//// OSC1 Detune
-	//encoders[3] = encoder_initialize(2, &PINC, &PORTC, (1 << PC2), (1 << PC3));
-	//
-	//// OSC2 Type
-	//encoders[4] = encoder_initialize(2, &PINC, &PORTC, (1 << PC4), (1 << PC5));
-	//// OSC2 Detune
-	//encoders[5] = encoder_initialize(2, &PINC, &PORTC, (1 << PC6), (1 << PC7));
+	encoders[1] = encoder_initialize(2, &PINA, &DDRA, &PORTA, PA2, PA3);
+	
+	// OSC1 Type
+	encoders[2] = encoder_initialize(3, &PINC, &DDRC, &PORTC, PC0, PC1);
+	// OSC1 Detune
+	encoders[3] = encoder_initialize(4, &PINC, &DDRC, &PORTC, PC2, PC3);
+	
+	// OSC2 Type
+	encoders[4] = encoder_initialize(5, &PINC, &DDRC, &PORTC, PC4, PC5);
+	// OSC2 Detune
+	encoders[5] = encoder_initialize(6, &PINC, &DDRC, &PORTC, PC6, PC7);
 
-	// OSC3 Type
-	// encoders[6].Initialize(2, &PIND, &PORTD, (1 << PD0), (1 << PD1));
-	// OSC3 Detune
-	// encoders[7].Initialize(2, &PIND, &PORTD, (1 << PD2), (1 << PD3));
-
-	// Set data directory registers
-	DDRA &= ~(1 << PA0) | ~(1 << PA1) | ~(1 << PA2) | ~(1 << PA3);
-	PORTA |= (1 << PA0) | (1 << PA1) | (1 << PA2) | (1 << PA3);
-	//DDRC &= 0;
-	// DDRD &= ~(1 << PD0) | ~(1 << PD1) | ~(1 << PD2) | ~(1 << PD3);
+	 // OSC3 Type (PD0 + PD1 are used for debugging output via serial)
+	 encoders[6] = encoder_initialize(7, &PIND, &DDRD, &PORTD,  PD2, PD3);
+	 // OSC3 Detune
+	 encoders[7] = encoder_initialize(8, &PIND, &DDRD, &PORTD, PD4, PD5);
 
 	serial_send_string("Starting timer...", true);
 	initialize_encoder_timer();
@@ -96,7 +90,7 @@ int main(void) {
 	
 	while (1) {
 		val1 += encoder_read_offset(&encoders[0]);
-		val2 += encoder_read_offset(&encoders[1]);
+		val2 += encoder_read_offset(&encoders[2]);
 		
 		if(val1 != oldVal1){
 			serial_send_string("Value for Encoder 1:", false);
@@ -104,7 +98,7 @@ int main(void) {
 			serial_send_string(buffer, true);
 		}
 		if(val2 != oldval2) {
-			serial_send_string("Value for Encoder 2:", false);
+			serial_send_string("Value for Encoder 3:", false);
 			itoa(val2, buffer, 10);
 			serial_send_string(buffer, true);
 		}

@@ -1,7 +1,7 @@
 #include "encoder.h"
 
 
-struct EncoderConfiguration encoder_initialize(uint8_t encoderId, volatile uint8_t *pin, volatile uint8_t *port, uint8_t phaseA, uint8_t phaseB) {
+struct EncoderConfiguration encoder_initialize(uint8_t encoderId, volatile uint8_t *pin, volatile uint8_t *ddr, volatile uint8_t *port, uint8_t phaseA, uint8_t phaseB) {
 	struct EncoderConfiguration config;
 	config.encoderId = encoderId;
 	config.pinA = (1 << phaseA);
@@ -11,6 +11,7 @@ struct EncoderConfiguration encoder_initialize(uint8_t encoderId, volatile uint8
 	config.oldState = 0;
 	
 	*port |= config.pinA | config.pinB;
+	*ddr &= ~config.pinA | ~config.pinB;
 	return config;
 }
 
