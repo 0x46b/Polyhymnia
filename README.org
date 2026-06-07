@@ -93,20 +93,20 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - [X] 12 Red LED
 
 * Schematics
-Main:
 [[./Schematics/img/Main.png][Main Schematics]]
+[[./Schematics/img/Main.png]]
 
-Control-Unit:
 [[./Schematics/img/Control_Unit.png][Control Unit Schematics]]
+[[./Schematics/img/Control_Unit.png]]
 
-MIDI-In:
 [[./Schematics/img/MIDI_In_Unit.png][MIDI In Schematics]]
+[[./Schematics/img/MIDI_In_Unit.png]]
 
-OSC-control-unit:
 [[./Schematics/img/OSC_Unit.png][OSC Control Unit Schematics]]
+[[./Schematics/img/OSC_Unit.png]]
 
-Filter-control-unit:
 [[./Schematics/img/Filter_Unit.png][Filter Control Unit Schematics]]
+[[./Schematics/img/Filter_Unit.png]]
 
-Envelope-unit:
 [[./Schematics/img/Envelope_Unit.png][Envelope Control Unit Schematics]]
+[[./Schematics/img/Envelope_Unit.png]]
