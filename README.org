@@ -15,11 +15,13 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 |        2 | Square   |
 |        3 | Sine     |
 
+
 | CC value | Filter Type |
 |----------+-------------|
 |        0 | Low Pass    |
 |        1 | High Pass   |
 |        2 | Band Pass   |
+
 
 | CC# | Function     |
 |-----+--------------|
@@ -61,8 +63,8 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - onboard speaker as "emergency output" (quality will be shit, but nice enough to fiddle at patches, I guess)
 - Case: Case for holding the synth with a little place for placing an MPK mini Plus as keys (could get connected via MIDI-cable then)
 
-* Plan for Version 0.1 [0/5]
-- [ ] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
+* Plan for Version 0.1 [1/5]
+- [X] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
 - [ ] 3 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
 - [ ] controllable ladder-Lopass-filter
 - [ ] controllable LFO for automating filter
@@ -72,23 +74,39 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - Onboard-Sequencer
 - Oscilloscope for showing the generated wave-form
 
-* Parts list [4/9]
+* Parts list [12/17]
 - [X] Teensy 4.1
 - [X] Teensy Audio Shield
-- [ ] 2x Buchsenleisten 1x24
+- [X] 2x Buchsenleisten 1x24
 - [X] 10x Rotary Encoder (ALPS?)
 - [X] 4x8 LEDs (rot)
-- [ ] 4x Linear-Potentiometer (motorised?)
+- [X] 4x Linear-Potentiometer (motorised?)
 - [ ] 4x 74HC595 Shift-Registers
 - [ ] 1x momentary switch (closed)
-- [ ] 2x Optokoppler 6N138
-- [ ] 2x DIN-Buchse 5-polig
+- [X] 2x Optokoppler 6N138
+- [X] 2x DIN-Buchse 5-polig
 - [ ] 1x CR2032 Halter
 - [ ] 1x Audiobuchse 6.5mm
 - [X] 1x ILI9341 Color TFT
+- [X] 220 Ohm Resistor
+- [X] 470 Ohm Resistor
+- [X] 12 Red LED
 
 * Schematics
-[[./Schematics/img/Main.png]]
-[[./Schematics/img/MIDI_In_Unit.png]]
-[[./Schematics/img/OSC_Unit.png]]
-[[./Schematics/img/Filter_Unit.png]]
+Main:
+[[./Schematics/img/Main.png][Main Schematics]]
+
+Control-Unit:
+[[./Schematics/img/Control_Unit.png][Control Unit Schematics]]
+
+MIDI-In:
+[[./Schematics/img/MIDI_In_Unit.png][MIDI In Schematics]]
+
+OSC-control-unit:
+[[./Schematics/img/OSC_Unit.png][OSC Control Unit Schematics]]
+
+Filter-control-unit:
+[[./Schematics/img/Filter_Unit.png][Filter Control Unit Schematics]]
+
+Envelope-unit:
+[[./Schematics/img/Envelope_Unit.png][Envelope Control Unit Schematics]]
