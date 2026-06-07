@@ -88,7 +88,7 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - [X] 1x ILI9341 Color TFT
 
 * Schematics
-./Schematics/img/Main.png
-./Schematics/img/MIDI_In_Unit.png
-./Schematics/img/OSC_Unit.png
-./Schematics/img/Filter_Unit.png
+[[./Schematics/img/Main.png]]
+[[./Schematics/img/MIDI_In_Unit.png]]
+[[./Schematics/img/OSC_Unit.png]]
+[[./Schematics/img/Filter_Unit.png]]
