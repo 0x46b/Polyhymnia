@@ -648,7 +648,7 @@
         "uuid": "e4936a91-9e28-4906-9468-02ad94b9239b"
       }
     ],
-    "used_designators": "",
+    "used_designators": "D34-45,J2-6,SW5,SW10-15,RV1-7",
     "variants": []
   },
   "sheets": [
@@ -667,6 +667,26 @@
     [
       "847d8919-6173-4e98-8a6f-493fe0dd1dfa",
       "MIDI_In"
+    ],
+    [
+      "04017fce-ab7a-4c45-a3b8-5493e5fdc4a7",
+      "OSC Unit"
+    ],
+    [
+      "acb5abcb-989c-4dca-8a1a-ed3e163b2d20",
+      "OSC Unit1"
+    ],
+    [
+      "4ef4e00a-50a0-4639-950e-6d0b1ade7b2c",
+      "OSC Unit2"
+    ],
+    [
+      "b6ce656f-00a9-4828-8fd5-baf62d963ca4",
+      "Filter Unit"
+    ],
+    [
+      "af9c59f6-b27a-4035-bbac-40858e2fcf85",
+      "Envelope Unit"
     ]
   ],
   "text_variables": {},
