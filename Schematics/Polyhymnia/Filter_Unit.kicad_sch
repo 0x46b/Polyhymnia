@@ -752,17 +752,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "bca66d64-5c30-472b-ab1c-5be227fec859")
+			(uuid "81cb9c48-ab02-4548-a1c9-c6a12b5c8404")
 		)
 		(pin "2"
-			(uuid "1b38c24d-0f97-4404-8cfe-c7d5bb83f352")
+			(uuid "9236c1f7-5f0f-41b8-80a6-5e3bb6c37b89")
 		)
 		(pin "3"
-			(uuid "ea4a3ac2-dcea-494b-9053-1fa479b13d54")
+			(uuid "68d38fc0-e31c-4161-a3a6-ec58ab09d7a8")
 		)
 		(instances
 			(project "Polyhymnia"
-				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/b6ce656f-00a9-4828-8fd5-baf62d963ca4"
+				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0/e286b5f3-44e7-4d1f-8527-4669d7064b71"
 					(reference "RV2")
 					(unit 1)
 				)
@@ -835,20 +835,20 @@
 			)
 		)
 		(pin "1"
-			(uuid "546dcb9f-5cbf-425f-9b22-483f8c3502ed")
+			(uuid "7b6edb24-ffc4-4eac-9759-8faf1b87856c")
 		)
 		(pin "4"
-			(uuid "5f3565df-c08d-4626-8a30-e32736d13c24")
+			(uuid "5f398fec-4960-49b7-8dfc-493218268f35")
 		)
 		(pin "2"
-			(uuid "b145cca3-ea42-41f5-92fb-6415269cf40f")
+			(uuid "f2f45ad6-3c53-4103-932c-06ab7263868c")
 		)
 		(pin "3"
-			(uuid "e65b500c-cc5b-4813-b090-07fc7506b331")
+			(uuid "e962c47e-781c-4f07-bf97-d6fd711dde2e")
 		)
 		(instances
 			(project "Polyhymnia"
-				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/b6ce656f-00a9-4828-8fd5-baf62d963ca4"
+				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0/e286b5f3-44e7-4d1f-8527-4669d7064b71"
 					(reference "J2")
 					(unit 1)
 				)
@@ -956,17 +956,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "827c3a13-625a-407e-9645-69538f8c017f")
+			(uuid "0ead024a-a66e-4ab1-baa4-0271eca5f78e")
 		)
 		(pin "2"
-			(uuid "cd8575e4-f2c3-4991-8a7e-b1e56e89f720")
+			(uuid "15c0f829-1922-45b2-ace4-9e52bd5f97d7")
 		)
 		(pin "3"
-			(uuid "63f63b1e-20ef-40fb-a4ee-5b72cad2003e")
+			(uuid "13ee5815-42c8-4ade-9838-0fcf33993bcb")
 		)
 		(instances
 			(project "Polyhymnia"
-				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/b6ce656f-00a9-4828-8fd5-baf62d963ca4"
+				(path "/e4936a91-9e28-4906-9468-02ad94b9239b/3627614c-7dfe-4a8f-9547-cf9b2f9e6ef0/e286b5f3-44e7-4d1f-8527-4669d7064b71"
 					(reference "RV1")
 					(unit 1)
 				)

@@ -3,6 +3,10 @@ Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy
 
 Since I'll try to develop it myself version 1 will be completely digital, adding the analogue stuff incrementally as the project evolves.
 
+!!!!! NOTE !!!!!
+Everything here is currenty under heavy development, so use at your own risk. Every code and schematics could and will change over time without warning ;)
+
+
 * Used MIDI-CC
 | CC value | Waveform |
 |----------+----------|
@@ -82,3 +86,9 @@ Since I'll try to develop it myself version 1 will be completely digital, adding
 - [ ] 1x CR2032 Halter
 - [ ] 1x Audiobuchse 6.5mm
 - [X] 1x ILI9341 Color TFT
+
+* Schematics
+./Schematics/img/Main.png
+./Schematics/img/MIDI_In_Unit.png
+./Schematics/img/OSC_Unit.png
+./Schematics/img/Filter_Unit.png
