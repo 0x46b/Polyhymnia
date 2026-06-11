@@ -42,23 +42,27 @@ VCO* PolyVCO3;
 SynthMixer* Mixer;
 SynthEnvelope* Envelope;
 LadderFilter* Filter;
+Settings settings;
 
 // Teensy 2.0 has the LED on pin 11
 // Teensy++ 2.0 has the LED on pin 6
 // Teensy 3.x / Teensy LC have the LED on pin 13
 const int ledPin = 13;
+const int chipSelect = BUILTIN_SDCARD;
 
-void setup() {
-  // put your setup code here, to run once:
-  while (!Serial) {}
-  Serial.println("Initializing...");
+void initialize_audio_system(){
+  Serial.print("Initializing Audio System...");
   AudioMemory(20);
   usbMIDI.setHandleControlChange(handleCC);
   usbMIDI.setHandleNoteOff(handleNoteOff);
   usbMIDI.setHandleNoteOn(handleNoteOn);
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.32);
+  Serial.println("[OK]");
+}
 
+void initialize_synthesizer_system(Settings settings){
+  Serial.print("Initializing synthesizer system...");
   PolyVCO1 = new VCO(&VCO1, 70, 76, 0.25);
   PolyVCO2 = new VCO(&VCO2, 77, 78, 0.25);
   PolyVCO3 = new VCO(&VCO3, 85, 86, 0.25);
@@ -78,12 +82,48 @@ void setup() {
   LFO.amplitude(0.75);
   LFO.frequency(10);
   LFO.pulseWidth(0.15);
+  Serial.println("[OK]");
+}
+
+bool initialize_sd_card(){
+  Serial.print("Initializing SD-card...");
+  
+  // see if the card is present and can be initialized:
+  if (!SD.begin(chipSelect)) {
+    Serial.println("[FAILED]: Card failed, or not present");
+    return false;
+  }
+
+  Serial.println("[OK]");
+  return true;
+}
+
+void intialize_settings(){
+  Serial.print("Loading settings...");
+  settings.LoadSettings();
+  settings.print_settings_to_serial();
+  Serial.println("[OK]");
+}  
+
+void setup() {
   Serial.begin(9600);
+  // Wait for serial to connect
+  while (!Serial) {}
+
+  initialize_audio_system();
+  
+  if(initialize_sd_card()) {
+    intialize_settings();  
+  }
+
+  initialize_synthesizer_system(Settings settings);
+
+  Serial.print("Setting status-led to communicate ready...");
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);  // set the LED on
-  Settings* settings = new Settings();
-  settings->LoadSettings();
-  Serial.println("Initializing Done");
+  Serial.println("[OK]");
+
+  Serial.println("Initializing [Done]");
 }
 
 void loop() {
