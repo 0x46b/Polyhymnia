@@ -19,10 +19,17 @@ struct EncoderConfiguration {
 	volatile uint8_t *pin;
 	volatile uint8_t oldState;
 	volatile int offset;
+	volatile uint8_t *led_port;
+	uint8_t led_saw;
+	uint8_t led_square;
+	uint8_t led_triangle;
+	uint8_t led_sine;
 };
+typedef struct EncoderConfiguration encoderConfiguration;
 
-struct EncoderConfiguration encoder_initialize(uint8_t encoderId, volatile uint8_t *pin, volatile uint8_t *ddr, volatile uint8_t *port, uint8_t phaseA, uint8_t phaseB);
-int encoder_read_offset(volatile struct EncoderConfiguration *encoder);
-void encoder_tick(volatile struct EncoderConfiguration *encoder);
-
+void encoder_initialize(volatile encoderConfiguration* config, uint8_t encoderId, volatile uint8_t *pin, volatile uint8_t *ddr, volatile uint8_t *port, uint8_t phaseA, uint8_t phaseB);
+int encoder_read_offset(volatile encoderConfiguration *encoder);
+void encoder_tick(volatile encoderConfiguration *encoder);
+void initialize_oscillator_type_leds(volatile encoderConfiguration* encoder, volatile uint8_t *ddr, volatile uint8_t *port, uint8_t led_saw, uint8_t led_square, uint8_t led_triangle, uint8_t led_sine);
+void set_oscillator_type_led(encoderConfiguration encoder, int value);
 #endif
