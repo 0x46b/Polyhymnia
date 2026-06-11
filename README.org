@@ -76,7 +76,8 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
     - [-] Saving/Loading settings to/from SD-card
     - [-] Saving/Loading patches to/from SD-card
     - [ ] Add effects (Reverb, Delay, BitCrush, ...)
-** WIP Hardware [0/2]
+** WIP Hardware [1/3]
+  - [X] Build MIDI-port
   - [-] Display control
     - [-] Find working pinout/connection 
   - [-] Build Oscillator control modules [1/6]
