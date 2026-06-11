@@ -1,3 +1,5 @@
+#+TODO: TODO WIP VERIFY | DONE CANCELED
+
 * Polyhymnia - Hybrid Synthesizer
 Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy 4.1 as oscillators and envelope-generator but using analogue filters.
 
@@ -63,6 +65,35 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - onboard speaker as "emergency output" (quality will be shit, but nice enough to fiddle at patches, I guess)
 - Case: Case for holding the synth with a little place for placing an MPK mini Plus as keys (could get connected via MIDI-cable then)
 
+* Milestones
+** WIP Software [0/3]
+  - [-] Display control library
+    - WIP Get connection working (reading ID and/or reset the screen)
+  - [-] SPI communication
+  - [ ] Design UI
+  - Features [0/4]
+    - [ ] Add code for LFO
+    - [-] Saving/Loading settings to/from SD-card
+    - [-] Saving/Loading patches to/from SD-card
+    - [ ] Add effects (Reverb, Delay, BitCrush, ...)
+** WIP Hardware [0/2]
+  - [-] Display control
+    - [-] Find working pinout/connection 
+  - [-] Build Oscillator control modules [1/6]
+    - [X] OSC 1
+    - [ ] OSC 2
+    - [ ] OSC 3
+    - [ ] Build Status-LED-Driver module
+    - [ ] Build Envelope control module
+    - [ ] Build Filter control module
+
+** TODO Enclosure [0/2]
+    - [ ] Design Enclosure
+    - [ ] Build Enclosure
+
+** TODO Documentation [0/1]
+    - [ ] Update parts list
+
 * Plan for Version 0.1 [1/5]
 - [X] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
 - [ ] 3 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
@@ -74,7 +105,7 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - Onboard-Sequencer
 - Oscilloscope for showing the generated wave-form
 
-* Parts list [12/17]
+* Parts list [12/16]
 - [X] Teensy 4.1
 - [X] Teensy Audio Shield
 - [X] 2x Buchsenleisten 1x24
