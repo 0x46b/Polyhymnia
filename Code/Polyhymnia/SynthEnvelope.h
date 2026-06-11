@@ -2,6 +2,8 @@
 #define SYNTHENVELOPE_H
 
 #include "Constants.h"
+#include "SerialLogger.hpp"
+#include "Settings.h"
 
 class SynthEnvelope {
 private:
@@ -17,9 +19,12 @@ private:
   // 11800ms = 1.96s
   const float MAX_RELEASE_IN_MS = 3000;
 
+  SerialLogger _logger;
+
 
 public:
-  SynthEnvelope(AudioEffectEnvelope* teensyEnvelope, byte attackCC, byte decayCC, byte sustainCC, byte releaseCC) {
+  SynthEnvelope(AudioEffectEnvelope* teensyEnvelope, byte attackCC, byte decayCC, byte sustainCC, byte releaseCC, String loggingContext)
+  : _logger(loggingContext, CURRENT_LOGLEVEL) {
     this->_teensyEnvelope = teensyEnvelope;
     this->_attackCC = attackCC;
     this->_decayCC = decayCC;
@@ -33,6 +38,14 @@ public:
     this->_teensyEnvelope->hold(0);
     this->_teensyEnvelope->sustain(1);
     this->_teensyEnvelope->release(300);
+  }
+
+  void Initialize(EnvelopeSetting setting) {
+    this->_teensyEnvelope->attack(setting.Attack);
+    this->_teensyEnvelope->decay(setting.Decay);
+    this->_teensyEnvelope->hold(0);
+    this->_teensyEnvelope->sustain(setting.Sustain);
+    this->_teensyEnvelope->release(setting.Release);
   }
 
   void HandleMidiCC(byte cc, byte value) {

@@ -69,6 +69,8 @@ public:
 
 // Class-Definitions
 class Settings {
+private: 
+  bool _loadedSuccessfully = false;
 
 public:
   SystemSettings System;
@@ -81,6 +83,7 @@ public:
   bool LoadSettings() {
     if (!SD.begin(BUILTIN_SDCARD)) {
       Serial.println("initialization failed!");
+      _loadedSuccessfully = false;
       return false;
     }
 
@@ -138,91 +141,13 @@ public:
 
       patchCounter++;
     }
-
+    
+    _loadedSuccessfully = true;
     return true;
   }
 
-  void print_vco_info_to_serial(VCOSetting vco){
-    Serial.print("\t\t\tType: ");
-    switch(vco.Type){
-      case 0:
-        Serial.println("SAWTOOTH");
-        break;
-      case 1:
-        Serial.println("SQUARE");
-        break;
-      case 2:
-        Serial.println("TRIANGLE");
-        break;
-      case 3:
-        Serial.println("SINE");
-        break;
-    }
-    Serial.print("\t\t\tDetune: ");
-    Serial.println(vco.Detune);
-  }
-
-  void print_envelope_filter_to_serial(EnvelopeSetting envelope){
-    Serial.print("\t\t\tAttack: ");
-    Serial.println(envelope.Attack);
-    Serial.print("\t\t\tDecay: ");
-    Serial.println(envelope.Decay);
-    Serial.print("\t\t\tSustain: ");
-    Serial.println(envelope.Sustain);
-    Serial.print("\t\t\tRelease: ");
-    Serial.println(envelope.Release);
-  }
-
-  void print_lfo_to_serial(LFOSetting lfo){
-    Serial.print("\t\t\tRate: ");
-    Serial.println(lfo.Rate);
-    Serial.print("\t\t\tAmount: ");
-    Serial.println(lfo.Amount);
-  }
-
-  void print_mixer_to_serial(MixerSetting mixer){
-    Serial.print("\t\t\tVCO1Gain: ");
-    Serial.println(mixer.VCO1Gain);
-    Serial.print("\t\t\tVCO2Gain: ");
-    Serial.println(mixer.VCO2Gain);
-    Serial.print("\t\t\tVCO3Gain: ");
-    Serial.println(mixer.VCO3Gain);
-    Serial.print("\t\t\tNoise: ");
-    Serial.println(mixer.NoiseGain);
-  }
-
-  void print_patch_info_to_serial(PatchSetting patch){
-    Serial.print("\tName: ");
-    Serial.println(patch.Name);
-    Serial.println("\t\tVCO1: ");
-    print_vco_info_to_serial(patch.VCO1);
-    Serial.println("\t\tVCO2: ");
-    print_vco_info_to_serial(patch.VCO2);
-    Serial.println("\t\tVCO3: ");
-    print_vco_info_to_serial(patch.VCO3);
-    Serial.println("\t\tEnvelope: ");
-    print_envelope_filter_to_serial(patch.Envelope);
-    Serial.println("\t\tLFO: ");
-    print_lfo_to_serial(patch.LFO);
-    Serial.println("\t\tMixer: ");
-    print_mixer_to_serial(patch.Mixer);
-  }
-
-  void print_settings_to_serial() {
-    Serial.println("Loaded settings: ");
-    Serial.println("System: ");
-    Serial.print("\tShowBootscreen: ");
-    if(System.ShowBootscreen){
-      Serial.println("true");
-    }else{
-      Serial.println("false");
-    }
-    Serial.print("\tBootscreenFilepath: ");
-    Serial.println(System.BootscreenFilepath);
-    Serial.print("\tMIDI channel: ");
-    Serial.println(System.MidiChannel);
-    print_patch_info_to_serial(Patches[0]);
-    print_patch_info_to_serial(Patches[1]);
+  bool is_loaded(){
+    return _loadedSuccessfully;
   }
 };
 
