@@ -2,6 +2,8 @@
 #define SYNTHMIXER_H
 
 #include "Constants.h"
+#include "Settings.h"
+#include "SerialLogger.hpp"
 
 class SynthMixer {
 private:
@@ -15,6 +17,7 @@ private:
   byte _vco2CC;
   byte _vco3CC;
   byte _noiseCC;
+  SerialLogger _logger;
 
   float CalculatePercentage(byte quantity, float total) {
     // Avoid dividing by zero
@@ -41,7 +44,9 @@ private:
     int totalVolumes = this->_vco1Volume + this->_vco2Volume + this->_vco3Volume + this->_noiseVolume;
 
     float vco1gain = CalculatePercentage(this->_vco1Volume, totalVolumes);
-    Serial.printf("Setting VCO1 gain to %f\n", vco1gain);
+    _logger.print("Setting VCO1 gain to ", LOGLEVEL_DEBUG);
+    _logger.print_float(vco1gain, LOGLEVEL_DEBUG);
+
     this->_teensyMixer->gain(0, vco1gain);
 
     float vco2gain = CalculatePercentage(this->_vco2Volume, totalVolumes);
@@ -58,7 +63,8 @@ private:
   }
 
 public:
-  SynthMixer(AudioMixer4* teensyMixer, byte vco1CC, byte vco2CC, byte vco3CC, byte noiseCC) {
+  SynthMixer(AudioMixer4* teensyMixer, byte vco1CC, byte vco2CC, byte vco3CC, byte noiseCC)
+  : _logger("Mixer", CURRENT_LOGLEVEL) {
     this->_teensyMixer = teensyMixer;
     this->_vco1CC = vco1CC;
     this->_vco2CC = vco2CC;
@@ -66,10 +72,22 @@ public:
     this->_noiseCC = noiseCC;
   }
 
+  void Initialize(MixerSetting settings) {
+    _logger.println("Initializing mixer with loaded settings", LOGLEVEL_DEBUG);
+    this->_vco1Volume = settings.VCO1Gain;
+    this->_vco2Volume = settings.VCO2Gain;
+    this->_vco3Volume = settings.VCO3Gain;
+    this->_noiseVolume = settings.NoiseGain;
+
+    this->UpdateVolumes();
+  }
+
   void Initialize() {
+    _logger.println("Initializing mixer with default values", LOGLEVEL_DEBUG);
     this->_vco1Volume = 42;
     this->_vco2Volume = 42;
     this->_vco3Volume = 42;
+
     this->UpdateVolumes();
   }
 

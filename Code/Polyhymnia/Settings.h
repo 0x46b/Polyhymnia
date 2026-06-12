@@ -62,13 +62,15 @@ public:
   FilterSetting Filter;
   LFOSetting LFO;
 
-  PatchSetting(){
+  PatchSetting() {
     Name = "Unused";
   }
 };
 
 // Class-Definitions
 class Settings {
+private:
+  bool _loadedSuccessfully = false;
 
 public:
   SystemSettings System;
@@ -81,6 +83,7 @@ public:
   bool LoadSettings() {
     if (!SD.begin(BUILTIN_SDCARD)) {
       Serial.println("initialization failed!");
+      _loadedSuccessfully = false;
       return false;
     }
 
@@ -102,44 +105,49 @@ public:
 
     int patchCounter = 0;
     for (JsonObject patche : doc["patches"].as<JsonArray>()) {
-      PatchSetting currentPatch = Patches[patchCounter];
-      currentPatch.Name = patche["Name"];  // "Patch 1", "Patch 2"
+      PatchSetting* currentPatch = &Patches[patchCounter];
+      currentPatch->Name = patche["Name"];  // "Patch 1", "Patch 2"
 
-      currentPatch.VCO1.Type = patche["VCO1"]["Type"];      // 1, 1
-      currentPatch.VCO1.Detune = patche["VCO1"]["Detune"];  // 0, 0
+      currentPatch->VCO1.Type = patche["VCO1"]["Type"];      // 1, 1
+      currentPatch->VCO1.Detune = patche["VCO1"]["Detune"];  // 0, 0
 
-      currentPatch.VCO2.Type = patche["VCO2"]["Type"];      // 1, 1
-      currentPatch.VCO2.Detune = patche["VCO2"]["Detune"];  // 0, 0
+      currentPatch->VCO2.Type = patche["VCO2"]["Type"];      // 1, 1
+      currentPatch->VCO2.Detune = patche["VCO2"]["Detune"];  // 0, 0
 
-      currentPatch.VCO3.Type = patche["VCO3"]["Type"];      // 1, 1
-      currentPatch.VCO3.Detune = patche["VCO3"]["Detune"];  // 0, 0
+      currentPatch->VCO3.Type = patche["VCO3"]["Type"];      // 1, 1
+      currentPatch->VCO3.Detune = patche["VCO3"]["Detune"];  // 0, 0
 
-      currentPatch.Noise.Gain = patche["Noise"]["Gain"];  // 0, 0
+      currentPatch->Noise.Gain = patche["Noise"]["Gain"];  // 0, 0
 
       JsonObject patche_Envelope = patche["Envelope"];
-      currentPatch.Envelope.Attack = patche_Envelope["Attack"];    // 0, 0
-      currentPatch.Envelope.Decay = patche_Envelope["Decay"];      // 35, 35
-      currentPatch.Envelope.Sustain = patche_Envelope["Sustain"];  // 1, 1
-      currentPatch.Envelope.Release = patche_Envelope["Release"];  // 300, 300
+      currentPatch->Envelope.Attack = patche_Envelope["Attack"];    // 0, 0
+      currentPatch->Envelope.Decay = patche_Envelope["Decay"];      // 35, 35
+      currentPatch->Envelope.Sustain = patche_Envelope["Sustain"];  // 1, 1
+      currentPatch->Envelope.Release = patche_Envelope["Release"];  // 300, 300
 
       JsonObject patche_Filter = patche["Filter"];
-      currentPatch.Filter.Type = patche_Filter["FilterType"];      // 0, 0
-      currentPatch.Filter.Cutoff = patche_Filter["Cutoff"];        // 1, 1
-      currentPatch.Filter.Resonance = patche_Filter["Resonance"];  // 0, 0
+      currentPatch->Filter.Type = patche_Filter["FilterType"];      // 0, 0
+      currentPatch->Filter.Cutoff = patche_Filter["Cutoff"];        // 1, 1
+      currentPatch->Filter.Resonance = patche_Filter["Resonance"];  // 0, 0
 
-      currentPatch.LFO.Rate = patche["LFO"]["Rate"];      // 10, 10
-      currentPatch.LFO.Amount = patche["LFO"]["Amount"];  // 50, 50
+      currentPatch->LFO.Rate = patche["LFO"]["Rate"];      // 10, 10
+      currentPatch->LFO.Amount = patche["LFO"]["Amount"];  // 50, 50
 
       JsonObject patche_Mixer = patche["Mixer"];
-      currentPatch.Mixer.VCO1Gain = patche_Mixer["VCO1Gain"];    // 0.3, 0.3
-      currentPatch.Mixer.VCO2Gain = patche_Mixer["VCO2Gain"];    // 0.3, 0.3
-      currentPatch.Mixer.VCO3Gain = patche_Mixer["VCO3Gain"];    // 0.3, 0.3
-      currentPatch.Mixer.NoiseGain = patche_Mixer["NoiseGain"];  // 0, 0
+      currentPatch->Mixer.VCO1Gain = patche_Mixer["VCO1Gain"];    // 0.3, 0.3
+      currentPatch->Mixer.VCO2Gain = patche_Mixer["VCO2Gain"];    // 0.3, 0.3
+      currentPatch->Mixer.VCO3Gain = patche_Mixer["VCO3Gain"];    // 0.3, 0.3
+      currentPatch->Mixer.NoiseGain = patche_Mixer["NoiseGain"];  // 0, 0
 
       patchCounter++;
     }
 
+    _loadedSuccessfully = true;
     return true;
+  }
+
+  bool is_loaded() {
+    return _loadedSuccessfully;
   }
 };
 
