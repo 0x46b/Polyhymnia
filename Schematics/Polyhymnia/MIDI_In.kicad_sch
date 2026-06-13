@@ -3,7 +3,12 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "4ec6b20e-2652-4b00-9287-cc184dc9ebdd")
-	(paper "A4")
+	(paper "A5")
+	(title_block
+		(title "MIDI-Input Unit")
+		(date "2026-06-13")
+		(rev "0.1")
+	)
 	(lib_symbols
 		(symbol "Connector:DIN-5"
 			(pin_names

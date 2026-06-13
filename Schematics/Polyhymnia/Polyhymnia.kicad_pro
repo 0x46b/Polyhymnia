@@ -697,9 +697,14 @@
         "filename": "Polyhymnia.kicad_sch",
         "name": "Stammblatt",
         "uuid": "e4936a91-9e28-4906-9468-02ad94b9239b"
+      },
+      {
+        "filename": "audio-amplifier.kicad_sch",
+        "name": "Audio-Amplifier",
+        "uuid": "5b0bdf70-91b1-4732-8927-3f4b26ef1de2"
       }
     ],
-    "used_designators": "Q1-16,R45-60",
+    "used_designators": "J8,RV8,LS1,#PWR2-8,C1-4,U10,Q1-16,R45-60",
     "variants": []
   },
   "sheets": [
@@ -738,6 +743,10 @@
     [
       "38dc72d3-2b98-4f0c-a4a0-3d9d564278f9",
       "Envelope Unit"
+    ],
+    [
+      "5b0bdf70-91b1-4732-8927-3f4b26ef1de2",
+      "Audio-Amplifier"
     ]
   ],
   "text_variables": {},

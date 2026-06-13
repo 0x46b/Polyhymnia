@@ -3,7 +3,12 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "8602658a-36ea-4abf-8232-044a89b0b344")
-	(paper "A4")
+	(paper "A5")
+	(title_block
+		(title "Filter Control Unit")
+		(date "2026-06-13")
+		(rev "0.1")
+	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_02x02_Counter_Clockwise"
 			(pin_names
@@ -436,20 +441,20 @@
 		)
 	)
 	(junction
-		(at 95.25 48.26)
+		(at 105.41 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2a90238b-fe19-4c1d-b80e-1ccc24ec134c")
 	)
 	(junction
-		(at 87.63 55.88)
+		(at 97.79 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "85bbcabd-6611-4b70-ad80-4f0e308da49e")
 	)
 	(wire
 		(pts
-			(xy 114.3 48.26) (xy 95.25 48.26)
+			(xy 124.46 55.88) (xy 105.41 55.88)
 		)
 		(stroke
 			(width 0)
@@ -459,7 +464,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 48.26) (xy 67.31 48.26)
+			(xy 105.41 55.88) (xy 77.47 55.88)
 		)
 		(stroke
 			(width 0)
@@ -469,7 +474,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 67.31) (xy 63.5 71.12)
+			(xy 73.66 74.93) (xy 73.66 78.74)
 		)
 		(stroke
 			(width 0)
@@ -479,7 +484,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 48.26) (xy 67.31 63.5)
+			(xy 77.47 55.88) (xy 77.47 71.12)
 		)
 		(stroke
 			(width 0)
@@ -489,7 +494,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 48.26) (xy 95.25 63.5)
+			(xy 105.41 55.88) (xy 105.41 71.12)
 		)
 		(stroke
 			(width 0)
@@ -499,7 +504,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 67.31) (xy 113.03 58.42)
+			(xy 123.19 74.93) (xy 123.19 66.04)
 		)
 		(stroke
 			(width 0)
@@ -509,7 +514,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 59.69) (xy 63.5 55.88)
+			(xy 73.66 67.31) (xy 73.66 63.5)
 		)
 		(stroke
 			(width 0)
@@ -519,7 +524,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 55.88) (xy 87.63 55.88)
+			(xy 73.66 63.5) (xy 97.79 63.5)
 		)
 		(stroke
 			(width 0)
@@ -529,7 +534,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 55.88) (xy 113.03 55.88)
+			(xy 124.46 63.5) (xy 123.19 63.5)
 		)
 		(stroke
 			(width 0)
@@ -539,7 +544,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 63.5) (xy 91.44 63.5)
+			(xy 105.41 71.12) (xy 101.6 71.12)
 		)
 		(stroke
 			(width 0)
@@ -549,7 +554,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 67.31) (xy 113.03 67.31)
+			(xy 97.79 74.93) (xy 123.19 74.93)
 		)
 		(stroke
 			(width 0)
@@ -559,7 +564,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 71.12) (xy 100.33 58.42)
+			(xy 110.49 78.74) (xy 110.49 66.04)
 		)
 		(stroke
 			(width 0)
@@ -569,7 +574,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 55.88) (xy 100.33 55.88)
+			(xy 97.79 63.5) (xy 110.49 63.5)
 		)
 		(stroke
 			(width 0)
@@ -579,7 +584,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 55.88) (xy 87.63 59.69)
+			(xy 97.79 63.5) (xy 97.79 67.31)
 		)
 		(stroke
 			(width 0)
@@ -589,7 +594,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 71.12) (xy 100.33 71.12)
+			(xy 73.66 78.74) (xy 110.49 78.74)
 		)
 		(stroke
 			(width 0)
@@ -599,7 +604,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 55.88) (xy 114.3 48.26)
+			(xy 124.46 63.5) (xy 124.46 55.88)
 		)
 		(stroke
 			(width 0)
@@ -609,7 +614,7 @@
 	)
 	(hierarchical_label "3.3V"
 		(shape input)
-		(at 90.17 55.88 90)
+		(at 100.33 63.5 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -620,7 +625,7 @@
 	)
 	(hierarchical_label "Potentiometer_Frequency"
 		(shape input)
-		(at 100.33 62.23 0)
+		(at 110.49 69.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -631,7 +636,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 114.3 55.88 0)
+		(at 124.46 63.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -642,7 +647,7 @@
 	)
 	(hierarchical_label "Potentiometer_Resonance"
 		(shape input)
-		(at 113.03 66.04 0)
+		(at 123.19 73.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -653,7 +658,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Potentiometer")
-		(at 87.63 63.5 0)
+		(at 97.79 71.12 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -664,7 +669,7 @@
 		(fields_autoplaced yes)
 		(uuid "352b286a-8ee8-4243-b93b-52c3c2f3b9ad")
 		(property "Reference" "RV2"
-			(at 85.09 62.2299 0)
+			(at 95.25 69.8499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -675,7 +680,7 @@
 			)
 		)
 		(property "Value" "R_Potentiometer"
-			(at 85.09 64.7699 0)
+			(at 95.25 72.3899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -686,7 +691,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -697,7 +702,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -708,7 +713,7 @@
 			)
 		)
 		(property "Description" "Potentiometer"
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -719,7 +724,7 @@
 			)
 		)
 		(property "Sim.Device" "R"
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -730,7 +735,7 @@
 			)
 		)
 		(property "Sim.Type" "POT"
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -741,7 +746,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=r0 2=wiper 3=r1"
-			(at 87.63 63.5 0)
+			(at 97.79 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -771,7 +776,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x02_Counter_Clockwise")
-		(at 105.41 55.88 0)
+		(at 115.57 63.5 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -782,7 +787,7 @@
 		(fields_autoplaced yes)
 		(uuid "39769287-b5ec-4f54-8d37-1352d11bf0ba")
 		(property "Reference" "J2"
-			(at 106.68 49.53 0)
+			(at 116.84 57.15 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -792,7 +797,7 @@
 			)
 		)
 		(property "Value" "Conn_02x02_Counter_Clockwise"
-			(at 106.68 52.07 0)
+			(at 116.84 59.69 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -802,7 +807,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 105.41 55.88 0)
+			(at 115.57 63.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -813,7 +818,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 55.88 0)
+			(at 115.57 63.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -824,7 +829,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x02, counter clockwise pin numbering scheme (similar to DIP package numbering), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 105.41 55.88 0)
+			(at 115.57 63.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -857,7 +862,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Potentiometer")
-		(at 63.5 63.5 0)
+		(at 73.66 71.12 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -868,7 +873,7 @@
 		(fields_autoplaced yes)
 		(uuid "da71ef7c-44f4-4a05-965d-4ad760d855a2")
 		(property "Reference" "RV1"
-			(at 60.96 62.2299 0)
+			(at 71.12 69.8499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -879,7 +884,7 @@
 			)
 		)
 		(property "Value" "R_Potentiometer"
-			(at 60.96 64.7699 0)
+			(at 71.12 72.3899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -890,7 +895,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -901,7 +906,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -912,7 +917,7 @@
 			)
 		)
 		(property "Description" "Potentiometer"
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -923,7 +928,7 @@
 			)
 		)
 		(property "Sim.Device" "R"
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -934,7 +939,7 @@
 			)
 		)
 		(property "Sim.Type" "POT"
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -945,7 +950,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=r0 2=wiper 3=r1"
-			(at 63.5 63.5 0)
+			(at 73.66 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
