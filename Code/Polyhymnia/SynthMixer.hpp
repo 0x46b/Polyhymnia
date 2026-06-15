@@ -1,8 +1,8 @@
 #ifndef SYNTHMIXER_H
 #define SYNTHMIXER_H
 
-#include "Constants.h"
-#include "Settings.h"
+#include "Constants.hpp"
+#include "Settings.hpp"
 #include "SerialLogger.hpp"
 
 class SynthMixer {

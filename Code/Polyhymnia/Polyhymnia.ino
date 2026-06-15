@@ -3,11 +3,11 @@
 #include <SPI.h>
 #include <SD.h>
 #include <ArduinoJson.h>
-#include "SynthEnvelope.h"
-#include "SynthMixer.h"
-#include "VCO.h"
-#include "Settings.h"
-#include "LadderFilter.h"
+#include "SynthEnvelope.hpp"
+#include "SynthMixer.hpp"
+#include "VCO.hpp"
+#include "Settings.hpp"
+#include "LadderFilter.hpp"
 #include "SerialLogger.hpp"
 
 // GUItool: begin automatically generated code
@@ -42,7 +42,7 @@ VCO* PolyVCO3;
 SynthMixer* Mixer;
 SynthEnvelope* Envelope;
 LadderFilter* Filter;
-Settings settings;
+Settings settings(SETTINGS_FILENAME);
 SerialLogger logger("Polyhymnia", CURRENT_LOGLEVEL);
 
 // Teensy 2.0 has the LED on pin 11

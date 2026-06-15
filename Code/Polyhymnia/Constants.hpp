@@ -1,10 +1,21 @@
-#ifndef MIDI_H
-#define MIDI_H
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
 
-class MIDI {
-private:
-  // MIDI-value to note lookup
-  const float midiToFrequency[128] = { 8.176, 8.662, 9.177, 9.723, 10.301, 10.913, 11.562, 12.25, 12.978, 13.75, 14.568,
+#define DIV127 (1.0 / 127.0)
+#define SETTINGS_FILENAME  "settings.json"
+#define NUMBER_OF_PATCHES 50
+
+#define LOGLEVEL_TRACE 5
+#define LOGLEVEL_DEBUG 4
+#define LOGLEVEL_INFO 3
+#define LOGLEVEL_WARNING 2
+#define LOGLEVEL_ERROR 1
+#define LOGLEVEL_FATAL 0
+
+// This is a little bit hacky, replace it with correct handling ASAP
+#define CURRENT_LOGLEVEL LOGLEVEL_TRACE
+
+const float midiToFrequency[128] = { 8.176, 8.662, 9.177, 9.723, 10.301, 10.913, 11.562, 12.25, 12.978, 13.75, 14.568,
                                        15.434, 16.352, 17.324, 18.354, 19.445, 20.602, 21.827, 23.125, 24.5, 25.957, 27.5,
                                        29.135, 30.868, 32.703, 34.648, 36.708, 38.891, 41.203, 43.654, 46.249, 48.999, 51.913,
                                        55, 58.27, 61.735, 65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.826,
@@ -16,29 +27,4 @@ private:
                                        2489.016, 2637.02, 2793.826, 2959.955, 3135.963, 3322.438, 3520, 3729.31, 3951.066, 4186.009, 4434.922,
                                        4698.636, 4978.032, 5274.041, 5587.652, 5919.911, 6271.927, 6644.875, 7040, 7458.62, 7902.133, 8372.018,
                                        8869.844, 9397.273, 9956.063, 10548.08, 11175.3, 11839.82, 12543.85 };
-
-public:
-  float MidiToFrequency(int midiValue) {
-    if (midiValue < 0 || midiValue > 127) {
-      return 0;
-    }
-
-    return midiToFrequency[midiValue];
-  }
-
-  static float MidiValueToValue(byte value, float maxValue, float offset) {
-    return offset + maxValue * (value * DIV127);
-  }
-
-
-  static void PrintMidiNoteInfoToSerial(const String& msg, byte channel, byte note, byte velocity) {
-    Serial.printf("%s Channel: %i Note: %i Velocity: %i\n", msg, channel, note, velocity);
-  }
-
-
-  static void PrintMidiCCInfoToSerial(byte channel, byte control, byte value) {
-    Serial.printf("%s Channel: %i CC: %i Value: %i\n", channel, control, value);
-  }
-};
-
 #endif

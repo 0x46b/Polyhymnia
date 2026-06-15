@@ -1,6 +1,6 @@
 #ifndef SERIAL_LOGGER_HPP
-#include "Settings.h"
-#include "Constants.h"
+#include "Settings.hpp"
+#include "Constants.hpp"
 #define ACTION_RESULT_SUCCESS 0
 #define ACTION_RESULT_WARNING 1
 #define ACTION_RESULT_ERROR -1

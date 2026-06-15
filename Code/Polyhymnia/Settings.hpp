@@ -1,7 +1,10 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "Constants.h"
+#include <ArduinoJson.h>
+#include <ArduinoJson.hpp>
+#include <SD.h>
+#include "Constants.hpp"
 
 class SystemSettings {
 public:
@@ -71,12 +74,13 @@ public:
 class Settings {
 private:
   bool _loadedSuccessfully = false;
+  String _filename;
 
 public:
   SystemSettings System;
-  PatchSetting Patches[100];
+  PatchSetting Patches[NUMBER_OF_PATCHES];
 
-  Settings()
+  Settings(String filename)
     : System() {
   }
 
@@ -87,10 +91,11 @@ public:
       return false;
     }
 
-    File input = SD.open(SETTINGS_FILENAME, FILE_READ);
+    File input = SD.open(_filename.c_str(), FILE_READ);
     JsonDocument doc;
 
     DeserializationError error = deserializeJson(doc, input);
+    input.close();
 
     if (error) {
       Serial.print("deserializeJson() failed: ");
@@ -144,6 +149,70 @@ public:
 
     _loadedSuccessfully = true;
     return true;
+  }
+
+  bool Save() {
+    JsonDocument doc;
+
+    JsonObject settings = doc["settings"].to<JsonObject>();
+    settings["ShowBootscreen"] = System.ShowBootscreen;
+    settings["BootscreenFilepath"] = System.BootscreenFilepath;
+    settings["MidiChannel"] = System.MidiChannel;
+
+    JsonArray patches = doc["patches"].to<JsonArray>();
+
+    for (int i = 0; i <= NUMBER_OF_PATCHES; i++) {
+      JsonObject patches_0 = patches.add<JsonObject>();
+      patches_0["Name"] = Patches[i].Name;
+
+      JsonObject patches_0_VCO1 = patches_0["VCO1"].to<JsonObject>();
+      patches_0_VCO1["Type"] = Patches[i].VCO1.Type;
+      patches_0_VCO1["Detune"] = Patches[i].VCO1.Detune;
+
+      JsonObject patches_0_VCO2 = patches_0["VCO2"].to<JsonObject>();
+      patches_0_VCO2["Type"] = Patches[i].VCO2.Type;
+      patches_0_VCO2["Detune"] = Patches[i].VCO2.Detune;
+
+      JsonObject patches_0_VCO3 = patches_0["VCO3"].to<JsonObject>();
+      patches_0_VCO3["Type"] = Patches[i].VCO3.Type;
+      patches_0_VCO3["Detune"] = Patches[i].VCO3.Detune;
+      patches_0["Noise"]["Gain"] = Patches[i].Noise.Gain;
+
+      JsonObject patches_0_Envelope = patches_0["Envelope"].to<JsonObject>();
+      patches_0_Envelope["Attack"] = Patches[i].Envelope.Attack;
+      patches_0_Envelope["Decay"] = Patches[i].Envelope.Decay;
+      patches_0_Envelope["Sustain"] = Patches[i].Envelope.Sustain;
+      patches_0_Envelope["Release"] = Patches[i].Envelope.Release;
+
+      JsonObject patches_0_Filter = patches_0["Filter"].to<JsonObject>();
+      patches_0_Filter["FilterType"] = Patches[i].Filter.Type;
+      patches_0_Filter["Cutoff"] = Patches[i].Filter.Cutoff;
+      patches_0_Filter["Resonance"] = Patches[i].Filter.Resonance;
+
+      JsonObject patches_0_LFO = patches_0["LFO"].to<JsonObject>();
+      patches_0_LFO["Rate"] = Patches[i].LFO.Rate;
+      patches_0_LFO["Amount"] = Patches[i].LFO.Amount;
+
+      JsonObject patches_0_Mixer = patches_0["Mixer"].to<JsonObject>();
+      patches_0_Mixer["VCO1Gain"] = Patches[i].Mixer.VCO1Gain;
+      patches_0_Mixer["VCO2Gain"] = Patches[i].Mixer.VCO2Gain;
+      patches_0_Mixer["VCO3Gain"] = Patches[i].Mixer.VCO3Gain;
+      patches_0_Mixer["NoiseGain"] = Patches[i].Mixer.NoiseGain;
+    }
+
+    String output;
+
+    doc.shrinkToFit();  // optional
+
+    serializeJson(doc, output);
+    File outputFile = SD.open(_filename.c_str(), FILE_WRITE);
+    if (outputFile) {
+      outputFile.print(output.c_str());
+
+      outputFile.close();
+      return true;
+    }
+    return false;
   }
 
   bool is_loaded() {

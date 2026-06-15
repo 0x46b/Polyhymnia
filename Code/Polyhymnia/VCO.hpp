@@ -2,8 +2,8 @@
 #define VCO_H
 
 #include "SerialLogger.hpp"
-#include "Constants.h"
-#include "MIDI.h"
+#include "Constants.hpp"
+#include "MIDI.hpp"
 
 class VCO {
 private:

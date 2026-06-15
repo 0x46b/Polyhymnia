@@ -1,9 +1,9 @@
 #ifndef SYNTHENVELOPE_H
 #define SYNTHENVELOPE_H
 
-#include "Constants.h"
+#include "Constants.hpp"
 #include "SerialLogger.hpp"
-#include "Settings.h"
+#include "Settings.hpp"
 
 class SynthEnvelope {
 private:
