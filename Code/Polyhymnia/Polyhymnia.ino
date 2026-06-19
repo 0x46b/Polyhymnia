@@ -51,6 +51,20 @@ SerialLogger logger("Polyhymnia", CURRENT_LOGLEVEL);
 const int ledPin = 13;
 const int chipSelect = BUILTIN_SDCARD;
 
+void dump_crash_report(){
+  if (CrashReport) {
+    if (SD.begin(chipSelect)) {
+      /* FILE_WRITE will append to end of the file */
+      File logFile = SD.open("crashlog.txt", FILE_WRITE);
+      if (logFile) {
+        logFile.print(CrashReport);
+        logFile.close();
+      }
+    }
+    Serial.print(CrashReport);
+  }
+}
+
 void initialize_audio_system() {
   logger.start_action("Audio System Initialization", LOGLEVEL_DEBUG);
   AudioMemory(20);
