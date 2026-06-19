@@ -42,6 +42,16 @@ bool initialize_sd_card() {
   return true;
 }
 
+void my_log_cb(lv_log_level_t level, const char * buf)
+{
+  Serial.print(buf);
+}
+
+
+void initialize_logging(){
+  lv_log_register_print_cb(my_log_cb);
+}
+
 /** LVGL Callback to draw on the screen */
 void my_disp_flush(lv_display_t* disp, const lv_area_t* area, uint8_t* px_map) {
   const bool redraw_now = lv_disp_flush_is_last(disp);                                      // check if when should update the screen (or just buffer the changes).
@@ -76,7 +86,7 @@ lv_key_t my_last_key() {
     return LV_KEY_ENTER;
   }
 
-  return 0;
+  return LV_KEY_ESC;
 }
 
 bool key_pressed() {
@@ -135,23 +145,17 @@ void init_lvgl() {
 }
 
 void showBootscreen(int showInSeconds){
-    
-    // LV_IMAGE_DECLARE(Bootup_Screen_distorted);
-    // lv_obj_t * screen = lv_screen_active();
-
-    // /* 💡 Register another image in `globals.xml` and swap `src` to its name to see a different bitmap. */
-    // lv_obj_t * image = lv_image_create(screen);
-    // lv_image_set_src(image, "S:/imgs/Bootup_Screen_distorted.bmp");
-    // lv_obj_set_align(image, LV_ALIGN_CENTER);
+    lv_obj_t * screen = lv_screen_active();
+    lv_obj_t * image = lv_image_create(screen);
+    lv_image_set_src(image, "S:/imgs/Bootup_Screen_distorted.bmp");
+    lv_obj_set_align(image, LV_ALIGN_CENTER);
 }
 
 void showGif(){
   lv_obj_t *img = lv_gif_create(lv_screen_active());
     lv_gif_set_color_format(img, LV_COLOR_FORMAT_ARGB8888);
-    /* Assuming a File system is attached to letter 'A'
-     * E.g. set LV_USE_FS_STDIO 'A' in lv_conf.h */
-    lv_gif_set_src(img, "S:imgs/nyan-cat-rainbow.gif");
-    lv_obj_align(img, LV_ALIGN_RIGHT_MID, -20, 0);
+    lv_gif_set_src(img, "S:/imgs/nyan-cat-rainbow.gif");
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
 }
 
 void setup() {
@@ -163,11 +167,7 @@ void setup() {
   init_buttons();
   init_tft_driver();
   init_lvgl();
-
-  // LV_IMAGE_DECLARE(TEST_IMAGE);
-  // lv_obj_t * bootupLogo = lv_image_create(lv_screen_active());
-  // lv_image_set_src(bootupLogo, &TEST_IMAGE);
-  // lv_obj_align(bootupLogo, LV_ALIGN_CENTER, 0, 0);
+  initialize_logging();
 
   Serial.println("LGVL Setup done");
   lv_group_t* group = lv_group_create();
@@ -177,10 +177,10 @@ void setup() {
   lv_indev_set_type(indev, LV_INDEV_TYPE_ENCODER);
   lv_indev_set_read_cb(indev, encoder_with_keys_read);
   lv_indev_set_group(indev, group);
-  //showBootscreen(5);
-  showGif();
-  //create_menu(group);
+  //showGif();
+  create_menu(group);
   
+  //showBootscreen(5);
 }
 
 void loop() {
