@@ -1,19 +1,11 @@
+#include "libraries/lv_conf.h"
 #include <lvgl.h>
 #include <ILI9341_T4.h>
 #include <SD.h>
 
 #include "config.h"
-#include "menu.h"
-#include "custom_icons.h"
+#include "ui/ui.h"
 
-#define LEFT_BTN 3
-#define ENTER_BTN 2
-#define RIGHT_BTN 4
-#define ENCODER_PIN1 8
-#define ENCODER_PIN2 9
-#define SD_CS BUILTIN_SDCARD
-
-//Encoder menuEncoder(ENCODER_PIN1, ENCODER_PIN2); 
 // 2 diff buffers with about 8K memory each
 ILI9341_T4::DiffBuffStatic<8000> diff1;
 ILI9341_T4::DiffBuffStatic<8000> diff2;
@@ -47,7 +39,6 @@ void my_log_cb(lv_log_level_t level, const char * buf)
   Serial.print(buf);
 }
 
-
 void initialize_logging(){
   lv_log_register_print_cb(my_log_cb);
 }
@@ -58,7 +49,6 @@ void my_disp_flush(lv_display_t* disp, const lv_area_t* area, uint8_t* px_map) {
   tft.updateRegion(redraw_now, (uint16_t*)px_map, area->x1, area->x2, area->y1, area->y2);  // update the interval framebuffer and then redraw the screen if requested
   lv_disp_flush_ready(disp);                                                                // tell lvgl that we are done and that the lvgl draw buffer can be reused immediately
 }
-
 
 /*use Arduinos millis() as tick source*/
 static uint32_t my_tick(void) {
@@ -178,7 +168,7 @@ void setup() {
   lv_indev_set_read_cb(indev, encoder_with_keys_read);
   lv_indev_set_group(indev, group);
   //showGif();
-  create_menu(group);
+  //create_menu(group);
   
   //showBootscreen(5);
 }

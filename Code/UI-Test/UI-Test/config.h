@@ -13,6 +13,13 @@
 #define PIN_TOUCH_IRQ 255  // optional, set this only if the touchscreen is connected on the same SPI bus
 #define PIN_TOUCH_CS 255   // optional, set this only if the touchscreen is connected on the same spi bus
 
+/* Pin Selection for buttons */
+#define LEFT_BTN 3
+#define ENTER_BTN 2
+#define RIGHT_BTN 4
+#define ENCODER_PIN1 8
+#define ENCODER_PIN2 9
+
 // SD Card CS Pin
 #define SD_CS BUILTIN_SDCARD
 
