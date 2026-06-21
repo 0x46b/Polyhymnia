@@ -6,6 +6,7 @@
 #include "config.h"
 #include "ui.h"
 #include "screens.h"
+#include "SynthManager.h"
 
 // 2 diff buffers with about 8K memory each
 ILI9341_T4::DiffBuffStatic<8000> diff1;
@@ -177,5 +178,9 @@ void setup() {
 
 void loop() {
   lv_timer_handler();  // lvgl gui handler
+  // synthManager.ADSR.Attack += 1;
+  // if(synthManager.ADSR.Attack > 127){
+  //   synthManager.ADSR.Attack = 0;
+  // }
   delay(5);
 }

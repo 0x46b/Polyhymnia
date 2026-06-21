@@ -12,6 +12,7 @@ extern void action_save_settings(lv_event_t * e);
 extern void action_exit_settings(lv_event_t * e);
 extern void action_open_settings(lv_event_t * e);
 extern void action_start_visualization(lv_event_t * e);
+extern void action_set_waveform_graphic(lv_event_t * e);
 
 #ifdef __cplusplus
 }

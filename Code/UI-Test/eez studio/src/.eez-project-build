@@ -12,6 +12,7 @@
     "ui.c",
     "ui.h",
     "ui_font_rubik_glitch_20.c",
+    "ui_image_bootup_screen.bin",
     "vars.h"
   ]
 }
