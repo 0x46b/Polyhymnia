@@ -69,7 +69,7 @@ lv_obj_t* create_menu(lv_group_t* group) {
   cont = add_menu_entry(CUST_ICON_HAND_FIST, "Live-Edit", main_page, group);
   lv_menu_set_load_page_event(menu, cont, patch_edit_page);
   
-  add_menu_entry(CUST_ICON_FLASK_VIAL, "Settings", main_page, group);
+  add_menu_entry(CUST_ICON_FLASK_VIAL, "Settisualngs", main_page, group);
   add_menu_entry(CUST_ICON_CAT, "LED-Matrix", main_page, group);
 
   lv_menu_set_sidebar_page(menu, main_page);
