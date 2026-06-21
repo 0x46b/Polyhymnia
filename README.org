@@ -133,6 +133,13 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - [X] Resistor 10&Omega;
 - [X] Potentiometer 10k&Omega;
 
+Power Supply:
+- [ ] LM7805 Voltage Regulator
+- [ ] 100uF Cap
+- [ ] 10uF Cap
+- [ ] 1N4001 Diode
+- [ ] DC-Input-Jack
+  
 * Schematics
 [[./Schematics/img/Main.png][Main Schematics]]
 [[./Schematics/img/Main.png]]
