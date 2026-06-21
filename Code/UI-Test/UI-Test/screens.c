@@ -140,7 +140,7 @@ void create_screen_bootup() {
             lv_obj_t *obj = lv_image_create(parent_obj);
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_image_set_src(obj, "S:/imgs/ui_image_bootup_screen.bin");
+            lv_image_set_src(obj, "S:/imgs/Bootup_Screen_distorted.bmp");
             {
                 lv_obj_t *parent_obj = obj;
                 {

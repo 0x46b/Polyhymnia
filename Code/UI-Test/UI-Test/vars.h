@@ -43,7 +43,7 @@ enum FlowGlobalVariables {
 
 extern const char *get_var_version();
 extern void set_var_version(const char *value);
-extern int32_t get_var_dco_number();
+extern const char *get_var_dco_number();
 extern void set_var_dco_number(int32_t value);
 extern Waveform get_var_dco_1_waveform();
 extern void set_var_dco_1_waveform(Waveform value);
