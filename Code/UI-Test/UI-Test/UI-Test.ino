@@ -4,7 +4,9 @@
 #include <SD.h>
 
 #include "config.h"
-#include "ui/ui.h"
+#include "ui.h"
+#include "screens.h"
+#include "SynthManager.h"
 
 // 2 diff buffers with about 8K memory each
 ILI9341_T4::DiffBuffStatic<8000> diff1;
@@ -159,14 +161,15 @@ void setup() {
   init_lvgl();
   initialize_logging();
 
-  Serial.println("LGVL Setup done");
-  lv_group_t* group = lv_group_create();
-  lv_group_set_default(group);
+  ui_create_groups();
+  lv_group_set_default(groups.MainGroup);
 
   lv_indev_t* indev = lv_indev_create();
   lv_indev_set_type(indev, LV_INDEV_TYPE_ENCODER);
   lv_indev_set_read_cb(indev, encoder_with_keys_read);
-  lv_indev_set_group(indev, group);
+  lv_indev_set_group(indev, groups.MainGroup);
+  Serial.println("LGVL Setup done");
+  ui_init();
   //showGif();
   //create_menu(group);
   
@@ -175,5 +178,9 @@ void setup() {
 
 void loop() {
   lv_timer_handler();  // lvgl gui handler
+  // synthManager.ADSR.Attack += 1;
+  // if(synthManager.ADSR.Attack > 127){
+  //   synthManager.ADSR.Attack = 0;
+  // }
   delay(5);
 }

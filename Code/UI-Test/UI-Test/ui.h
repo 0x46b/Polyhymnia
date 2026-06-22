@@ -13,6 +13,7 @@ void ui_init();
 void ui_tick();
 
 void loadScreen(enum ScreensEnum screenId);
+void loadScreenWithDelay(enum ScreensEnum screenId, uint32_t delay);
 
 #ifdef __cplusplus
 }

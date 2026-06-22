@@ -63,3 +63,5 @@ Testing/
 # etc.
 .history
 /Code/Encoder_Atmel
+/Code/UI-Test/eez studio/src
+Code/UI-Test/UI-Test/ui_image_bootup_screen.bin

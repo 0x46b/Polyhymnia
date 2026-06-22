@@ -21,6 +21,12 @@ void loadScreen(enum ScreensEnum screenId) {
     lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_FADE_IN, 200, 0, false);
 }
 
+void loadScreenWithDelay(enum ScreensEnum screenId, uint32_t delay) {
+    currentScreen = screenId - 1;
+    lv_obj_t *screen = getLvglObjectFromIndex(currentScreen);
+    lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_FADE_IN, 200, delay, false);
+}
+
 void ui_init() {
     create_screens();
     loadScreen(SCREEN_ID_BOOTUP);

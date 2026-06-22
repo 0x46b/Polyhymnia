@@ -26,25 +26,23 @@ typedef enum {
 
 enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_VERSION = 0,
-    FLOW_GLOBAL_VARIABLE_DCO_NUMBER = 1,
-    FLOW_GLOBAL_VARIABLE_DCO_1_WAVEFORM = 2,
-    FLOW_GLOBAL_VARIABLE_DCO_1_DETUNE = 3,
-    FLOW_GLOBAL_VARIABLE_DCO_1_VOLUME = 4,
-    FLOW_GLOBAL_VARIABLE_ENVELOP_ATTACK = 5,
-    FLOW_GLOBAL_VARIABLE_ENVELOPE_DECAY = 6,
-    FLOW_GLOBAL_VARIABLE_ENVELOPE_SUSTAIN = 7,
-    FLOW_GLOBAL_VARIABLE_ENVELOPE_RELEASE = 8,
-    FLOW_GLOBAL_VARIABLE_BOOTSCREEN_TYPE = 9,
-    FLOW_GLOBAL_VARIABLE_MIDICHANNEL = 10,
-    FLOW_GLOBAL_VARIABLE_SHOW_BOOTSCREEN = 11
+    FLOW_GLOBAL_VARIABLE_DCO_1_WAVEFORM = 1,
+    FLOW_GLOBAL_VARIABLE_DCO_1_DETUNE = 2,
+    FLOW_GLOBAL_VARIABLE_DCO_1_VOLUME = 3,
+    FLOW_GLOBAL_VARIABLE_ENVELOP_ATTACK = 4,
+    FLOW_GLOBAL_VARIABLE_ENVELOPE_DECAY = 5,
+    FLOW_GLOBAL_VARIABLE_ENVELOPE_SUSTAIN = 6,
+    FLOW_GLOBAL_VARIABLE_ENVELOPE_RELEASE = 7,
+    FLOW_GLOBAL_VARIABLE_BOOTSCREEN_TYPE = 8,
+    FLOW_GLOBAL_VARIABLE_MIDICHANNEL = 9,
+    FLOW_GLOBAL_VARIABLE_SHOW_BOOTSCREEN = 10,
+    FLOW_GLOBAL_VARIABLE_DCO_NUMBER = 11
 };
 
 // Native global variables
 
 extern const char *get_var_version();
 extern void set_var_version(const char *value);
-extern int32_t get_var_dco_number();
-extern void set_var_dco_number(int32_t value);
 extern Waveform get_var_dco_1_waveform();
 extern void set_var_dco_1_waveform(Waveform value);
 extern int32_t get_var_dco_1_detune();
@@ -65,6 +63,8 @@ extern int32_t get_var_midichannel();
 extern void set_var_midichannel(int32_t value);
 extern bool get_var_show_bootscreen();
 extern void set_var_show_bootscreen(bool value);
+extern const char *get_var_dco_number();
+extern void set_var_dco_number(const char *value);
 
 #ifdef __cplusplus
 }

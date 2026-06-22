@@ -1,14 +1,10 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/userPages/3",
-    "selectedUserWidgetObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/userWidgets/0",
-    "selectedActionObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/actions/0",
-    "selectedGlobalVariableObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/variables/globalVariables/11",
-    "selectedEnumObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/variables/enums/0",
-    "selectedStyleObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/lvglStyles/styles/1",
-    "selectedThemeObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/themes/0",
-    "selectedBitmapObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/bitmaps/0",
-    "selectedLvglGroupObject": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/lvglGroups/groups/0",
+    "selectedUserPageObject": "[Polyhymnia-UI.eez-project]:/userPages/1",
+    "selectedUserWidgetObject": "[Polyhymnia-UI.eez-project]:/userWidgets/1",
+    "selectedGlobalVariableObject": "[Polyhymnia-UI.eez-project]:/variables/globalVariables/11",
+    "selectedBitmapObject": "[Polyhymnia-UI.eez-project]:/bitmaps/0",
+    "selectedLvglGroupObject": "[Polyhymnia-UI.eez-project]:/lvglGroups/groups/0",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -31,7 +27,6 @@
           },
           {
             "type": "border",
-            "selected": 0,
             "size": 240,
             "location": "right",
             "children": [
@@ -79,7 +74,7 @@
           },
           {
             "type": "border",
-            "selected": 1,
+            "selected": 0,
             "size": 65.890625,
             "location": "bottom",
             "children": [
@@ -207,43 +202,54 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 53.1615477439822,
+              "weight": 49.846851804543675,
+              "selected": 3,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#76596b58-e443-465f-a02a-02601a9b8f68",
-                  "name": "Settings",
+                  "id": "#e1b181ca-50bd-472c-8cc9-c89c9fde4315",
+                  "name": "ADSR",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/settings",
-                    "subObjectPath": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/settings",
+                    "objectPath": "[Polyhymnia-UI.eez-project]:/userWidgets/1",
                     "permanent": false
                   },
-                  "icon": "material:settings"
+                  "icon": "svg:user_widget"
                 },
                 {
                   "type": "tab",
-                  "id": "#776b7418-7bdd-4042-b792-9309eef3753e",
-                  "name": "Visualization",
+                  "id": "#c2ca3f3f-9f9a-49d3-a490-f93cd50cdcf1",
+                  "name": "Bootup",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/userPages/3",
+                    "objectPath": "[Polyhymnia-UI.eez-project]:/userPages/0",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 },
                 {
                   "type": "tab",
-                  "id": "#c69739df-6a1b-45ef-8214-1520ecdae773",
+                  "id": "#d05aa7cc-23c3-45b4-b7b3-570d4a119985",
                   "name": "Oscillator",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[..\\..\\..\\..\\..\\..\\eez-projects\\Polyhymnia-UI\\Polyhymnia-UI.eez-project]:/userWidgets/0",
-                    "permanent": false
+                    "objectPath": "[Polyhymnia-UI.eez-project]:/userWidgets/0",
+                    "permanent": true
                   },
                   "icon": "svg:user_widget"
+                },
+                {
+                  "type": "tab",
+                  "id": "#9482e951-d1ce-4125-81ac-11171b554423",
+                  "name": "Dashboard",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[Polyhymnia-UI.eez-project]:/userPages/1",
+                    "permanent": true
+                  },
+                  "icon": "svg:page"
                 }
               ],
               "active": true
@@ -251,7 +257,7 @@
             {
               "type": "row",
               "id": "#2f0089a2-3441-4824-add9-1372e7380949",
-              "weight": 15.2650171735992,
+              "weight": 18.57971311303773,
               "children": [
                 {
                   "type": "tabset",
@@ -1087,7 +1093,8 @@
                       "component": "groups",
                       "enableClose": false
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -1105,8 +1112,7 @@
                       "component": "order",
                       "enableClose": false
                     }
-                  ],
-                  "active": true
+                  ]
                 }
               ]
             }
@@ -1145,7 +1151,8 @@
       "selectionFront": {},
       "selectionBack": {
         "0": {
-          "0": {
+          "0": {},
+          "3": {
             "$selected": true
           }
         }
@@ -1198,7 +1205,12 @@
     },
     "[Polyhymnia-UI.eez-project]:/userWidgets/0[flow-state]": {
       "selectionFront": {},
-      "selectionBack": {},
+      "selectionBack": {
+        "1": {},
+        "4": {
+          "$selected": true
+        }
+      },
       "transform": {
         "translate": {
           "x": -159.60000610351562,
@@ -1559,5 +1571,5 @@
   "globalFlowZoom": true,
   "flowZoom": 1,
   "implementationLanguage": "C",
-  "openDialogDefaultPath": "C:\\Users\\sebastian\\Downloads\\fontawesome-free-7.2.0-desktop\\otfs\\Font Awesome 7 Free-Regular-400.otf"
+  "openDialogDefaultPath": "/home/hase/Projekte/Polyhymnia/Graphics/Bootup_Screen_distorted.png"
 }
