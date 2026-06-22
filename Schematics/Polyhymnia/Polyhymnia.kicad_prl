@@ -118,32 +118,7 @@
   },
   "open_jobsets": [],
   "project": {
-    "files": [
-      {
-        "name": "Polyhymnia.kicad_pcb",
-        "open": false,
-        "window": {
-          "display": 0,
-          "maximized": true,
-          "pos_x": 43,
-          "pos_y": 37,
-          "size_x": 1280,
-          "size_y": 720
-        }
-      },
-      {
-        "name": "Polyhymnia.kicad_sch",
-        "open": true,
-        "window": {
-          "display": 0,
-          "maximized": false,
-          "pos_x": 0,
-          "pos_y": 27,
-          "size_x": 683,
-          "size_y": 741
-        }
-      }
-    ]
+    "files": []
   },
   "schematic": {
     "hierarchy_collapsed": [],
