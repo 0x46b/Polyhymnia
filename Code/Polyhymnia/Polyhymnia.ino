@@ -4,11 +4,13 @@
 #include <SD.h>
 #include <SerialFlash.h>
 #include <ArduinoJson.h>
-#include "SynthEnvelope.h"
-#include "SynthMixer.h"
-#include "VCO.h"
-#include "Settings.h"
-#include "LadderFilter.h"
+#include "SynthEnvelope.hpp"
+#include "SynthMixer.hpp"
+#include "VCO.hpp"
+#include "Settings.hpp"
+#include "LadderFilter.hpp"
+#include "SerialLogger.hpp"
+#include "HardwareInterfaceCommunication.h"
 
 // GUItool: begin automatically generated code
 AudioSynthWaveform VCO3;     //xy=389.20001220703125,478.00001525878906
@@ -36,12 +38,15 @@ AudioControlSGTL5000 sgtl5000_1;  //xy=965.2000122070312,582.0000152587891
 // GUItool: end automatically generated code
 
 // Global variables
-VCO* PolyVCO1;
-VCO* PolyVCO2;
-VCO* PolyVCO3;
-SynthMixer* Mixer;
-SynthEnvelope* Envelope;
-LadderFilter* Filter;
+VCO PolyVCO1(&VCO1, 70, 76, 0.25, "VCO 1");
+VCO PolyVCO2(&VCO2, 77, 78, 0.25, "VCO 2");
+VCO PolyVCO3(&VCO3, 85, 86, 0.25, "VCO 3");
+SynthMixer Mixer(&VCOMixer, 20, 21, 22, 23);
+SynthEnvelope Envelope(&ADSR, 73, 80, 75, 72);
+LadderFilter Filter(&VCF);
+Settings settings(SETTINGS_FILENAME);
+SerialLogger logger("Polyhymnia", CURRENT_LOGLEVEL);
+HardwareInterfaceCommunication hardwareCommunication;
 
 // Teensy 2.0 has the LED on pin 11
 // Teensy++ 2.0 has the LED on pin 6
@@ -59,25 +64,73 @@ void setup() {
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.32);
 
-  PolyVCO1 = new VCO(&VCO1, 70, 76, 0.25);
-  PolyVCO2 = new VCO(&VCO2, 77, 78, 0.25);
-  PolyVCO3 = new VCO(&VCO3, 85, 86, 0.25);
-  Mixer = new SynthMixer(&VCOMixer, 20, 21, 22, 23);
-  Envelope = new SynthEnvelope(&ADSR, 73, 80, 75, 72);
-  Filter = new LadderFilter(&VCF);
+void initialize_synthesizer_system(Settings settings) {
+  uint8_t result = ACTION_RESULT_SUCCESS;
 
-  PolyVCO1->Initialize();
-  PolyVCO2->Initialize();
-  PolyVCO3->Initialize();
-  Mixer->Initialize();
-  Envelope->Initialize();
-  Filter->Initialize();
+  logger.start_action("Synthesizer System Initialization", LOGLEVEL_DEBUG);
+
+  if (settings.is_loaded()) {
+    PolyVCO1.Initialize(settings.Patches[0].VCO1);
+    PolyVCO2.Initialize(settings.Patches[0].VCO2);
+    PolyVCO3.Initialize(settings.Patches[0].VCO3);
+    Mixer.Initialize(settings.Patches[0].Mixer);
+    Envelope.Initialize(settings.Patches[0].Envelope);
+    Filter.Initialize(settings.Patches[0].Filter);
+  } else {
+    result = ACTION_RESULT_WARNING;
+    PolyVCO1.Initialize();
+    PolyVCO2.Initialize();
+    PolyVCO3.Initialize();
+    Mixer.Initialize();
+    Envelope.Initialize();
+    Filter.Initialize();
+  }
 
   Noise.amplitude(1.0);
   LFO.begin(WAVEFORM_SINE);
   LFO.amplitude(0.75);
   LFO.frequency(10);
   LFO.pulseWidth(0.15);
+  
+  logger.end_action(result, LOGLEVEL_DEBUG);
+}
+
+bool initialize_sd_card() {
+  uint8_t result = ACTION_RESULT_SUCCESS;
+  String msg;
+  logger.start_action("SD-card Initialization", LOGLEVEL_DEBUG);
+
+  // see if the card is present and can be initialized:
+  if (!SD.begin(chipSelect)) {
+    result = ACTION_RESULT_WARNING;
+    msg = "SD-card could not get opened. Is an SD-card present? Is it formatted correctly? Is there a settings.json present?";
+    return false;
+  }
+
+  logger.end_action(result, msg, LOGLEVEL_DEBUG);
+  return true;
+}
+
+void intialize_settings() {
+  uint8_t result = ACTION_RESULT_SUCCESS;
+  String msg;
+
+  logger.start_action("Loading settings", LOGLEVEL_DEBUG);
+  if(!settings.LoadSettings()){
+    result = ACTION_RESULT_WARNING;
+    msg = "Could not load settings";
+  }
+  //logger.print_settings(settings);
+  logger.end_action(result, msg, LOGLEVEL_DEBUG);
+}
+
+void initialize_hardware_communication(){
+  logger.start_action("Initializing hardware-communication", LOGLEVEL_DEBUG);
+  hardwareCommunication.Initialize(&SPI);
+  logger.end_action(ACTION_RESULT_SUCCESS, LOGLEVEL_DEBUG);
+}
+
+void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);  // set the LED on
@@ -92,30 +145,30 @@ void loop() {
 
 void handleNoteOn(byte channel, byte note, byte velocity) {
   MIDI::PrintMidiNoteInfoToSerial("Received MIDI NoteOn: ", channel, note, velocity);
-  PolyVCO1->HandlePitchChange(note);
-  PolyVCO1->HandleVelocityChange(velocity);
-  PolyVCO2->HandlePitchChange(note);
-  PolyVCO2->HandleVelocityChange(velocity);
-  PolyVCO3->HandlePitchChange(note);
-  PolyVCO3->HandleVelocityChange(velocity);
+  PolyVCO1.HandlePitchChange(note);
+  PolyVCO1.HandleVelocityChange(velocity);
+  PolyVCO2.HandlePitchChange(note);
+  PolyVCO2.HandleVelocityChange(velocity);
+  PolyVCO3.HandlePitchChange(note);
+  PolyVCO3.HandleVelocityChange(velocity);
   Noise.amplitude(velocity / 127);
 
-  Envelope->NoteOn();
+  Envelope.NoteOn();
 }
 
 void handleNoteOff(byte channel, byte note, byte velocity) {
   MIDI::PrintMidiNoteInfoToSerial("Received MIDI NoteOff: ", channel, note, velocity);
-  Envelope->NoteOff();
+  Envelope.NoteOff();
 }
 
 void handleCC(byte channel, byte control, byte value) {
   MIDI::PrintMidiCCInfoToSerial(channel, control, value);
-  PolyVCO1->HandleMidiCC(control, value);
-  PolyVCO2->HandleMidiCC(control, value);
-  PolyVCO3->HandleMidiCC(control, value);
-  Mixer->HandleMidiCC(control, value);
-  Envelope->HandleMidiCC(control, value);
-  Filter->HandleMidiCC(control, value);
+  PolyVCO1.HandleMidiCC(control, value);
+  PolyVCO2.HandleMidiCC(control, value);
+  PolyVCO3.HandleMidiCC(control, value);
+  Mixer.HandleMidiCC(control, value);
+  Envelope.HandleMidiCC(control, value);
+  Filter.HandleMidiCC(control, value);
 
   switch (control) {
      // LFO Rate (0 - 20 Hz)
