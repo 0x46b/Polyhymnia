@@ -10,13 +10,31 @@
 // Commands (first 4 bits)
 #include <inttypes.h>
 
-#define READ 0x1
+/* Return codes, that the slave can send back to the master to indicate some states */
 
-uint8_t GenerateReadCommand(uint8_t encoderId) {
-  return (READ << 4) | encoderId;
-}
+/* Slave listens, transaction could be done normally */
+#define MODULE_LISTENING 0xC0
+/* Something went horribly wrong, so the current command must be indicated "lost" and resend */
+#define MODULE_FAILURE 0xBD
+/* The module is busy at the moment and cannot receive commands. Resend command after a short delay */
+#define MODULE_BUSY 0xBF
 
-uint8_t DecodeCommand(uint8_t msg) { return (msg & 0xF0) >> 4; }
-uint8_t DecodeData(uint8_t msg) { return msg & 0xF;}
+/* Command definitions for using in the SPI_Frame */
+typedef enum {
+  ReadOSC = 0x1,
+  ReadEnvelope = 0x2,
+  ReadFilter = 0x3,
+  ReadLFO = 0x4,
+  SetWaveformSaw = 0x5,
+  SetWaveformSquare = 0x6,
+  SetWaveformTriangle = 0x7,
+  SetWaveformSine = 0x8,
+} spi_command;
+
+/* Frame for sending SPI-commands */
+typedef struct {
+  spi_command command;
+  uint8_t payload;
+} SPI_Frame;
 
 #endif
