@@ -10,14 +10,14 @@ typedef enum {
 
 typedef struct {
   uint8_t Id;
-  uint8_t Offset;
+  uint8_t DetuneOffset;
   OscillatorType Type;
 } OscillatorState;
 
 typedef struct {
   uint8_t Attack;
-  uint8_t Sustain;
   uint8_t Decay;
+  uint8_t Sustain;
   uint8_t Release;
 } EnvelopeState;
 
