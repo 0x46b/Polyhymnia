@@ -1,12 +1,8 @@
 #ifndef CONTROL_TYPES_H
 #define CONTROL_TYPES_H
+#include <stdint.h>
 
-typedef enum {
-  SAW = 0,
-  TRIANGLE = 1,
-  SQUARE = 2,
-  SINE = 3
-} OscillatorType;
+typedef enum { SAW = 0, TRIANGLE = 1, SQUARE = 2, SINE = 3 } OscillatorType;
 
 typedef struct {
   uint8_t Id;

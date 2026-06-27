@@ -1,3 +1,8 @@
+*.sym
+*.map
+*.eep
+*.lss
+
 # Prerequisites
 *.d
 
@@ -38,11 +43,14 @@
 *.out
 *.app
 *.hex
+*.elf
+*.bin
 
 # Build directories
 build/
 Build/
 build-*/
+obj/
 
 # BEAR generated files
 compile_commands.json
