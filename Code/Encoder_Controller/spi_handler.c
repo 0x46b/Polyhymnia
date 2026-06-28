@@ -10,7 +10,7 @@ void initialize_spi(void) {
   DDRB &= ~((1 << MOSI) | (1 << SCK) |
             (1 << SS)); /* Make MOSI, SCK, SS as input pins */
   DDRB |= (1 << MISO);  /* Make MISO pin as output pin */
-  SPCR = (1 << SPE);    /* Enable SPI in slave mode */
+  SPCR = (1 << SPE) | (1 << SPIE) | (1 << DORD); /* Enable SPI in slave mode */
 }
 
 void handle_received_byte(uint8_t byte) {

@@ -7,7 +7,10 @@ void HardwareInterfaceCommunication::Initialize(SPIClass* spiConnection) {
   _spiConnection->setMOSI(HW_INTERFACE_MOSI);
   _spiConnection->setMISO(HW_INTERFACE_MISO);
   _spiConnection->setSCK(HW_INTERFACE_SCK);
-  SPI.begin();
+  _spiConnection->setBitOrder(LSBFIRST);
+  _spiConnection->setDataMode(SPI_MODE0);
+  _spiConnection->setClockDivider(SPI_CLOCK_DIV128);
+  _spiConnection->begin();
 }
 
 OscillatorState HardwareInterfaceCommunication::GetOscillatorState(uint8_t id) {
@@ -20,8 +23,17 @@ OscillatorState HardwareInterfaceCommunication::GetOscillatorState(uint8_t id) {
 
   OscillatorState state;
   state.Id = ReceiveByte();
+  Serial.print("Received id: ");
+  Serial.print(state.Id);
+
   state.Offset = ReceiveByte();
+  Serial.print("Received offset: ");
+  Serial.print(state.Offset);
+  
   state.Type = static_cast<OscillatorType>(ReceiveByte());
+  Serial.print("Received type: ");
+  Serial.print(state.Type);
+  
   EndCommunication();
   return state;
 }
@@ -79,7 +91,6 @@ FilterState HardwareInterfaceCommunication::GetFilterState() {
     SendFrame(frame);
 
   FilterState state;
-  state.Cutoff = ReceiveByte();
   state.Resonance = ReceiveByte();
   EndCommunication();
   return state;
@@ -103,13 +114,15 @@ LFOState HardwareInterfaceCommunication::GetLFOState() {
 }
 
 void HardwareInterfaceCommunication::InitiateCommunication() {
+  Serial.println("Initializing com");
   _communicationActive = true;
-  digitalWrite(HW_INTERFACE_SS, HIGH);
+  digitalWrite(HW_INTERFACE_SS, LOW);
 }
 
 void HardwareInterfaceCommunication::EndCommunication() {
+  Serial.println("Ending com");
   _communicationActive = false;
-  digitalWrite(HW_INTERFACE_SS, LOW);
+  digitalWrite(HW_INTERFACE_SS, HIGH);
 }
 
 void HardwareInterfaceCommunication::SendByteWithStatusHandling(uint8_t byte) {
@@ -117,12 +130,16 @@ void HardwareInterfaceCommunication::SendByteWithStatusHandling(uint8_t byte) {
   if (moduleState != MODULE_LISTENING) {
     switch (moduleState) {
       case MODULE_BUSY:
+        Serial.println("Module busy");
         // TODO Do something, I dunno what ATM
         break;
       case MODULE_FAILURE:
+        Serial.println("Module failure");
         // TODO Do something, I dunno what ATM
         break;
       default:
+      Serial.print("Unknown response:");
+      Serial.println(moduleState, HEX);
         // TODO Do something, I dunno what ATM
         break;
     }
@@ -130,6 +147,15 @@ void HardwareInterfaceCommunication::SendByteWithStatusHandling(uint8_t byte) {
 }
 
 void HardwareInterfaceCommunication::SendFrame(SPI_Frame command) {
+  Serial.print("Sending Frame: {");
+  Serial.print(command.command, HEX);
+  Serial.print(", ");
+  Serial.print(command.payload, HEX);
+  Serial.println("}");
   SendByteWithStatusHandling(command.command);
   SendByteWithStatusHandling(command.payload);
+}
+
+uint8_t HardwareInterfaceCommunication::ReceiveByte(){
+  return SPI.transfer(0);
 }
