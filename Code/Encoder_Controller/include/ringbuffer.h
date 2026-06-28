@@ -11,9 +11,10 @@ typedef struct {
   uint8_t data[INPUT_BUFFER_SIZE];
   uint8_t head;
   uint8_t tail;
+  const uint8_t maxlen;
 } RingBuffer;
 
-void buffer_write(volatile RingBuffer *buffer, uint8_t entry);
+int8_t buffer_write(volatile RingBuffer *buffer, uint8_t entry);
 uint8_t buffer_read(volatile RingBuffer *buffer);
 
 #endif
