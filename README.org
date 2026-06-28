@@ -1,3 +1,5 @@
+#+TODO: TODO WIP VERIFY | DONE CANCELED
+
 * Polyhymnia - Hybrid Synthesizer
 Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy 4.1 as oscillators and envelope-generator but using analogue filters.
 
@@ -15,11 +17,13 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 |        2 | Square   |
 |        3 | Sine     |
 
+
 | CC value | Filter Type |
 |----------+-------------|
 |        0 | Low Pass    |
 |        1 | High Pass   |
 |        2 | Band Pass   |
+
 
 | CC# | Function     |
 |-----+--------------|
@@ -54,41 +58,129 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - TFT/LCD-Display for saving/loading patches
 - full MIDI-IO
 - saveable patches
-- 4x8 LED-Strip to show custom graphics, waveforms or whatever
-- motorized fader for ADSR, so they "drive in place" if a saved patch gets loaded
 - effect-section (delay, reverb, ...)
 - totally standalone, but with MIDI-controllability (USB or DIN)
 - onboard speaker as "emergency output" (quality will be shit, but nice enough to fiddle at patches, I guess)
 - Case: Case for holding the synth with a little place for placing an MPK mini Plus as keys (could get connected via MIDI-cable then)
 
-* Plan for Version 0.1 [0/5]
-- [ ] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
-- [ ] 3 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
-- [ ] controllable ladder-Lopass-filter
+* Milestones
+** WIP Software [0/3]
+  - [-] SPI communication
+  - [-] Design UI
+  - Features [0/4]
+    - [ ] Add code for LFO
+    - [X] Saving/Loading settings to/from SD-card
+    - [X] Saving/Loading patches to/from SD-card
+    - [ ] Add effects (Reverb, Delay, BitCrush, ...)
+** WIP Hardware [1/3]
+  - [X] Build MIDI-port
+  - [X] Display control
+    - [X] Find working pinout/connection 
+  - [-] Build Oscillator control modules [1/6]
+    - [X] OSC 1
+    - [ ] OSC 2
+    - [ ] OSC 3
+    - [ ] Build Status-LED-Driver module
+    - [ ] Build Envelope control module
+    - [ ] Build Filter control module
+
+** TODO Enclosure [0/2]
+    - [-] Design Enclosure
+    - [ ] Build Enclosure
+
+** TODO Documentation [0/1]
+    - [ ] Update parts list
+
+* Plan for Version 0.1 [1/5]
+- [X] playable (controlled via Pure Data "software-UI" with pass-thru MIDI-Controller-Keyboard) via USB-Midi
+- [X] 3 detunable VCOs with selectable waveforms (Saw, Triangle, Sine, Square)
+- [X] controllable ladder-Lopass-filter
 - [ ] controllable LFO for automating filter
-- [ ] controllable ADSR-Envelope
+- [X] controllable ADSR-Envelope
   
 * Ideas for later
 - Onboard-Sequencer
 - Oscilloscope for showing the generated wave-form
 
-* Parts list [4/9]
+* Used Libraries
+- [Teensy Audio Library](https://www.pjrc.com/teensy/td_libs_Audio.html)
+- [ILI9341_T4 Library](https://github.com/vindar/ILI9341_T4)
+- [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+- [LVGL](https://lvgl.io/)
+
+* Used Software
+- [Pure Data](https://puredata.info/)
+- [KiCad](https://kicad.org/)
+- [FreeCAD](https://www.freecadweb.org/)
+- [Arduino IDE](https://www.arduino.cc/en/software)
+- [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html)
+- [EEZ Studio](https://www.envox.eu/studio/studio-introduction/)
+
+* Parts list [12/16]
 - [X] Teensy 4.1
 - [X] Teensy Audio Shield
-- [ ] 2x Buchsenleisten 1x24
+- [X] 2x Buchsenleisten 1x24
 - [X] 10x Rotary Encoder (ALPS?)
 - [X] 4x8 LEDs (rot)
-- [ ] 4x Linear-Potentiometer (motorised?)
+- [X] 4x Linear-Potentiometer (motorised?)
 - [ ] 4x 74HC595 Shift-Registers
 - [ ] 1x momentary switch (closed)
-- [ ] 2x Optokoppler 6N138
-- [ ] 2x DIN-Buchse 5-polig
+- [X] 2x Optokoppler 6N138
+- [X] 2x DIN-Buchse 5-polig
 - [ ] 1x CR2032 Halter
 - [ ] 1x Audiobuchse 6.5mm
 - [X] 1x ILI9341 Color TFT
+- [X] 220 Ohm Resistor
+- [X] 470 Ohm Resistor
+- [X] 12 Red LED
+  
+** Audio-Amplifier (everything x2 if you want stereo):
+- [X] LM386 Audio-Amplifier IC 
+- [X] ElKo 250&micro;F
+- [X] CerKo 33nF [333]
+- [X] CerKo 50nF (alternative 47nF [473]
+- [X] Resistor 10k&Omega;
+- [X] Resistor 10&Omega;
+- [X] Potentiometer 10k&Omega;
 
+Power Supply:
+- [ ] LM7805 Voltage Regulator
+- [ ] 100uF Cap
+- [ ] 10uF Cap
+- [ ] 1N4001 Diode
+- [ ] DC-Input-Jack
+  
 * Schematics
-./Schematics/img/Main.png
-./Schematics/img/MIDI_In_Unit.png
-./Schematics/img/OSC_Unit.png
-./Schematics/img/Filter_Unit.png
+[[./Schematics/img/Main.png][Main Schematics]]
+[[./Schematics/img/Main.png]]
+
+[[./Schematics/img/Encoder_Control.png][Control Unit Schematics]]
+[[./Schematics/img/Encoder_Control.png]]
+
+[[./Schematics/img/MIDI_In_Unit.png][MIDI In Schematics]]
+[[./Schematics/img/MIDI_In_Unit.png]]
+
+[[./Schematics/img/OSC_Unit.png][OSC Control Unit Schematics]]
+[[./Schematics/img/OSC_Unit.png]]
+
+[[./Schematics/img/Filter_Unit.png][Filter Control Unit Schematics]]
+[[./Schematics/img/Filter_Unit.png]]
+
+[[./Schematics/img/Envelope_Unit.png][Envelope Control Unit Schematics]]
+[[./Schematics/img/Envelope_Unit.png]]
+
+[[./Schematics/img/audio_amp.png][LM386 Audio Amp Schematics (Mono)]]
+[[./Schematics/img/audio_amp.png]]
+
+* Enclosure
+[[./Enclosure/imgs/3d.png][3D rendering]]
+[[./Enclosure/imgs/3d.png]]
+
+[[./Enclosure/imgs/Explosion.png][Explosion View]]
+[[./Enclosure/imgs/Explosion.png]]
+
+[[./Enclosure/imgs/right.png][Right Side View]]
+[[./Enclosure/imgs/right.png]]
+
+[[./Enclosure/imgs/front.png][Front View]]
+[[./Enclosure/imgs/front.png]]

@@ -2,7 +2,6 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <SD.h>
-#include <SerialFlash.h>
 #include <ArduinoJson.h>
 #include "SynthEnvelope.hpp"
 #include "SynthMixer.hpp"
@@ -52,39 +51,47 @@ HardwareInterfaceCommunication hardwareCommunication;
 // Teensy++ 2.0 has the LED on pin 6
 // Teensy 3.x / Teensy LC have the LED on pin 13
 const int ledPin = 13;
+const int chipSelect = BUILTIN_SDCARD;
 
-void setup() {
-  // put your setup code here, to run once:
-  while (!Serial) {}
-  Serial.println("Initializing...");
+void initialize_audio_system() {
+  logger.start_action("Audio System Initialization", LOGLEVEL_DEBUG);
   AudioMemory(20);
   usbMIDI.setHandleControlChange(handleCC);
   usbMIDI.setHandleNoteOff(handleNoteOff);
   usbMIDI.setHandleNoteOn(handleNoteOn);
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.32);
+  logger.end_action(ACTION_RESULT_SUCCESS, LOGLEVEL_DEBUG);
+}
 
 void initialize_synthesizer_system(Settings settings) {
   uint8_t result = ACTION_RESULT_SUCCESS;
 
   logger.start_action("Synthesizer System Initialization", LOGLEVEL_DEBUG);
+  PolyVCO1 = new VCO(&VCO1, 70, 76, 0.25, "VCO 1");
+  PolyVCO2 = new VCO(&VCO2, 77, 78, 0.25, "VCO 2");
+  PolyVCO3 = new VCO(&VCO3, 85, 86, 0.25, "VCO 3");
+  Mixer = new SynthMixer(&VCOMixer, 20, 21, 22, 23);
+  Envelope = new SynthEnvelope(&ADSR, 73, 80, 75, 72);
+  Filter = new LadderFilter(&VCF);
 
   if (settings.is_loaded()) {
-    PolyVCO1.Initialize(settings.Patches[0].VCO1);
-    PolyVCO2.Initialize(settings.Patches[0].VCO2);
-    PolyVCO3.Initialize(settings.Patches[0].VCO3);
-    Mixer.Initialize(settings.Patches[0].Mixer);
-    Envelope.Initialize(settings.Patches[0].Envelope);
-    Filter.Initialize(settings.Patches[0].Filter);
+    PolyVCO1->Initialize(settings.Patches[0].VCO1);
+    PolyVCO2->Initialize(settings.Patches[0].VCO2);
+    PolyVCO3->Initialize(settings.Patches[0].VCO3);
+    Mixer->Initialize(settings.Patches[0].Mixer);
+    Envelope->Initialize(settings.Patches[0].Envelope);
+    Filter->Initialize(settings.Patches[0].Filter);
   } else {
     result = ACTION_RESULT_WARNING;
-    PolyVCO1.Initialize();
-    PolyVCO2.Initialize();
-    PolyVCO3.Initialize();
-    Mixer.Initialize();
-    Envelope.Initialize();
-    Filter.Initialize();
+    PolyVCO1->Initialize();
+    PolyVCO2->Initialize();
+    PolyVCO3->Initialize();
+    Mixer->Initialize();
+    Envelope->Initialize();
+    Filter->Initialize();
   }
+
 
   Noise.amplitude(1.0);
   LFO.begin(WAVEFORM_SINE);
@@ -132,11 +139,21 @@ void initialize_hardware_communication(){
 
 void setup() {
   Serial.begin(9600);
+  // Wait for logger to connect
+  while (!Serial) {}
+
+  initialize_audio_system();
+
+  if (initialize_sd_card()) {
+    intialize_settings();
+  }
+
+  initialize_synthesizer_system(settings);
+
+  logger.start_action("Setting status-led to ON", LOGLEVEL_DEBUG);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);  // set the LED on
-  Settings* settings = new Settings();
-  settings->LoadSettings();
-  Serial.println("Initializing Done");
+  logger.end_action(ACTION_RESULT_SUCCESS, LOGLEVEL_DEBUG);
 }
 
 void loop() {
@@ -171,7 +188,7 @@ void handleCC(byte channel, byte control, byte value) {
   Filter.HandleMidiCC(control, value);
 
   switch (control) {
-     // LFO Rate (0 - 20 Hz)
+      // LFO Rate (0 - 20 Hz)
     case 105:
       LFO.frequency(20 * (value / 127));
       break;
