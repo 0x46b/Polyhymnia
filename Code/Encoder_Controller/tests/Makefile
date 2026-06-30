@@ -28,7 +28,7 @@ LDFLAGS += -L${CPPUTEST_HOME}/lib64 -lCppUTest -lCppUTestExt
 all: AllTests
 
 test: ${CXXBINARIES}
-	./AllTests
+	./AllTests -ojunit
 
 AllTests: ${OBJ}  ${OBJ_TESTS}
 
