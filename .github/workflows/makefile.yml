@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: install cppunit
+      run: sudo apt install -y cpputest
     - uses: actions/checkout@v4
     - name: Run tests
       working-directory: ./Code/Encoder_Controller/tests
