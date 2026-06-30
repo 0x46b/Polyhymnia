@@ -27,3 +27,5 @@ jobs:
       if: success() || failure() # always run even if the previous step fails
       with:
         report_paths: './Code/Encoder_Controller/tests/*.xml'
+        fail_on_failure: true
+        require_passed_tests: true
