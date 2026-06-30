@@ -18,7 +18,7 @@ jobs:
     - name: install cpputest
       run: sudo apt install -y cpputest
     - name: Find cpputest
-      run: dpkg -L cppunit
+      run: dpkg -L cpputest
     - uses: actions/checkout@v4
     - name: Run tests
       working-directory: ./Code/Encoder_Controller/tests
