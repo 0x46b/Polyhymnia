@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  CPPUTEST_HOME: /usr/local
+  CPPUTEST_HOME: /usr/share/cpputest
   
 jobs:
   test:
