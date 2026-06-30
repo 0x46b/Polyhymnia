@@ -19,10 +19,10 @@ OBJ = ${SRC:%.c=%.o}
 DEP = ${SRC:%.c=%.d}
 
 # CPPUTEST 
-CPPFLAGS += -I$(CPPUTEST_HOME)/include
-CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacros.h
-CFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorMallocMacros.h
-LDFLAGS += -L$(CPPUTEST_HOME)/lib64 -lCppUTest -lCppUTestExt
+CPPFLAGS += -I${CPPUTEST_HOME}/include
+CXXFLAGS += -include ${CPPUTEST_HOME}/include/CppUTest/MemoryLeakDetectorNewMacros.h
+CFLAGS += -include ${CPPUTEST_HOME}/include/CppUTest/MemoryLeakDetectorMallocMacros.h
+LDFLAGS += -L${CPPUTEST_HOME}/lib64 -lCppUTest -lCppUTestExt
 #LDLIBS += -lCppuTest -lCppuTestExt
 
 all: AllTests
