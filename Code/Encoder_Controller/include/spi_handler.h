@@ -1,7 +1,7 @@
 #ifndef SPI_HANDLER_H
 #define SPI_HANDLER_H
 #include "ringbuffer.h"
-#include "spi_commands.hpp"
+#include "spi_commands.h"
 #include <avr/io.h>
 
 #define SS PB4
