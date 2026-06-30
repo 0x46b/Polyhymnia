@@ -15,6 +15,6 @@ typedef struct {
 } RingBuffer;
 
 int8_t buffer_write(volatile RingBuffer *buffer, uint8_t entry);
-uint8_t buffer_read(volatile RingBuffer *buffer);
+int8_t buffer_read(volatile RingBuffer *buffer);
 
 #endif

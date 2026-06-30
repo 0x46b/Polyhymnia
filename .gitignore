@@ -71,3 +71,5 @@ Testing/
 # etc.
 .history
 /Code/Encoder_Atmel
+Code/Encoder_Controller/tests/AllTests
+Code/Encoder_Controller/tests/cpputest_RingbufferTests.xml
