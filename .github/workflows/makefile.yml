@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  CPPUTEST_HOME: /usr/share/cpputest
+  CPPUTEST_HOME: /usr
   
 jobs:
   test:
@@ -17,8 +17,6 @@ jobs:
     steps:
     - name: install cpputest
       run: sudo apt install -y cpputest
-    - name: Find cpputest
-      run: dpkg -L libcpputest-dev
     - uses: actions/checkout@v4
     - name: Run tests
       working-directory: ./Code/Encoder_Controller/tests
