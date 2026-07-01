@@ -1,14 +1,21 @@
-SRC_TESTS = AllTests.cpp ringbuffer_tests.cpp
-SRC = ../ringbuffer.c
+SRC_TESTS = AllTests.cpp ringbuffer_tests.cpp spi_handler_tests.cpp
+SRC = ../ringbuffer.c ../spi_handler.c ../spi_commands.c
 
-INCLUDE_DIR = -Iinclude -I../include
+INCLUDE_DIR = -Imock_include -I../include
 
 CXXBINARIES = AllTests
 CC = gcc
 CXX = g++
 CPPFLAGS = -MMD ${INCLUDE_DIR}
 CXXFLAGS = 
-CFLAGS = -Wall -Wextra -std=c99 -O2 
+CFLAGS = -Wall -Wextra -fshort-enums -std=c99 -O2
+CFLAGS += -g
+CFLAGS += -funsigned-char
+CFLAGS += -funsigned-bitfields
+CFLAGS += -fpack-struct
+CFLAGS += -fshort-enums
+CFLAGS += -Wall
+CFLAGS += -Wstrict-prototypes
 LDFLAGS =
 LDLIBS =
 

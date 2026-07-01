@@ -8,8 +8,8 @@
 #include "control_types.h"
 #include "encoder.h"
 #include "fader.h"
-#include "ringbuffer.h"
 #include "serial.h"
+#include "spi_commands.h"
 #include "spi_handler.h"
 
 #include <assert.h>
@@ -106,23 +106,21 @@ void setup(void) {
 
   serial_send_string("Starting timer...", true);
   initialize_encoder_timer();
-  initialize_spi();
+  spi_initialize();
 }
 
 void put_envelope_data_into_transfer_buffer(void) {
   update_envelope_state(&adsr_controller);
-  buffer_write(&_transferBuffer, adsr_controller.state.Attack);
-  buffer_write(&_transferBuffer, adsr_controller.state.Decay);
-  buffer_write(&_transferBuffer, adsr_controller.state.Sustain);
-  buffer_write(&_transferBuffer, adsr_controller.state.Release);
-  _transfer_length_in_bytes = ReadEnvelopeLen;
+  write_to_transfer_buffer(adsr_controller.state.Attack);
+  write_to_transfer_buffer(adsr_controller.state.Decay);
+  write_to_transfer_buffer(adsr_controller.state.Sustain);
+  write_to_transfer_buffer(adsr_controller.state.Release);
 }
 
 void put_filter_data_into_transfer_buffer(void) {
   update_filter_state(&lowpass_controller);
-  buffer_write(&_transferBuffer, lowpass_controller.state.Cutoff);
-  buffer_write(&_transferBuffer, lowpass_controller.state.Resonance);
-  _transfer_length_in_bytes = ReadFilterLen;
+  write_to_transfer_buffer(lowpass_controller.state.Cutoff);
+  write_to_transfer_buffer(lowpass_controller.state.Resonance);
 }
 
 void put_lfo_data_into_transfer_buffer(void) {
@@ -130,10 +128,9 @@ void put_lfo_data_into_transfer_buffer(void) {
 }
 
 void put_osc_data_into_transfer_buffer(uint8_t id) {
-  buffer_write(&_transferBuffer, oscillator_controllers[id].state.Id);
-  buffer_write(&_transferBuffer, oscillator_controllers[id].state.DetuneOffset);
-  buffer_write(&_transferBuffer, oscillator_controllers[id].state.Type);
-  _transfer_length_in_bytes = ReadOSCLen;
+  write_to_transfer_buffer(oscillator_controllers[id].state.Id);
+  write_to_transfer_buffer(oscillator_controllers[id].state.DetuneOffset);
+  write_to_transfer_buffer(oscillator_controllers[id].state.Type);
 }
 
 void set_waveform_for_osc(OscillatorType type, uint8_t id) {
@@ -168,42 +165,51 @@ void set_waveform_for_osc(OscillatorType type, uint8_t id) {
 }
 
 void handle_spi_commands(void) {
-  if (_spi_state == CMD_EXEC) {
-    switch (_lastCommand.command) {
+  uint8_t payload;
+
+  if (is_command_ready()) {
+    spi_command cmd = get_command();
+    switch (cmd) {
     case ReadEnvelope:
       put_envelope_data_into_transfer_buffer();
-      _spi_state = TRANSFER_READY;
+      set_transfer_ready();
       break;
     case ReadFilter:
       put_filter_data_into_transfer_buffer();
-      _spi_state = TRANSFER_READY;
+      set_transfer_ready();
       break;
     case ReadLFO:
       put_lfo_data_into_transfer_buffer();
-      _spi_state = TRANSFER_READY;
+      set_transfer_ready();
       break;
     case ReadOSC:
-      put_osc_data_into_transfer_buffer(_lastCommand.payload);
-      _spi_state = TRANSFER_READY;
+      payload = get_payload();
+      put_osc_data_into_transfer_buffer(payload);
+      set_transfer_ready();
       break;
     case SetWaveformSaw:
-      set_waveform_for_osc(SAW, _lastCommand.payload);
-      _spi_state = CMD_READ;
+      payload = get_payload();
+      set_waveform_for_osc(SAW, payload);
+      set_ready_for_next_cmd();
       break;
     case SetWaveformSine:
-      set_waveform_for_osc(SINE, _lastCommand.payload);
-      _spi_state = CMD_READ;
+      payload = get_payload();
+      set_waveform_for_osc(SINE, payload);
+      set_ready_for_next_cmd();
       break;
     case SetWaveformSquare:
-      set_waveform_for_osc(SQUARE, _lastCommand.payload);
-      _spi_state = CMD_READ;
+      payload = get_payload();
+      set_waveform_for_osc(SQUARE, payload);
+      set_ready_for_next_cmd();
       break;
     case SetWaveformTriangle:
-      set_waveform_for_osc(TRIANGLE, _lastCommand.payload);
-      _spi_state = CMD_READ;
+      payload = get_payload();
+      set_waveform_for_osc(TRIANGLE, payload);
+      set_ready_for_next_cmd();
       break;
     default:
-      _spi_state = UNKNOWN_COMMAND;
+      write_to_transfer_buffer(MODULE_UNKNOWN_COMMAND);
+      set_transfer_ready();
       break;
     case SetEnvelope:
       break;

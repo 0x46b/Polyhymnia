@@ -7,6 +7,12 @@
 #define INDEX_BUFFER_SIZE 16
 #define MASK (INPUT_BUFFER_SIZE - 1)
 
+typedef enum {
+  BUFFER_SUCCESS = 0,
+  BUFFER_FULL = 1,
+  BUFFER_EMPTY = 2
+} buffer_action_result;
+
 typedef struct {
   uint8_t data[INPUT_BUFFER_SIZE];
   uint8_t head;
@@ -14,7 +20,7 @@ typedef struct {
   const uint8_t maxlen;
 } RingBuffer;
 
-int8_t buffer_write(volatile RingBuffer *buffer, uint8_t entry);
-int8_t buffer_read(volatile RingBuffer *buffer);
+buffer_action_result buffer_write(volatile RingBuffer *buffer, uint8_t entry);
+buffer_action_result buffer_read(volatile RingBuffer *buffer, uint8_t *entry);
 
 #endif

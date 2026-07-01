@@ -79,7 +79,7 @@ OBJDIR = obj
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c spi_handler.c fader.c encoder.c serial.c fader.c ringbuffer.c
+SRC = $(TARGET).c spi_handler.c fader.c encoder.c serial.c fader.c ringbuffer.c spi_commands.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
