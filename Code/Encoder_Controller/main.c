@@ -1,44 +1,20 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
-#include <stdlib.h>
 
 #include <util/delay.h>
 
 #include "control_types.h"
 #include "encoder.h"
 #include "fader.h"
-#include "serial.h"
 #include "spi_commands.h"
 #include "spi_handler.h"
-
-#include <assert.h>
 
 #define XTAL 8e6
 
 oscillator_controller oscillator_controllers[3];
 envelope_controller adsr_controller;
 filter_controller lowpass_controller;
-
-void print_encoder_to_serial(encoder_config encoder) {
-  char buffer[10];
-  serial_send_string("Encoder ", false);
-  serial_send_string(buffer, false);
-  serial_send_string(": {", false);
-  itoa(encoder.offset, buffer, 10);
-  serial_send_string(buffer, false);
-  serial_send(',', false);
-  itoa(encoder.oldState, buffer, 10);
-  serial_send_string(buffer, false);
-  serial_send(',', false);
-  itoa(encoder.pinA, buffer, 2);
-  serial_send_string(buffer, false);
-  serial_send(',', false);
-  itoa(encoder.pinB, buffer, 2);
-  serial_send_string(buffer, false);
-
-  serial_send('}', true);
-}
 
 ISR(TIMER0_COMP_vect) {
   for (int i = 0; i < 3; i++) {
@@ -55,7 +31,7 @@ void initialize_encoder_timer(void) { // nur Timer 0 initialisieren
 }
 
 void leds_initialize(oscillator_type_LED_config *ledConfig) {
-  assert(!"The method or operation is not implemented.");
+  // assert(!"The method or operation is not implemented.");
 }
 
 void initialize_oscillator_controller(oscillator_controller *oscillator,
@@ -66,8 +42,6 @@ void initialize_oscillator_controller(oscillator_controller *oscillator,
 }
 
 void setup(void) {
-  serial_initialize();
-  serial_send_string("Initializing Ports...", true);
   // OSC1
   initialize_oscillator_controller(&oscillator_controllers[0], 0);
   // Type encoder
@@ -104,7 +78,6 @@ void setup(void) {
   // LowPass
   filter_initialize(&lowpass_controller, 4, 5);
 
-  serial_send_string("Starting timer...", true);
   initialize_encoder_timer();
   spi_initialize();
 }
@@ -124,7 +97,7 @@ void put_filter_data_into_transfer_buffer(void) {
 }
 
 void put_lfo_data_into_transfer_buffer(void) {
-  assert(!"The method or operation is not implemented.");
+  // assert(!"The method or operation is not implemented.");
 }
 
 void put_osc_data_into_transfer_buffer(uint8_t id) {
@@ -207,15 +180,15 @@ void handle_spi_commands(void) {
       set_waveform_for_osc(TRIANGLE, payload);
       set_ready_for_next_cmd();
       break;
-    default:
-      write_to_transfer_buffer(MODULE_UNKNOWN_COMMAND);
-      set_transfer_ready();
-      break;
     case SetEnvelope:
       break;
     case SetLFO:
       break;
     case SetFilter:
+      break;
+    default:
+      write_to_transfer_buffer(MODULE_UNKNOWN_COMMAND);
+      set_transfer_ready();
       break;
     }
   }
@@ -223,7 +196,6 @@ void handle_spi_commands(void) {
 
 int main(void) {
   setup();
-  serial_send_string("Setup finished", true);
   sei();
 
   while (1) {

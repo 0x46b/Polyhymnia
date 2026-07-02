@@ -9,6 +9,7 @@
 #define MOSI PB5
 #define MISO PB6
 #define SCK PB7
+#define DATA_READY PB3
 
 /* Initializes the internal data-structures, configures SPI and sets the correct
  *  data-direction-registers

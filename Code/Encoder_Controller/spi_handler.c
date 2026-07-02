@@ -47,21 +47,32 @@ int is_command_ready(void) {
   return 0;
 }
 
+void set_data_ready(void) { PORTB |= (1 << DATA_READY); }
+
+void clear_data_ready(void) { PORTB &= ~(1 << DATA_READY); }
+
 void reset_statemachine(void) {
   buffer_reset(&_transferBuffer);
   _spi_state.lastCommand.command = NOP;
   _spi_state.lastCommand.payload = 0;
   _spi_state.bytes_to_send = 0;
   _spi_state.state = CMD_READ;
+  clear_data_ready();
 }
 
 uint8_t get_payload(void) { return _spi_state.lastCommand.payload; }
 
 spi_command get_command(void) { return _spi_state.lastCommand.command; }
 
-void set_transfer_ready(void) { _spi_state.state = TRANSFER_READY; }
+void set_transfer_ready(void) {
+  _spi_state.state = TRANSFER_READY;
+  set_data_ready();
+}
 
-void set_ready_for_next_cmd(void) { _spi_state.state = CMD_READ; }
+void set_ready_for_next_cmd(void) {
+  _spi_state.state = CMD_READ;
+  set_data_ready();
+}
 
 buffer_action_result write_to_transfer_buffer(uint8_t byte) {
   if (_spi_state.state != CMD_EXEC) {
@@ -76,12 +87,12 @@ buffer_action_result write_to_transfer_buffer(uint8_t byte) {
 }
 
 void spi_initialize(void) {
-  reset_statemachine();
-
   DDRB &= ~((1 << MOSI) | (1 << SCK) |
             (1 << SS)); /* Make MOSI, SCK, SS as input pins */
-  DDRB |= (1 << MISO);  /* Make MISO pin as output pin */
+  DDRB |= (1 << MISO) |
+          (1 << DATA_READY); /* Make MISO and DATA_READY pins as output pin */
   SPCR = (1 << SPE) | (1 << SPIE) | (1 << DORD); /* Enable SPI in slave mode */
+  reset_statemachine();
 }
 
 void handle_received_byte(uint8_t byte) {
