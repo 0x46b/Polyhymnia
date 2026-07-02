@@ -8,7 +8,7 @@ CC = gcc
 CXX = g++
 CPPFLAGS = -MMD ${INCLUDE_DIR}
 CXXFLAGS = 
-CFLAGS = -Wall -Wextra -fshort-enums -std=c99 -O2
+CFLAGS = -Wall -Wextra -fshort-enums -std=c99 #-O2
 CFLAGS += -g
 CFLAGS += -funsigned-char
 CFLAGS += -funsigned-bitfields

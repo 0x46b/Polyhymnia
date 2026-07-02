@@ -4,7 +4,6 @@
 #include <avr/io.h>
 #include <avr/portpins.h>
 #include <stdbool.h>
-#include <string.h>
 #include <util/delay.h>
 
 #define RXD PD0;

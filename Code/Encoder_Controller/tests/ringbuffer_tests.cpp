@@ -7,8 +7,18 @@ extern "C" {
 
 TEST_GROUP(RingbufferTests){};
 
+TEST(RingbufferTests, resetResetsTheBuffer) {
+  ring_buffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
+  buffer_write(&buffer, 10);
+  buffer_write(&buffer, 11);
+  buffer_reset(&buffer);
+  uint8_t data;
+  uint8_t result = buffer_read(&buffer, &data);
+  ENUMS_EQUAL_INT(BUFFER_EMPTY, result);
+}
+
 TEST(RingbufferTests, StoringAndRetrivingSingleEntry) {
-  RingBuffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
+  ring_buffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
   int8_t firstEntry = 10;
   int executionResult = buffer_write(&buffer, firstEntry);
   uint8_t entry = 0;
@@ -18,7 +28,7 @@ TEST(RingbufferTests, StoringAndRetrivingSingleEntry) {
 }
 
 TEST(RingbufferTests, StoringAndRetrivingMultipleEntries) {
-  RingBuffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
+  ring_buffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
   uint8_t firstEntry = 10;
   uint8_t secondEntry = 12;
   uint8_t thirdEntry = 15;
@@ -45,7 +55,7 @@ TEST(RingbufferTests, StoringAndRetrivingMultipleEntries) {
 }
 
 TEST(RingbufferTests, TryToReadMoreThanStored) {
-  RingBuffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
+  ring_buffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
   uint8_t firstEntry = 10;
   uint8_t secondEntry = 12;
 
@@ -69,7 +79,7 @@ TEST(RingbufferTests, TryToReadMoreThanStored) {
 }
 
 TEST(RingbufferTests, TryToOverflowMaxSize) {
-  RingBuffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
+  ring_buffer buffer = {{0}, 0, 0, INPUT_BUFFER_SIZE};
   buffer_action_result executionResult;
 
   for (int i = 0; i <= INPUT_BUFFER_SIZE + 1; i++) {

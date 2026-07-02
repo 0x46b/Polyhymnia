@@ -33,21 +33,26 @@ typedef struct {
   spi_state_flag state;
   SPI_Frame lastCommand;
   uint8_t bytes_to_send;
-  uint8_t transferred_bytes;
 } spi_state;
 
-static spi_state _spi_state = (spi_state){.state = CMD_READ,
-                                          .lastCommand = {NOP, 0},
-                                          .bytes_to_send = 0,
-                                          .transferred_bytes = 0};
+static spi_state _spi_state =
+    (spi_state){.state = CMD_READ, .lastCommand = {NOP, 0}, .bytes_to_send = 0};
 
-static RingBuffer _transferBuffer = (RingBuffer){
+static ring_buffer _transferBuffer = (ring_buffer){
     .maxlen = INPUT_BUFFER_SIZE, .data = {0}, .head = 0, .tail = 0};
 
 int is_command_ready(void) {
   if (_spi_state.state == CMD_EXEC)
     return 1;
   return 0;
+}
+
+void reset_statemachine(void) {
+  buffer_reset(&_transferBuffer);
+  _spi_state.lastCommand.command = NOP;
+  _spi_state.lastCommand.payload = 0;
+  _spi_state.bytes_to_send = 0;
+  _spi_state.state = CMD_READ;
 }
 
 uint8_t get_payload(void) { return _spi_state.lastCommand.payload; }
@@ -59,6 +64,10 @@ void set_transfer_ready(void) { _spi_state.state = TRANSFER_READY; }
 void set_ready_for_next_cmd(void) { _spi_state.state = CMD_READ; }
 
 buffer_action_result write_to_transfer_buffer(uint8_t byte) {
+  if (_spi_state.state != CMD_EXEC) {
+    return BUFFER_LOCKED;
+  }
+
   buffer_action_result result = buffer_write(&_transferBuffer, byte);
   if (result == BUFFER_SUCCESS) {
     _spi_state.bytes_to_send++;
@@ -67,11 +76,7 @@ buffer_action_result write_to_transfer_buffer(uint8_t byte) {
 }
 
 void spi_initialize(void) {
-  _spi_state.state = CMD_READ;
-  _spi_state.bytes_to_send = 0;
-  _spi_state.transferred_bytes = 0;
-  _spi_state.lastCommand.command = NOP;
-  _spi_state.lastCommand.payload = 0;
+  reset_statemachine();
 
   DDRB &= ~((1 << MOSI) | (1 << SCK) |
             (1 << SS)); /* Make MOSI, SCK, SS as input pins */
@@ -81,7 +86,7 @@ void spi_initialize(void) {
 
 void handle_received_byte(uint8_t byte) {
   uint8_t data;
-  buffer_action_result result;
+  buffer_action_result buffer_result;
 
   switch (_spi_state.state) {
   case CMD_READ:
@@ -93,40 +98,47 @@ void handle_received_byte(uint8_t byte) {
       SPDR = MODULE_UNKNOWN_COMMAND;
     }
     return;
-    ;
 
   case PAYLOAD_READ:
     _spi_state.lastCommand.payload = byte;
     _spi_state.state = CMD_EXEC;
     SPDR = MODULE_BUSY;
     return;
-    ;
+
+  case CMD_EXEC:
+    SPDR = MODULE_BUSY;
+    return;
 
   case TRANSFER_READY:
-    result = buffer_read(&_transferBuffer, &data);
-    if (result == BUFFER_EMPTY) {
-      SPDR = MODULE_FAILURE;
-      return;
+    // Nothing to send, but we are in "send-mode". Switch to command-receive
+    // automatically and parse the received byte as command
+    if (_spi_state.bytes_to_send == 0) {
+      _spi_state.state = CMD_READ;
+      handle_received_byte(byte);
     }
 
-    SPDR = data;
-    _spi_state.transferred_bytes++;
+    buffer_result = buffer_read(&_transferBuffer, &data);
+    if (buffer_result == BUFFER_SUCCESS) {
+      SPDR = data;
+      _spi_state.bytes_to_send--;
+    } else {
+      SPDR = MODULE_FAILURE;
+      reset_statemachine();
+    }
 
-    if (_spi_state.transferred_bytes == _spi_state.bytes_to_send) {
-      _spi_state.transferred_bytes = 0;
-      _spi_state.bytes_to_send = 0;
-      _spi_state.state = CMD_READ;
+    if (_spi_state.bytes_to_send == 0) {
+      reset_statemachine();
     }
     return;
-    ;
 
   case UNKNOWN_COMMAND:
     SPDR = MODULE_UNKNOWN_COMMAND;
-    _spi_state.state = CMD_READ;
+    reset_statemachine();
     return;
 
   default:
     SPDR = MODULE_FAILURE;
+    reset_statemachine();
     return;
     ;
   };

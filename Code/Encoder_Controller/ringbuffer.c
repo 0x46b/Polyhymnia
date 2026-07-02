@@ -1,6 +1,6 @@
 #include "ringbuffer.h"
 
-buffer_action_result buffer_write(volatile RingBuffer *buffer, uint8_t entry) {
+buffer_action_result buffer_write(volatile ring_buffer *buffer, uint8_t entry) {
   uint8_t next;
 
   next = buffer->head + 1; // next is where head will point to after this write.
@@ -15,7 +15,7 @@ buffer_action_result buffer_write(volatile RingBuffer *buffer, uint8_t entry) {
   return BUFFER_SUCCESS; // return success to indicate successful push.
 }
 
-buffer_action_result buffer_read(volatile RingBuffer *buffer, uint8_t *entry) {
+buffer_action_result buffer_read(volatile ring_buffer *buffer, uint8_t *entry) {
   int next;
 
   if (buffer->head ==
@@ -30,4 +30,9 @@ buffer_action_result buffer_read(volatile RingBuffer *buffer, uint8_t *entry) {
   buffer->tail = next;                 // tail to next offset.
 
   return BUFFER_SUCCESS;
+}
+
+void buffer_reset(volatile ring_buffer *buffer) {
+  buffer->head = 0;
+  buffer->tail = 0;
 }

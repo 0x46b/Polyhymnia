@@ -1,11 +1,9 @@
 #ifndef SPI_COMMANDS_H
 #define SPI_COMMANDS_H
-
-#include <inttypes.h>
+#include <stdint.h>
 
 /* Return codes, that the slave can send back to the master to indicate some
  * states */
-
 typedef enum {
   /* Slave listens, transaction could be done normally */
   MODULE_LISTENING = 0xA,
@@ -34,21 +32,13 @@ typedef enum {
   SetFilter = 0x11,
 } spi_command;
 
-/* Indicates how long the response of the commands above are in bytes */
-typedef enum {
-  ReadOSCLen = 3,
-  ReadEnvelopeLen = 4,
-  ReadFilterLen = 2,
-  ReadLFOLen = 2,
-  None = 0,
-} spi_command_response_length_in_bytes;
-
-/* Frame for sending SPI-commands */
+/* Frame for sending/receiving SPI-commands */
 typedef struct {
   spi_command command;
   uint8_t payload;
 } SPI_Frame;
 
+/* Checks, wether the byte is a valid command (returns 1) or not (returns 0) */
 uint8_t is_byte_valid_command(uint8_t byte);
 
 #endif
