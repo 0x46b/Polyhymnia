@@ -79,3 +79,4 @@ Testing/
 *.gcda
 *.gcno
 *.gcov
+/Code/SPI-Test
