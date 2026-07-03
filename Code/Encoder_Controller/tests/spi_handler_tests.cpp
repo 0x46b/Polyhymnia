@@ -24,6 +24,32 @@ spi_initialize();
 }
 ;
 
+TEST(SpiHandlerTests, initializeSetsDataReadyToLow) {
+  BITS_EQUAL(1, PORTB, (1 << DATA_READY));
+}
+
+TEST(SpiHandlerTests, setTransferReadySetsDataReadyToHigh) {
+  // Buffer is locked when no command was received, simulate command receive
+  handle_received_byte(ReadFilter);
+  handle_received_byte(29);
+
+  uint8_t data[] = {1, 2, 3, 4};
+  uint8_t writeResult = write_to_transfer_buffer(data[0]);
+  ENUMS_EQUAL_INT_TEXT(BUFFER_SUCCESS, writeResult, "Writing to buffer failed");
+
+  writeResult = write_to_transfer_buffer(data[1]);
+  ENUMS_EQUAL_INT_TEXT(BUFFER_SUCCESS, writeResult, "Writing to buffer failed");
+
+  writeResult = write_to_transfer_buffer(data[2]);
+  ENUMS_EQUAL_INT_TEXT(BUFFER_SUCCESS, writeResult, "Writing to buffer failed");
+
+  writeResult = write_to_transfer_buffer(data[3]);
+  ENUMS_EQUAL_INT_TEXT(BUFFER_SUCCESS, writeResult, "Writing to buffer failed");
+
+  set_transfer_ready();
+  BITS_EQUAL(1, PORTB, (1 << DATA_READY));
+}
+
 TEST(SpiHandlerTests, handleReceivedBytesSendsCorrectStates) {
   handle_received_byte(ReadOSC);
   ENUMS_EQUAL_INT(MODULE_LISTENING, SPDR);
