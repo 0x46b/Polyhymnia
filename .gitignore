@@ -76,3 +76,6 @@ Testing/
 # Emacs temp-files
 \#*\#
 .\#*
+*.gcda
+*.gcno
+*.gcov

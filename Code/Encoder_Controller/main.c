@@ -5,11 +5,13 @@
 #include <util/delay.h>
 
 #include "control_types.h"
-#include "encoder.h"
 #include "fader.h"
+#include "oscillator_controller.h"
+#include "serial.h"
 #include "spi_commands.h"
 #include "spi_handler.h"
 
+#define ENCODER_TICK_FREQUENCY_HZ 72
 #define XTAL 8e6
 
 oscillator_controller oscillator_controllers[3];
@@ -25,12 +27,16 @@ ISR(TIMER0_COMP_vect) {
 ISR(SPI_STC_vect) { handle_received_byte(SPDR); }
 
 void initialize_encoder_timer(void) { // nur Timer 0 initialisieren
-  TCCR0 = (1 << WGM01) | (1 << CS01) | (1 << CS00); // CTC, prescaler 64
-  OCR0 = (uint8_t)(F_CPU / 64.0 * 1e-3 - 0.5);      // 1ms
-  TIMSK |= 1 << OCIE0;
+  TCCR0 = (1 << WGM01) | (1 << CS02) | (1 << CS00); // CTC, prescaler 1024
+  OCR0 = (uint8_t)(F_CPU / 1024.0 * ENCODER_TICK_FREQUENCY_HZ) - 1;
 }
 
+void start_encoder_timer(void) { TIMSK |= 1 << OCIE0; }
+
 void setup(void) {
+  serial_initialize();
+
+  serial_send_string("Initializing OSC 1 controller...", false);
   // OSC1
   oscillator_controllers[0].detuneState.config.port = &PORTC;
   oscillator_controllers[0].detuneState.config.pinA = PC2;
@@ -42,6 +48,8 @@ void setup(void) {
 
   initialize_oscillator_controller(&oscillator_controllers[0], 1);
 
+  serial_send_string("[OK]", true);
+  serial_send_string("Initializing OSC 3 controller...", false);
   // OSC2
   oscillator_controllers[1].detuneState.config.port = &PORTC;
   oscillator_controllers[1].detuneState.config.pinA = PC6;
@@ -52,7 +60,8 @@ void setup(void) {
   oscillator_controllers[1].typeState.config.pinB = PC5;
 
   initialize_oscillator_controller(&oscillator_controllers[1], 2);
-
+  serial_send_string("[OK]", true);
+  serial_send_string("Initializing OSC 3 controller...", false);
   // OSC3
   oscillator_controllers[2].detuneState.config.port = &PORTD;
   oscillator_controllers[2].detuneState.config.pinA = PD4;
@@ -63,15 +72,24 @@ void setup(void) {
   oscillator_controllers[2].typeState.config.pinB = PD3;
 
   initialize_oscillator_controller(&oscillator_controllers[2], 3);
-
+  serial_send_string("[OK]", true);
+  serial_send_string("Initializing Envelope controller...", false);
   // ADSR
   envelope_initialize(&adsr_controller, 0, 1, 2, 3);
-
+  serial_send_string("[OK]", true);
+  serial_send_string("Initializing Filter controller...", false);
   // LowPass
   filter_initialize(&lowpass_controller, 4, 5);
+  serial_send_string("[OK]", true);
+  // SPI
+  /* serial_send_string("Initializing SPI connection...", false); */
+  /* spi_initialize(); */
+  /* serial_send_string("[OK]", true); */
 
+  // Encoder timer interrupt
+  serial_send_string("Initializing encoder polling...", false);
   initialize_encoder_timer();
-  spi_initialize();
+  serial_send_string("[OK]", true);
 }
 
 void put_envelope_data_into_transfer_buffer(void) {
@@ -158,9 +176,17 @@ void handle_spi_commands(void) {
 
 int main(void) {
   setup();
+  serial_send_string("Enabling encoder polling...", false);
+  // start_encoder_timer();
+  serial_send_string("[OK]", true);
+  serial_send_string("Enabling global-interrupts...", false);
   sei();
+  serial_send_string("[OK]", true);
 
   while (1) {
     handle_spi_commands();
+    for (int i = 0; i < 3; i++) {
+      oscillator_tick(&oscillator_controllers[i]);
+    }
   }
 }

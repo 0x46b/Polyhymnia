@@ -1,4 +1,4 @@
-#include "encoder.h"
+#include "oscillator_controller.h"
 
 void encoder_initialize(volatile encoder_config *config) {
   // Get DDR via offset

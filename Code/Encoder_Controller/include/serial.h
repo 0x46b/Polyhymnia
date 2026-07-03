@@ -7,13 +7,11 @@
 #include <util/delay.h>
 
 #define BAUD 9600
-#define RXD PD0;
-#define TXD PD1;
-#define XCK PB0;
+// #define USE_2X
 
 void serial_initialize(void);
-unsigned char serial_receive(void);
-void serial_send(unsigned char data, bool sendNewline);
+char serial_receive(void);
+void serial_send(char data, bool sendNewline);
 void serial_send_string(char *msg, bool sendNewLine);
 
 #endif // SERIAL_H

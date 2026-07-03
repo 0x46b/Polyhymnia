@@ -1,5 +1,5 @@
-SRC_TESTS = AllTests.cpp ringbuffer_tests.cpp spi_handler_tests.cpp
-SRC = ../ringbuffer.c ../spi_handler.c ../spi_commands.c
+SRC_TESTS = AllTests.cpp ringbuffer_tests.cpp spi_handler_tests.cpp oscillator_controller_tests.cpp
+SRC = ../ringbuffer.c ../spi_handler.c ../spi_commands.c ../led_driver.c ../oscillator_controller.c
 
 INCLUDE_DIR = -Imock_include -I../include
 
@@ -8,7 +8,7 @@ CC = gcc
 CXX = g++
 CPPFLAGS = -MMD ${INCLUDE_DIR}
 CXXFLAGS = 
-CFLAGS = -Wall -Wextra -fshort-enums -std=c99 #-O2
+CFLAGS =  -Wall -Wextra -fshort-enums -std=c99 #-O2
 CFLAGS += -g
 CFLAGS += -funsigned-char
 CFLAGS += -funsigned-bitfields
@@ -16,7 +16,9 @@ CFLAGS += -fpack-struct
 CFLAGS += -fshort-enums
 CFLAGS += -Wall
 CFLAGS += -Wstrict-prototypes
-LDFLAGS =
+#CFLAGS += -fprofile-arcs -ftest-coverage
+LDFLAGS = 
+#LDFLAGS += -lgcov --coverage
 LDLIBS =
 
 OBJ_TESTS = ${SRC_TESTS:%.cpp=%.o}

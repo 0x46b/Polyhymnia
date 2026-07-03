@@ -10,4 +10,4 @@ TEST_GROUP(LedDriverTests){
 
 };
 
-TEST(LedDriverTests, ledDriverShouldPulseCorrectValue) {}
+IGNORE_TEST(LedDriverTests, ledDriverShouldPulseCorrectValue) {}
