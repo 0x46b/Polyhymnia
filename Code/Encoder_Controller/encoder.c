@@ -61,3 +61,38 @@ void oscillator_tick(volatile oscillator_controller *controller) {
   controller->state.Type =
       handle_type_change(encoder_read_offset(&controller->typeState));
 }
+
+void set_waveform_for_osc(volatile oscillator_controller *controller,
+                          OscillatorType type, uint8_t id) {
+  /* switch (type) { */
+  /* case SAW: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSaw); */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
+  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
+   */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case TRIANGLE: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinTriangle);
+   */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
+  /*                                 ~(1 << controller->ledConfig.pinSaw) | */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case SINE: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSine); */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSaw) | */
+  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
+   */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case SQUARE: */
+  /*   *controller->ledConfig.pin |= (1u << controller->ledConfig.pinSquare); */
+  /*   *controller->ledConfig.pin &= ~(1u << controller->ledConfig.pinSine) | */
+  /*                                 ~(1u << controller->ledConfig.pinTriangle)
+   * | */
+  /*                                 ~(1u << controller->ledConfig.pinSaw); */
+  /*   break; */
+  /* } */
+  controller->state.Type = type;
+}

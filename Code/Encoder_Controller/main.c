@@ -98,41 +98,6 @@ void put_osc_data_into_transfer_buffer(uint8_t id) {
   write_to_transfer_buffer(oscillator_controllers[id].state.Type);
 }
 
-void set_waveform_for_osc(OscillatorType type, uint8_t id) {
-  oscillator_controller *controller = &oscillator_controllers[id];
-  /* switch (type) { */
-  /* case SAW: */
-  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSaw); */
-  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
-  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
-   */
-  /*                                 ~(1 << controller->ledConfig.pinSquare); */
-  /*   break; */
-  /* case TRIANGLE: */
-  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinTriangle);
-   */
-  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
-  /*                                 ~(1 << controller->ledConfig.pinSaw) | */
-  /*                                 ~(1 << controller->ledConfig.pinSquare); */
-  /*   break; */
-  /* case SINE: */
-  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSine); */
-  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSaw) | */
-  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
-   */
-  /*                                 ~(1 << controller->ledConfig.pinSquare); */
-  /*   break; */
-  /* case SQUARE: */
-  /*   *controller->ledConfig.pin |= (1u << controller->ledConfig.pinSquare); */
-  /*   *controller->ledConfig.pin &= ~(1u << controller->ledConfig.pinSine) | */
-  /*                                 ~(1u << controller->ledConfig.pinTriangle)
-   * | */
-  /*                                 ~(1u << controller->ledConfig.pinSaw); */
-  /*   break; */
-  /* } */
-  controller->state.Type = type;
-}
-
 void handle_spi_commands(void) {
   uint8_t payload;
 
@@ -156,24 +121,25 @@ void handle_spi_commands(void) {
       put_osc_data_into_transfer_buffer(payload);
       set_transfer_ready();
       break;
+    /* TODO: Make ID configurable instead of using the first every time*/
     case SetWaveformSaw:
       payload = get_payload();
-      set_waveform_for_osc(SAW, payload);
+      set_waveform_for_osc(&oscillator_controllers[0], SAW, payload);
       set_ready_for_next_cmd();
       break;
     case SetWaveformSine:
       payload = get_payload();
-      set_waveform_for_osc(SINE, payload);
+      set_waveform_for_osc(&oscillator_controllers[0], SINE, payload);
       set_ready_for_next_cmd();
       break;
     case SetWaveformSquare:
       payload = get_payload();
-      set_waveform_for_osc(SQUARE, payload);
+      set_waveform_for_osc(&oscillator_controllers[0], SQUARE, payload);
       set_ready_for_next_cmd();
       break;
     case SetWaveformTriangle:
       payload = get_payload();
-      set_waveform_for_osc(TRIANGLE, payload);
+      set_waveform_for_osc(&oscillator_controllers[0], TRIANGLE, payload);
       set_ready_for_next_cmd();
       break;
     case SetEnvelope:

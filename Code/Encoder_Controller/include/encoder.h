@@ -55,6 +55,7 @@ void encoder_initialize(volatile encoder_config *config);
 /* Returns the offset since the last read */
 int encoder_read_offset(volatile encoder_state *encoder);
 
+/* Initializes the given controller (setting DDRs, default values etc.) */
 void initialize_oscillator_controller(oscillator_controller *oscillator_control,
                                       uint8_t id);
 
@@ -66,4 +67,7 @@ void initialize_oscillator_controller(oscillator_controller *oscillator_control,
  * at the encoder (e.g. from a short-enough firing timer-interrupt)
  */
 void oscillator_tick(volatile oscillator_controller *controller);
+/* Sets the oscillator type and updates the LEDs accordingly */
+void set_waveform_for_osc(volatile oscillator_controller *controller,
+                          OscillatorType type, uint8_t id);
 #endif
