@@ -1,10 +1,10 @@
 #include "serial.h"
 #include <string.h>
+#include <util/setbaud.h>
 
 void serial_initialize(void) {
-  uint8_t baud = 51;
-  UBRRH = (uint8_t)(baud >> 8);
-  UBRRL = (uint8_t)baud;
+  UBRRH = UBRRH_VALUE;
+  UBRRL = UBRRL_VALUE;
   UCSRB = (1 << TXEN);
   /* Set frame format: 8data, 2stop bit */
   UCSRC = (1 << URSEL) | (0 << USBS) | (1 << UCSZ0) | (1 << UCSZ1);

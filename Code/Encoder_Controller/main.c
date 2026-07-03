@@ -30,47 +30,39 @@ void initialize_encoder_timer(void) { // nur Timer 0 initialisieren
   TIMSK |= 1 << OCIE0;
 }
 
-void leds_initialize(oscillator_type_LED_config *ledConfig) {
-  // assert(!"The method or operation is not implemented.");
-}
-
-void initialize_oscillator_controller(oscillator_controller *oscillator,
-                                      uint8_t id) {
-  oscillator->state.Id = id;
-  oscillator->state.DetuneOffset = 0;
-  oscillator->state.Type = SAW;
-}
-
 void setup(void) {
   // OSC1
-  initialize_oscillator_controller(&oscillator_controllers[0], 0);
-  // Type encoder
-  encoder_initialize(&oscillator_controllers[0].encoderType, &PINC, &DDRC,
-                     &PORTC, PC0, PC1);
-  // Detune encoder
-  encoder_initialize(&oscillator_controllers[0].encoderDetune, &PINC, &DDRC,
-                     &PORTC, PC2, PC3);
-  leds_initialize(&oscillator_controllers[0].ledConfig);
+  oscillator_controllers[0].detuneState.config.port = &PORTC;
+  oscillator_controllers[0].detuneState.config.pinA = PC2;
+  oscillator_controllers[0].detuneState.config.pinB = PC3;
+
+  oscillator_controllers[0].typeState.config.port = &PORTC;
+  oscillator_controllers[0].typeState.config.pinA = PC0;
+  oscillator_controllers[0].typeState.config.pinB = PC1;
+
+  initialize_oscillator_controller(&oscillator_controllers[0], 1);
 
   // OSC2
-  initialize_oscillator_controller(&oscillator_controllers[1], 1);
-  // OSC2 Type
-  encoder_initialize(&oscillator_controllers[1].encoderType, &PINC, &DDRC,
-                     &PORTC, PC4, PC5);
-  // OSC2 Detune
-  encoder_initialize(&oscillator_controllers[1].encoderDetune, &PINC, &DDRC,
-                     &PORTC, PC6, PC7);
-  leds_initialize(&oscillator_controllers[1].ledConfig);
+  oscillator_controllers[1].detuneState.config.port = &PORTC;
+  oscillator_controllers[1].detuneState.config.pinA = PC6;
+  oscillator_controllers[1].detuneState.config.pinB = PC7;
+
+  oscillator_controllers[1].typeState.config.port = &PORTC;
+  oscillator_controllers[1].typeState.config.pinA = PC4;
+  oscillator_controllers[1].typeState.config.pinB = PC5;
+
+  initialize_oscillator_controller(&oscillator_controllers[1], 2);
 
   // OSC3
-  initialize_oscillator_controller(&oscillator_controllers[2], 2);
-  // OSC3 Type (PD0 + PD1 are used for debugging output via serial)
-  encoder_initialize(&oscillator_controllers[2].encoderType, &PIND, &DDRD,
-                     &PORTD, PD2, PD3);
-  // OSC3 Detune
-  encoder_initialize(&oscillator_controllers[2].encoderType, &PIND, &DDRD,
-                     &PORTD, PD4, PD5);
-  leds_initialize(&oscillator_controllers[2].ledConfig);
+  oscillator_controllers[2].detuneState.config.port = &PORTD;
+  oscillator_controllers[2].detuneState.config.pinA = PD4;
+  oscillator_controllers[2].detuneState.config.pinB = PD5;
+
+  oscillator_controllers[2].typeState.config.port = &PORTD;
+  oscillator_controllers[2].typeState.config.pinA = PD2;
+  oscillator_controllers[2].typeState.config.pinB = PD3;
+
+  initialize_oscillator_controller(&oscillator_controllers[2], 3);
 
   // ADSR
   envelope_initialize(&adsr_controller, 0, 1, 2, 3);
@@ -108,32 +100,36 @@ void put_osc_data_into_transfer_buffer(uint8_t id) {
 
 void set_waveform_for_osc(OscillatorType type, uint8_t id) {
   oscillator_controller *controller = &oscillator_controllers[id];
-  switch (type) {
-  case SAW:
-    *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSaw);
-    *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) |
-                                  ~(1 << controller->ledConfig.pinTriangle) |
-                                  ~(1 << controller->ledConfig.pinSquare);
-    break;
-  case TRIANGLE:
-    *controller->ledConfig.pin |= (1 << controller->ledConfig.pinTriangle);
-    *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) |
-                                  ~(1 << controller->ledConfig.pinSaw) |
-                                  ~(1 << controller->ledConfig.pinSquare);
-    break;
-  case SINE:
-    *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSine);
-    *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSaw) |
-                                  ~(1 << controller->ledConfig.pinTriangle) |
-                                  ~(1 << controller->ledConfig.pinSquare);
-    break;
-  case SQUARE:
-    *controller->ledConfig.pin |= (1u << controller->ledConfig.pinSquare);
-    *controller->ledConfig.pin &= ~(1u << controller->ledConfig.pinSine) |
-                                  ~(1u << controller->ledConfig.pinTriangle) |
-                                  ~(1u << controller->ledConfig.pinSaw);
-    break;
-  }
+  /* switch (type) { */
+  /* case SAW: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSaw); */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
+  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
+   */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case TRIANGLE: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinTriangle);
+   */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSine) | */
+  /*                                 ~(1 << controller->ledConfig.pinSaw) | */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case SINE: */
+  /*   *controller->ledConfig.pin |= (1 << controller->ledConfig.pinSine); */
+  /*   *controller->ledConfig.pin &= ~(1 << controller->ledConfig.pinSaw) | */
+  /*                                 ~(1 << controller->ledConfig.pinTriangle) |
+   */
+  /*                                 ~(1 << controller->ledConfig.pinSquare); */
+  /*   break; */
+  /* case SQUARE: */
+  /*   *controller->ledConfig.pin |= (1u << controller->ledConfig.pinSquare); */
+  /*   *controller->ledConfig.pin &= ~(1u << controller->ledConfig.pinSine) | */
+  /*                                 ~(1u << controller->ledConfig.pinTriangle)
+   * | */
+  /*                                 ~(1u << controller->ledConfig.pinSaw); */
+  /*   break; */
+  /* } */
   controller->state.Type = type;
 }
 

@@ -6,12 +6,10 @@
 #include <stdbool.h>
 #include <util/delay.h>
 
+#define BAUD 9600
 #define RXD PD0;
 #define TXD PD1;
 #define XCK PB0;
-// Does not work, idk why
-// #define BAUD_RATE 9600
-// #define BAUD_PRESCALER (((F_CPU / (BAUD_RATE * 16UL)))) - 1
 
 void serial_initialize(void);
 unsigned char serial_receive(void);
