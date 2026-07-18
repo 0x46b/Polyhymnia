@@ -39,7 +39,7 @@ AudioControlSGTL5000 sgtl5000_1; // xy=965.2000122070312,582.0000152587891
 // GUItool: end automatically generated code
 
 // Global variables
-LoggerFactory _loggerFactory((Stream *)&Serial, LOGLEVEL_DEBUG);
+LoggerFactory _loggerFactory(Serial, LOGLEVEL_DEBUG);
 Logger *_logger;
 PolyhymniaCore core(&VCO1, &VCO2, &VCO3, &VCOMixer, &ADSR, &VCF, &sgtl5000_1,
                     _loggerFactory);
@@ -73,8 +73,6 @@ void initialize_audio_system() {
   _logger->end_action(ACTION_SUCCESS, LOGLEVEL_DEBUG);
 }
 
-void initialize_synthesizer_system(Settings settings) {}
-
 bool initialize_sd_card() {
   ActionResult result = ACTION_SUCCESS;
   String msg;
@@ -92,51 +90,36 @@ bool initialize_sd_card() {
   return true;
 }
 
-// void intialize_settings() {
-//   uint8_t result = ACTION_SUCCESS;
-//   String msg;
-
-//   _logger->start_action("Loading settings", DEBUG);
-//   if (!settings.LoadSettings()) {
-//     result = ACTION_WARNING;
-//     msg = "Could not load settings";
-//   }
-//   // _logger->print_settings(settings);
-//   _logger->end_action(result, msg.c_str(), DEBUG);
-// }
-
-// void initialize_hardware_communication() {
-//   _logger->start_action("Initializing hardware-communication", DEBUG);
-//   hardwareCommunication.Initialize(&SPI);
-//   _logger->end_action(ACTION_SUCCESS, DEBUG);
-// }
+void loggerTest(Print &logger) { logger.print("BUH"); }
 
 void setup() {
   Serial.begin(9600);
-
-  _logger = _loggerFactory.CreateDefaultForContext("Main");
+  Serial.print("TEST");
+  _logger = _loggerFactory.CreateForContext("Main", SERIALLOGGER);
   // Wait for logger to connect
   while (!Serial) {
   }
 
-  Serial.print("Polyhymnia v");
-  Serial.println(_VERSION);
+  _logger->print("Polyhymnia v", LOGLEVEL_DEBUG);
+  _logger->println(_VERSION, LOGLEVEL_DEBUG);
 
+  _logger->println("Initializing audio-system...", LOGLEVEL_DEBUG);
   initialize_audio_system();
 
-  // if (initialize_sd_card()) {
-  //   intialize_settings();
-  // }
+  _logger->println("Initializing SD-card...", LOGLEVEL_DEBUG);
+  initialize_sd_card();
 
-  // initialize_synthesizer_system(settings);
-  // initialize_hardware_communication();
-  // _logger->start_action("Setting status-led to ON", DEBUG);
-  // pinMode(ledPin, OUTPUT);
-  // digitalWrite(ledPin, HIGH);  // set the LED on
-  // _logger->end_action(ACTION_SUCCESS, DEBUG);
+  _logger->println("Initializing Core...", LOGLEVEL_DEBUG);
+  core.Initialize();
+  _logger->start_action("Setting status-led to ON", LOGLEVEL_DEBUG);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH); // set the LED on
+  _logger->end_action(ACTION_SUCCESS, LOGLEVEL_DEBUG);
+
+  Serial.print("TEST2");
 }
 
 void loop() {
   usbMIDI.read();
-  core.Tick();
+  // core.Tick();
 }

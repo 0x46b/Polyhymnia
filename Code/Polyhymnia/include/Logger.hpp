@@ -3,16 +3,16 @@
 
 #include "Settings.hpp"
 
-typedef enum {
-  LOGLEVEL_FATAL = 0,
-  LOGLEVEL_ERROR = 1,
-  LOGLEVEL_WARNING = 2,
-  LOGLEVEL_INFO = 3,
-  LOGLEVEL_DEBUG = 4,
-  LOGLEVEL_TRACE = 5
+typedef enum LogLevel {
+  LOGLEVEL_FATAL = 5,
+  LOGLEVEL_ERROR = 4,
+  LOGLEVEL_WARNING = 3,
+  LOGLEVEL_INFO = 2,
+  LOGLEVEL_DEBUG = 1,
+  LOGLEVEL_TRACE = 0
 } LogLevel;
 
-typedef enum {
+typedef enum ActionResult {
   ACTION_SUCCESS = 0,
   ACTION_WARNING = 1,
   ACTION_ERROR = 2

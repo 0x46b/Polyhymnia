@@ -9,10 +9,11 @@
 // have control over when we have time for sending)
 class SerialLogger : public Logger {
 private:
-  Stream *_serial;
+  Print &_serial;
+  bool loglevel_active(LogLevel level);
 
 public:
-  SerialLogger(Stream *serial, const char *context, LogLevel logLevel);
+  SerialLogger(Print &serial, const char *context, LogLevel logLevel);
   void start_action(const char *actionName, LogLevel logLevel);
   void end_action(ActionResult result, LogLevel logLevel);
   void end_action(ActionResult result, const char *msg, LogLevel logLevel);

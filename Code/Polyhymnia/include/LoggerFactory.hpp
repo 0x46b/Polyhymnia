@@ -7,12 +7,12 @@ typedef enum LoggerType { SERIALLOGGER, FILELOGGER } LoggerType;
 
 class LoggerFactory {
 private:
-  Stream *_serial;
+  Print &_serial;
   LogLevel _currentLogLevel;
   LoggerType _defaultType = SERIALLOGGER;
 
 public:
-  LoggerFactory(Stream *serial, LogLevel currentLoglevel);
+  LoggerFactory(Print &serial, LogLevel currentLoglevel);
   Logger *CreateForContext(const char *context, LoggerType type);
   Logger *CreateDefaultForContext(const char *context);
   void SetDefaultType(LoggerType type);

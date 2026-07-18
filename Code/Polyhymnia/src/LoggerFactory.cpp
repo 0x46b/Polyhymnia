@@ -1,8 +1,8 @@
 #include "LoggerFactory.hpp"
 #include "SerialLogger.hpp"
 
-LoggerFactory::LoggerFactory(Stream *serial, LogLevel currentLoglevel) {
-  _serial = serial;
+LoggerFactory::LoggerFactory(Print &serial, LogLevel currentLoglevel)
+    : _serial(serial) {
   _currentLogLevel = currentLoglevel;
 }
 
