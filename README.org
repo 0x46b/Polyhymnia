@@ -5,57 +5,12 @@ Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy
 
 Since I'll try to develop it myself version 1 will be completely digital, adding the analogue stuff incrementally as the project evolves.
 
-!!!!! NOTE !!!!!
+#+begin_warning
 Everything here is currenty under heavy development, so use at your own risk. Every code and schematics could and will change over time without warning ;)
-#+caption: Polyhymnia Build Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_build.yml/badge.svg]]
-#+caption: EncoderController Tests Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_ci_tests.yml/badge.svg]]
-#+caption: Polyhymnia Tests Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_tests.yml/badge.svg]]
+#+end_warning
 
-* Used MIDI-CC
-| CC value | Waveform |
-|----------+----------|
-|        0 | Sawtooth |
-|        1 | Triangle |
-|        2 | Square   |
-|        3 | Sine     |
+[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_build.yml/badge.svg]][[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_ci_tests.yml/badge.svg]][[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_tests.yml/badge.svg]]
 
-
-| CC value | Filter Type |
-|----------+-------------|
-|        0 | Low Pass    |
-|        1 | High Pass   |
-|        2 | Band Pass   |
-
-
-| CC# | Function     |
-|-----+--------------|
-|  70 | VCO1 Type    |
-|  76 | VCO1 Detune  |
-|  77 | VCO2 Type    |
-|  78 | VCO2 Detune  |
-|  85 | VCO3 Type    |
-|  86 | VCO3 Detune  |
-|-----+--------------|
-|  73 | Attack       |
-|  80 | Decay        |
-|  75 | Sustain      |
-|  72 | Release      |
-|-----+--------------|
-|  74 | Cutoff       |
-|  71 | Resonance    |
-|  89 | Filtertype   |
-|-----+--------------|
-| 105 | LFO Rate     |
-| 106 | LFO Amount   |
-|-----+--------------|
-| 20  | VCO1 Volume  |
-| 21  | VCO2 Volume  |
-| 22  | VCO3 Volume  |
-| 23  | Noise Volume |
-| 24  | Total Volume |
 
 * Vision
 - digitally created oscillators using the Teensy 4.1
@@ -106,22 +61,67 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 * Ideas for later
 - Onboard-Sequencer
 - Oscilloscope for showing the generated wave-form
+* Documentation
+** Used Libraries
+- [[Teensy Audio Library][https://www.pjrc.com/teensy/td_libs_Audio.html]]
+- [[ILI9341_T4 Library][https://github.com/vindar/ILI9341_T4]]
+- [[ArduinoJson][https://github.com/bblanchon/ArduinoJson]]
+- [[LVGL][https://lvgl.io/]]
 
-* Used Libraries
-- [Teensy Audio Library](https://www.pjrc.com/teensy/td_libs_Audio.html)
-- [ILI9341_T4 Library](https://github.com/vindar/ILI9341_T4)
-- [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
-- [LVGL](https://lvgl.io/)
+** Used Software
+- [[Pure Data][https://puredata.info/]]
+- [[KiCad][https://kicad.org/]]
+- [[FreeCAD][https://www.freecadweb.org/]]
+- [[Teensyduino][https://www.pjrc.com/teensy/teensyduino.html]]
+- [[EEZ Studio][https://www.envox.eu/studio/studio-introduction/]]
+- [[Doxygen][https://www.doxygen.nl/]]
+- [[platformio][https://platformio.org/]]
 
-* Used Software
-- [Pure Data](https://puredata.info/)
-- [KiCad](https://kicad.org/)
-- [FreeCAD](https://www.freecadweb.org/)
-- [Arduino IDE](https://www.arduino.cc/en/software)
-- [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html)
-- [EEZ Studio](https://www.envox.eu/studio/studio-introduction/)
+** MIDI-CC
+| CC value | Waveform |
+|----------+----------|
+|        0 | Sawtooth |
+|        1 | Triangle |
+|        2 | Square   |
+|        3 | Sine     |
 
-* Parts list [12/16]
+
+| CC value | Filter Type |
+|----------+-------------|
+|        0 | Low Pass    |
+|        1 | High Pass   |
+|        2 | Band Pass   |
+
+
+| CC# | Function     |
+|-----+--------------|
+|  70 | VCO1 Type    |
+|  76 | VCO1 Detune  |
+|  77 | VCO2 Type    |
+|  78 | VCO2 Detune  |
+|  85 | VCO3 Type    |
+|  86 | VCO3 Detune  |
+|-----+--------------|
+|  73 | Attack       |
+|  80 | Decay        |
+|  75 | Sustain      |
+|  72 | Release      |
+|-----+--------------|
+|  74 | Cutoff       |
+|  71 | Resonance    |
+|  89 | Filtertype   |
+|-----+--------------|
+| 105 | LFO Rate     |
+| 106 | LFO Amount   |
+|-----+--------------|
+| 20  | VCO1 Volume  |
+| 21  | VCO2 Volume  |
+| 22  | VCO3 Volume  |
+| 23  | Noise Volume |
+| 24  | Total Volume |
+
+* Hardware
+** Parts list [12/16]
 - [X] Teensy 4.1
 - [X] Teensy Audio Shield
 - [X] 2x Buchsenleisten 1x24
