@@ -1,0 +1,26 @@
+var annotated_dup =
+[
+    [ "DCO", "classDCO.html", "classDCO" ],
+    [ "DCOSetting", "structDCOSetting.html", "structDCOSetting" ],
+    [ "EnvelopeSetting", "structEnvelopeSetting.html", "structEnvelopeSetting" ],
+    [ "EnvelopeState", "structEnvelopeState.html", null ],
+    [ "FilterSetting", "structFilterSetting.html", null ],
+    [ "FilterState", "structFilterState.html", null ],
+    [ "HardwareInterfaceCommunication", "classHardwareInterfaceCommunication.html", null ],
+    [ "LadderFilter", "classLadderFilter.html", null ],
+    [ "LFOSetting", "structLFOSetting.html", null ],
+    [ "LFOState", "structLFOState.html", null ],
+    [ "Logger", "classLogger.html", null ],
+    [ "LoggerFactory", "classLoggerFactory.html", null ],
+    [ "MixerSetting", "structMixerSetting.html", null ],
+    [ "NoiseSetting", "structNoiseSetting.html", null ],
+    [ "OscillatorState", "structOscillatorState.html", null ],
+    [ "PatchSetting", "structPatchSetting.html", null ],
+    [ "PolyhymniaCore", "classPolyhymniaCore.html", null ],
+    [ "SerialLogger", "classSerialLogger.html", null ],
+    [ "Settings", "classSettings.html", null ],
+    [ "SPI_Frame", "structSPI__Frame.html", null ],
+    [ "SynthEnvelope", "classSynthEnvelope.html", null ],
+    [ "SynthMixer", "classSynthMixer.html", null ],
+    [ "SystemSettings", "structSystemSettings.html", "structSystemSettings" ]
+];

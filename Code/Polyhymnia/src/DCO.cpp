@@ -20,7 +20,7 @@ void DCO::PrintWaveformChangeToSerial(oscillator_waveform waveform) {
 }
 
 DCO::DCO(AudioSynthWaveform *vco, int typeChangeMidiCC, int detuneChangeMidiCC,
-         float maxVolume, const char *loggingContext, Logger *logger) {
+         float maxVolume, Logger *logger) {
   this->_teensyVCO = vco;
   this->_maxVolume = maxVolume;
   this->_detuneChangeMidiCC = detuneChangeMidiCC;
@@ -30,13 +30,13 @@ DCO::DCO(AudioSynthWaveform *vco, int typeChangeMidiCC, int detuneChangeMidiCC,
 
 void DCO::Initialize() {
   _logger->println("Initializing VCO with default values", LOGLEVEL_DEBUG);
-  _teensyVCO->begin(_maxVolume, MIDI::MidiToFrequency(60), DEFAULT_TYPE);
+  _teensyVCO->begin(_maxVolume, MIDI::midivalue_to_frequency(60), DEFAULT_TYPE);
 }
 
-void DCO::Initialize(VCOSetting setting) {
+void DCO::Initialize(DCOSetting setting) {
   _logger->println("Initializing VCO with loaded settings", LOGLEVEL_DEBUG);
   if (setting.Type >= 0 && setting.Type <= 4) {
-    _teensyVCO->begin(_maxVolume, MIDI::MidiToFrequency(60),
+    _teensyVCO->begin(_maxVolume, MIDI::midivalue_to_frequency(60),
                       _waveformLookup[setting.Type]);
   } else {
     _logger->println("Value for type out of range, using default",
@@ -69,7 +69,7 @@ void DCO::HandleTypeChange(uint8_t waveformId) {
 }
 
 void DCO::HandlePitchChange(uint8_t midiValue) {
-  float frequency = MIDI::MidiToFrequency(midiValue);
+  float frequency = MIDI::midivalue_to_frequency(midiValue);
   //_logger->printf("PitchChange: %f\n", frequency);
   _teensyVCO->frequency(frequency + _current_detune);
 }

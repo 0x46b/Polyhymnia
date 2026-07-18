@@ -96,7 +96,7 @@ void SerialLogger::printf(const char *msg, ...) {
   // va_end(args);
 }
 
-void SerialLogger::print_vco_settings(VCOSetting vco, LogLevel logLevel) {
+void SerialLogger::print_vco_settings(DCOSetting vco, LogLevel logLevel) {
   if (_logLevel <= logLevel) {
     return;
   }

@@ -36,7 +36,7 @@ public:
   virtual void print_settings(Settings settings, LogLevel logLevel) = 0;
   virtual void print_envelope_settings(EnvelopeSetting envelope,
                                        LogLevel logLevel) = 0;
-  virtual void print_vco_settings(VCOSetting vco, LogLevel logLevel) = 0;
+  virtual void print_vco_settings(DCOSetting vco, LogLevel logLevel) = 0;
   virtual void print_lfo_settings(LFOSetting lfo, LogLevel logLevel) = 0;
   virtual void print_patch_settings(PatchSetting patch, LogLevel logLevel) = 0;
   virtual void print_mixer_settings(MixerSetting mixer, LogLevel logLevel) = 0;

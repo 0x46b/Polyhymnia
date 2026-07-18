@@ -1,12 +1,9 @@
+#include "MIDI.hpp"
 #include "doctest.h"
 
-int factorial(int number) {
-    return number <= 1 ? number : factorial(number - 1) * number;
-}
-
-TEST_CASE("testing the factorial function") {
-    CHECK(factorial(1) == 1);
-    CHECK(factorial(2) == 2);
-    CHECK(factorial(3) == 6);
-    CHECK(factorial(10) == 3628800);
+TEST_CASE("midivalue_to_frequency will have correct bounds") {
+  float result = MIDI::midivalue_to_frequency(-10);
+  CHECK(result == 0);
+  result = MIDI::midivalue_to_frequency(128);
+  CHECK(result == 0);
 }

@@ -21,7 +21,7 @@ public:
   void print(const char *msg, LogLevel logLevel);
   void print(float num, LogLevel logLevel);
   void printf(const char *msg, ...);
-  void print_vco_settings(VCOSetting vco, LogLevel logLevel);
+  void print_vco_settings(DCOSetting vco, LogLevel logLevel);
   void print_envelope_settings(EnvelopeSetting envelope, LogLevel logLevel);
   void print_lfo_settings(LFOSetting lfo, LogLevel logLevel);
   void print_mixer_settings(MixerSetting mixer, LogLevel logLevel);
