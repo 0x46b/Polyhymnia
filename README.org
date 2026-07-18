@@ -8,11 +8,11 @@ Since I'll try to develop it myself version 1 will be completely digital, adding
 !!!!! NOTE !!!!!
 Everything here is currenty under heavy development, so use at your own risk. Every code and schematics could and will change over time without warning ;)
 #+caption: Polyhymnia Build Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_build.yml/badge.svg]]
+[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_build.yml/badge.svg]]
 #+caption: EncoderController Tests Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_tests.yml/badge.svg]]
+[[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_ci_tests.yml/badge.svg]]
 #+caption: Polyhymnia Tests Batch
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_tests.yml/badge.svg]]
+[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_tests.yml/badge.svg]]
 
 * Used MIDI-CC
 | CC value | Waveform |
