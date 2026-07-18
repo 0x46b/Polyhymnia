@@ -6,6 +6,8 @@ Polyhymnia is an experimental hybrid-synthesizer. It is planned to use an Teensy
 Since I'll try to develop it myself version 1 will be completely digital, adding the analogue stuff incrementally as the project evolves.
 
 #+begin_warning
+[!WARNING]
+
 Everything here is currenty under heavy development, so use at your own risk. Every code and schematics could and will change over time without warning ;)
 #+end_warning
 
