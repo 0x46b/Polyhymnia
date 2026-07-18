@@ -3,15 +3,16 @@
 
 #include <SPI.h>
 
-#include "spi_commands.hpp"
 #include "control_types.h"
+#include "spi_commands.hpp"
 
 #define HW_INTERFACE_SCK 27
 #define HW_INTERFACE_MOSI 26
 #define HW_INTERFACE_MISO 39
 #define HW_INTERFACE_SS 10
 
-/* Class for communicating with the different hardware-interfaces (OSC-Encoders etc.)*/
+/*! Class for communicating with the different hardware-interfaces (OSC-Encoders
+ * etc.)*/
 class HardwareInterfaceCommunication {
 private:
   SPIClass *_spiConnection;

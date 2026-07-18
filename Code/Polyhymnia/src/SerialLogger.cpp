@@ -102,7 +102,7 @@ void SerialLogger::print_vco_settings(DCOSetting vco, LogLevel logLevel) {
   }
 
   _serial->print("\t\t\tType: ");
-  switch (vco.Type) {
+  switch (vco.Waveform) {
   case 0:
     _serial->println("SAWTOOTH");
     break;
@@ -153,11 +153,11 @@ void SerialLogger::print_mixer_settings(MixerSetting mixer, LogLevel logLevel) {
   }
 
   _serial->print("\t\t\tVCO1Gain: ");
-  _serial->println(mixer.VCO1Gain);
+  _serial->println(mixer.DCO1Gain);
   _serial->print("\t\t\tVCO2Gain: ");
-  _serial->println(mixer.VCO2Gain);
+  _serial->println(mixer.DCO2Gain);
   _serial->print("\t\t\tVCO3Gain: ");
-  _serial->println(mixer.VCO3Gain);
+  _serial->println(mixer.DCO3Gain);
   _serial->print("\t\t\tNoise: ");
   _serial->println(mixer.NoiseGain);
 }
@@ -170,11 +170,11 @@ void SerialLogger::print_patch_settings(PatchSetting patch, LogLevel logLevel) {
   _serial->print("\tName: ");
   _serial->println(patch.Name);
   _serial->println("\t\tVCO1: ");
-  print_vco_settings(patch.VCO1, logLevel);
+  print_vco_settings(patch.DCO1, logLevel);
   _serial->println("\t\tVCO2: ");
-  print_vco_settings(patch.VCO2, logLevel);
+  print_vco_settings(patch.DCO2, logLevel);
   _serial->println("\t\tVCO3: ");
-  print_vco_settings(patch.VCO3, logLevel);
+  print_vco_settings(patch.DCO3, logLevel);
   _serial->println("\t\tEnvelope: ");
   print_envelope_settings(patch.Envelope, logLevel);
   _serial->println("\t\tLFO: ");

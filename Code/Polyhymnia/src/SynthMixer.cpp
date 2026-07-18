@@ -60,9 +60,9 @@ void SynthMixer::UpdateVolumes(void) {
 
 void SynthMixer::Initialize(MixerSetting settings) {
   _logger->println("Initializing mixer with loaded settings", LOGLEVEL_DEBUG);
-  this->_vco1Volume = settings.VCO1Gain;
-  this->_vco2Volume = settings.VCO2Gain;
-  this->_vco3Volume = settings.VCO3Gain;
+  this->_vco1Volume = settings.DCO1Gain;
+  this->_vco2Volume = settings.DCO2Gain;
+  this->_vco3Volume = settings.DCO3Gain;
   this->_noiseVolume = settings.NoiseGain;
 
   this->UpdateVolumes();

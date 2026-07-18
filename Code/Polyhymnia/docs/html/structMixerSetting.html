@@ -92,18 +92,79 @@ $(function(){initNavTree('structMixerSetting.html','','structMixerSetting-member
   <div class="headertitle"><div class="title">MixerSetting Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Settings_8hpp_source.html">Settings.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:abc31e14eebb8f0a1251bc95cc1bc2c20" id="r_abc31e14eebb8f0a1251bc95cc1bc2c20"><td class="memItemLeft"><a id="abc31e14eebb8f0a1251bc95cc1bc2c20" name="abc31e14eebb8f0a1251bc95cc1bc2c20"></a>
-float&#160;</td><td class="memItemRight"><b>VCO1Gain</b></td></tr>
-<tr class="memitem:a122e93e3eaa10c6c6ffcd293ae6321bd" id="r_a122e93e3eaa10c6c6ffcd293ae6321bd"><td class="memItemLeft"><a id="a122e93e3eaa10c6c6ffcd293ae6321bd" name="a122e93e3eaa10c6c6ffcd293ae6321bd"></a>
-float&#160;</td><td class="memItemRight"><b>VCO2Gain</b></td></tr>
-<tr class="memitem:ad2fce30f18821f21544d01e40aa5aa9e" id="r_ad2fce30f18821f21544d01e40aa5aa9e"><td class="memItemLeft"><a id="ad2fce30f18821f21544d01e40aa5aa9e" name="ad2fce30f18821f21544d01e40aa5aa9e"></a>
-float&#160;</td><td class="memItemRight"><b>VCO3Gain</b></td></tr>
-<tr class="memitem:a18710dba74beb35a6e6dad3769fffbb8" id="r_a18710dba74beb35a6e6dad3769fffbb8"><td class="memItemLeft"><a id="a18710dba74beb35a6e6dad3769fffbb8" name="a18710dba74beb35a6e6dad3769fffbb8"></a>
-float&#160;</td><td class="memItemRight"><b>NoiseGain</b></td></tr>
+<tr class="memitem:a501ed7b6906c078c3d3c52bfa4b48f3c" id="r_a501ed7b6906c078c3d3c52bfa4b48f3c"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a501ed7b6906c078c3d3c52bfa4b48f3c">DCO1Gain</a></td></tr>
+<tr class="memitem:ac3fdf5d00c428bc6d7201632dbedefc0" id="r_ac3fdf5d00c428bc6d7201632dbedefc0"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ac3fdf5d00c428bc6d7201632dbedefc0">DCO2Gain</a></td></tr>
+<tr class="memitem:a555734fb3092008e856d493566b7901d" id="r_a555734fb3092008e856d493566b7901d"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a555734fb3092008e856d493566b7901d">DCO3Gain</a></td></tr>
+<tr class="memitem:a18710dba74beb35a6e6dad3769fffbb8" id="r_a18710dba74beb35a6e6dad3769fffbb8"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a18710dba74beb35a6e6dad3769fffbb8">NoiseGain</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classSettings.html">Settings</a> for the volume of the different DCOs. A single "tone" consists of mixing all DCOs together. With this setting you can define of the ratios. Used for saving/loading patches (see <a class="el" href="structPatchSetting.html">PatchSetting</a>) </p><dl class="section remark"><dt>Remarks</dt><dd>{Note: Due to the nature of how teensy handles volume all volumes added shouldn't exceed 1, else distortion is highly probable} </dd></dl>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a501ed7b6906c078c3d3c52bfa4b48f3c" name="a501ed7b6906c078c3d3c52bfa4b48f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a501ed7b6906c078c3d3c52bfa4b48f3c">&#9670;&#160;</a></span>DCO1Gain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float MixerSetting::DCO1Gain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gain for <a class="el" href="classDCO.html">DCO</a> 1 </p>
+
+</div>
+</div>
+<a id="ac3fdf5d00c428bc6d7201632dbedefc0" name="ac3fdf5d00c428bc6d7201632dbedefc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3fdf5d00c428bc6d7201632dbedefc0">&#9670;&#160;</a></span>DCO2Gain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float MixerSetting::DCO2Gain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gain for <a class="el" href="classDCO.html">DCO</a> 2 </p>
+
+</div>
+</div>
+<a id="a555734fb3092008e856d493566b7901d" name="a555734fb3092008e856d493566b7901d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a555734fb3092008e856d493566b7901d">&#9670;&#160;</a></span>DCO3Gain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float MixerSetting::DCO3Gain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gain for <a class="el" href="classDCO.html">DCO</a> 3 </p>
+
+</div>
+</div>
+<a id="a18710dba74beb35a6e6dad3769fffbb8" name="a18710dba74beb35a6e6dad3769fffbb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18710dba74beb35a6e6dad3769fffbb8">&#9670;&#160;</a></span>NoiseGain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float MixerSetting::NoiseGain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gain for Noise </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/<a class="el" href="Settings_8hpp_source.html">Settings.hpp</a></li>
 </ul>

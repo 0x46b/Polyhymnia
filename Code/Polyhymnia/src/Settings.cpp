@@ -2,7 +2,7 @@
 #include <ArduinoJson.h>
 #include <SD.h>
 
-Settings::Settings(const char* filename) : System() {}
+Settings::Settings(const char *filename) : System() {}
 
 bool Settings::LoadSettings() {
   if (!SD.begin(BUILTIN_SDCARD)) {
@@ -33,14 +33,14 @@ bool Settings::LoadSettings() {
     PatchSetting *currentPatch = &Patches[patchCounter];
     currentPatch->Name = patche["Name"]; // "Patch 1", "Patch 2"
 
-    currentPatch->VCO1.Type = patche["VCO1"]["Type"];     // 1, 1
-    currentPatch->VCO1.Detune = patche["VCO1"]["Detune"]; // 0, 0
+    currentPatch->DCO1.Waveform = patche["VCO1"]["Type"]; // 1, 1
+    currentPatch->DCO1.Detune = patche["VCO1"]["Detune"]; // 0, 0
 
-    currentPatch->VCO2.Type = patche["VCO2"]["Type"];     // 1, 1
-    currentPatch->VCO2.Detune = patche["VCO2"]["Detune"]; // 0, 0
+    currentPatch->DCO2.Waveform = patche["VCO2"]["Type"]; // 1, 1
+    currentPatch->DCO2.Detune = patche["VCO2"]["Detune"]; // 0, 0
 
-    currentPatch->VCO3.Type = patche["VCO3"]["Type"];     // 1, 1
-    currentPatch->VCO3.Detune = patche["VCO3"]["Detune"]; // 0, 0
+    currentPatch->DCO3.Waveform = patche["VCO3"]["Type"]; // 1, 1
+    currentPatch->DCO3.Detune = patche["VCO3"]["Detune"]; // 0, 0
 
     currentPatch->Noise.Gain = patche["Noise"]["Gain"]; // 0, 0
 
@@ -59,9 +59,9 @@ bool Settings::LoadSettings() {
     currentPatch->LFO.Amount = patche["LFO"]["Amount"]; // 50, 50
 
     JsonObject patche_Mixer = patche["Mixer"];
-    currentPatch->Mixer.VCO1Gain = patche_Mixer["VCO1Gain"];   // 0.3, 0.3
-    currentPatch->Mixer.VCO2Gain = patche_Mixer["VCO2Gain"];   // 0.3, 0.3
-    currentPatch->Mixer.VCO3Gain = patche_Mixer["VCO3Gain"];   // 0.3, 0.3
+    currentPatch->Mixer.DCO1Gain = patche_Mixer["VCO1Gain"];   // 0.3, 0.3
+    currentPatch->Mixer.DCO2Gain = patche_Mixer["VCO2Gain"];   // 0.3, 0.3
+    currentPatch->Mixer.DCO3Gain = patche_Mixer["VCO3Gain"];   // 0.3, 0.3
     currentPatch->Mixer.NoiseGain = patche_Mixer["NoiseGain"]; // 0, 0
 
     patchCounter++;
@@ -85,17 +85,17 @@ bool Settings::Save() {
     JsonObject patches_0 = patches.add<JsonObject>();
     patches_0["Name"] = Patches[i].Name;
 
-    JsonObject patches_0_VCO1 = patches_0["VCO1"].to<JsonObject>();
-    patches_0_VCO1["Type"] = Patches[i].VCO1.Type;
-    patches_0_VCO1["Detune"] = Patches[i].VCO1.Detune;
+    JsonObject patches_0_VCO1 = patches_0["DCO1"].to<JsonObject>();
+    patches_0_VCO1["Type"] = Patches[i].DCO1.Waveform;
+    patches_0_VCO1["Detune"] = Patches[i].DCO1.Detune;
 
-    JsonObject patches_0_VCO2 = patches_0["VCO2"].to<JsonObject>();
-    patches_0_VCO2["Type"] = Patches[i].VCO2.Type;
-    patches_0_VCO2["Detune"] = Patches[i].VCO2.Detune;
+    JsonObject patches_0_VCO2 = patches_0["DCO2"].to<JsonObject>();
+    patches_0_VCO2["Type"] = Patches[i].DCO2.Waveform;
+    patches_0_VCO2["Detune"] = Patches[i].DCO2.Detune;
 
-    JsonObject patches_0_VCO3 = patches_0["VCO3"].to<JsonObject>();
-    patches_0_VCO3["Type"] = Patches[i].VCO3.Type;
-    patches_0_VCO3["Detune"] = Patches[i].VCO3.Detune;
+    JsonObject patches_0_VCO3 = patches_0["DCO3"].to<JsonObject>();
+    patches_0_VCO3["Type"] = Patches[i].DCO3.Waveform;
+    patches_0_VCO3["Detune"] = Patches[i].DCO3.Detune;
     patches_0["Noise"]["Gain"] = Patches[i].Noise.Gain;
 
     JsonObject patches_0_Envelope = patches_0["Envelope"].to<JsonObject>();
@@ -114,9 +114,9 @@ bool Settings::Save() {
     patches_0_LFO["Amount"] = Patches[i].LFO.Amount;
 
     JsonObject patches_0_Mixer = patches_0["Mixer"].to<JsonObject>();
-    patches_0_Mixer["VCO1Gain"] = Patches[i].Mixer.VCO1Gain;
-    patches_0_Mixer["VCO2Gain"] = Patches[i].Mixer.VCO2Gain;
-    patches_0_Mixer["VCO3Gain"] = Patches[i].Mixer.VCO3Gain;
+    patches_0_Mixer["DCO1Gain"] = Patches[i].Mixer.DCO1Gain;
+    patches_0_Mixer["DCO2Gain"] = Patches[i].Mixer.DCO2Gain;
+    patches_0_Mixer["DCO3Gain"] = Patches[i].Mixer.DCO3Gain;
     patches_0_Mixer["NoiseGain"] = Patches[i].Mixer.NoiseGain;
   }
 

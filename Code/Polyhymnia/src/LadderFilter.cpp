@@ -11,7 +11,7 @@ LadderFilter::~LadderFilter(void) { free(_logger); }
 
 float LadderFilter::CalculateCutoff(byte midiValue) {
   // TODO: Add potentially LFO
-  return MIDI::MidiValueToValue(midiValue, 20000, 0);
+  return MIDI::scale_cc_linear(midiValue, 20000, 0);
 }
 
 void LadderFilter::SetCutoff(byte value) {

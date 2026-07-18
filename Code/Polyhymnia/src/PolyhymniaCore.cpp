@@ -28,9 +28,9 @@ void PolyhymniaCore::Initialize() {
   _logger->start_action("Synthesizer System Initialization", LOGLEVEL_DEBUG);
 
   if (_settings.is_loaded()) {
-    _polyVCO1.Initialize(_settings.Patches[0].VCO1);
-    _polyVCO2.Initialize(_settings.Patches[0].VCO2);
-    _polyVCO3.Initialize(_settings.Patches[0].VCO3);
+    _polyVCO1.Initialize(_settings.Patches[0].DCO1);
+    _polyVCO2.Initialize(_settings.Patches[0].DCO2);
+    _polyVCO3.Initialize(_settings.Patches[0].DCO3);
     _mixer.Initialize(_settings.Patches[0].Mixer);
     _envelope.Initialize(_settings.Patches[0].Envelope);
     _filter.Initialize(_settings.Patches[0].Filter);

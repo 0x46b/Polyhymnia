@@ -35,9 +35,9 @@ void DCO::Initialize() {
 
 void DCO::Initialize(DCOSetting setting) {
   _logger->println("Initializing VCO with loaded settings", LOGLEVEL_DEBUG);
-  if (setting.Type >= 0 && setting.Type <= 4) {
+  if (setting.Waveform >= 0 && setting.Waveform <= 4) {
     _teensyVCO->begin(_maxVolume, MIDI::midivalue_to_frequency(60),
-                      _waveformLookup[setting.Type]);
+                      _waveformLookup[setting.Waveform]);
   } else {
     _logger->println("Value for type out of range, using default",
                      LOGLEVEL_ERROR);

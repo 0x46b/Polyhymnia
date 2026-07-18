@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['switchvco1waveform_0',['SwitchVCO1Waveform',['../classDCO.html#ab565adff9d36efe0c8126eb871989a39',1,'DCO']]]
+  ['loadsettings_0',['LoadSettings',['../classSettings.html#a6087852a5c23f14ad12922b1cff45bd6',1,'Settings']]]
 ];

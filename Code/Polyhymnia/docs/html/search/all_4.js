@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['filtersetting_0',['FilterSetting',['../structFilterSetting.html',1,'']]],
-  ['filterstate_1',['FilterState',['../structFilterState.html',1,'']]]
+  ['envelopesetting_0',['EnvelopeSetting',['../structEnvelopeSetting.html',1,'']]],
+  ['envelopestate_1',['EnvelopeState',['../structEnvelopeState.html',1,'']]]
 ];

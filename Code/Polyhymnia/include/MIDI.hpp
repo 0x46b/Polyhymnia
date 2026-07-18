@@ -27,11 +27,21 @@ const float midiToFrequency[128] = {
     7902.133, 8372.018, 8869.844, 9397.273, 9956.063, 10548.08, 11175.3,
     11839.82, 12543.85};
 
-/* Converts a MIDI-value to the correct frequency of the note */
+/*! Converts a MIDI-value to the correct frequency of the note
+ * \returns The corresponding frequency
+ * \param[in] midiValue Note-value given by the MIDI-system (0-127)
+ */
 float midivalue_to_frequency(uint8_t midiValue);
 
-/*  */
-float MidiValueToValue(uint8_t value, float maxValue, float offset);
+/*! Scales the given value linear to a range 0-maxValue
+ *
+ * \returns mapped value
+ * \param[in] value The value that should get scaled (0-127)
+ * \param[in] maxValue Maximum value (e.g. value = 127 => maxValue)
+ * \param[in] offset Shifts the entire output range up or down so that the
+ * minimum input yields the offset value rather than zero
+ */
+float scale_cc_linear(uint8_t value, float maxValue, float offset);
 
 } // namespace MIDI
 #endif
