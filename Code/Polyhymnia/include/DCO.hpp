@@ -1,9 +1,8 @@
 #ifndef DCO_H
 #define DCO_H
 #include "Constants.hpp"
+#include "Logger.hpp"
 #include "MIDI.hpp"
-#include "SerialLogger.hpp"
-#include "synth_waveform.h"
 #include <Audio.h>
 #include <cstdint>
 
