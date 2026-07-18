@@ -11,7 +11,11 @@ Since I'll try to develop it myself version 1 will be completely digital, adding
 Everything here is currenty under heavy development, so use at your own risk. Every code and schematics could and will change over time without warning ;)
 #+end_warning
 
-[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_build.yml/badge.svg]][[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_ci_tests.yml/badge.svg]][[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_tests.yml/badge.svg]]
+#+begin_warning
+Be careful!  Check that you have...
+#+end_warning
+
+[[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_build.yml/badge.svg]] [[https://github.com/0x46b/Polyhymnia/actions/workflows/encoder_ci_tests.yml/badge.svg]] [[https://github.com/0x46b/Polyhymnia/actions/workflows/polyhymnia_ci_tests.yml/badge.svg]]
 
 
 * Vision
@@ -65,19 +69,20 @@ Everything here is currenty under heavy development, so use at your own risk. Ev
 - Oscilloscope for showing the generated wave-form
 * Documentation
 ** Used Libraries
-- [[Teensy Audio Library][https://www.pjrc.com/teensy/td_libs_Audio.html]]
-- [[ILI9341_T4 Library][https://github.com/vindar/ILI9341_T4]]
-- [[ArduinoJson][https://github.com/bblanchon/ArduinoJson]]
-- [[LVGL][https://lvgl.io/]]
+- [[https://www.pjrc.com/teensy/td_libs_Audio.html][Teensy Audio Library]]
+- [[https://github.com/vindar/ILI9341_T4][ILI9341_T4 Library]]
+- [[https://github.com/bblanchon/ArduinoJson][ArduinoJson]]
+- [[https://lvgl.io/][LVGL]]
 
 ** Used Software
-- [[Pure Data][https://puredata.info/]]
-- [[KiCad][https://kicad.org/]]
-- [[FreeCAD][https://www.freecadweb.org/]]
-- [[Teensyduino][https://www.pjrc.com/teensy/teensyduino.html]]
-- [[EEZ Studio][https://www.envox.eu/studio/studio-introduction/]]
-- [[Doxygen][https://www.doxygen.nl/]]
-- [[platformio][https://platformio.org/]]
+- [[https://puredata.info/][Pure Data]]
+- [[https://kicad.org/][KiCad]]
+- [[https://www.freecadweb.org/][FreeCAD]]
+- [[https://www.pjrc.com/teensy/teensyduino.html][Teensyduino]]
+- [[https://www.envox.eu/studio/studio-introduction/][EEZ Studio]]
+- [[https://www.doxygen.nl/][Doxygen]]
+- [[https://platformio.org/][platformio]]
+- [[https://vscodium.com/][VSCodium]]
 
 ** MIDI-CC
 | CC value | Waveform |
